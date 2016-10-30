@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		834DA1C81DC69BAB00E9D919 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */; };
+		834DA1CA1DC69BAB00E9D919 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1C91DC69BAB00E9D919 /* ViewController.swift */; };
+		834DA1CD1DC69BAB00E9D919 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834DA1CB1DC69BAB00E9D919 /* Main.storyboard */; };
+		834DA1D01DC69BAB00E9D919 /* KenKen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1CE1DC69BAB00E9D919 /* KenKen.xcdatamodeld */; };
+		834DA1D21DC69BAB00E9D919 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 834DA1D11DC69BAB00E9D919 /* Assets.xcassets */; };
+		834DA1D51DC69BAB00E9D919 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834DA1D31DC69BAB00E9D919 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		834DA1C41DC69BAB00E9D919 /* KenKen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KenKen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		834DA1C91DC69BAB00E9D919 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		834DA1CC1DC69BAB00E9D919 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		834DA1CF1DC69BAB00E9D919 /* KenKen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KenKen.xcdatamodel; sourceTree = "<group>"; };
+		834DA1D11DC69BAB00E9D919 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		834DA1D41DC69BAB00E9D919 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		834DA1D61DC69BAB00E9D919 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		834DA1C11DC69BAA00E9D919 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		834DA1BB1DC69BAA00E9D919 = {
+			isa = PBXGroup;
+			children = (
+				834DA1C61DC69BAB00E9D919 /* KenKen */,
+				834DA1C51DC69BAB00E9D919 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		834DA1C51DC69BAB00E9D919 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				834DA1C41DC69BAB00E9D919 /* KenKen.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		834DA1C61DC69BAB00E9D919 /* KenKen */ = {
+			isa = PBXGroup;
+			children = (
+				834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */,
+				834DA1C91DC69BAB00E9D919 /* ViewController.swift */,
+				834DA1CB1DC69BAB00E9D919 /* Main.storyboard */,
+				834DA1D11DC69BAB00E9D919 /* Assets.xcassets */,
+				834DA1D31DC69BAB00E9D919 /* LaunchScreen.storyboard */,
+				834DA1D61DC69BAB00E9D919 /* Info.plist */,
+				834DA1CE1DC69BAB00E9D919 /* KenKen.xcdatamodeld */,
+			);
+			path = KenKen;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		834DA1C31DC69BAA00E9D919 /* KenKen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 834DA1D91DC69BAB00E9D919 /* Build configuration list for PBXNativeTarget "KenKen" */;
+			buildPhases = (
+				834DA1C01DC69BAA00E9D919 /* Sources */,
+				834DA1C11DC69BAA00E9D919 /* Frameworks */,
+				834DA1C21DC69BAA00E9D919 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KenKen;
+			productName = KenKen;
+			productReference = 834DA1C41DC69BAB00E9D919 /* KenKen.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		834DA1BC1DC69BAA00E9D919 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = DeepHause;
+				TargetAttributes = {
+					834DA1C31DC69BAA00E9D919 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 834DA1BF1DC69BAA00E9D919 /* Build configuration list for PBXProject "KenKen" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 834DA1BB1DC69BAA00E9D919;
+			productRefGroup = 834DA1C51DC69BAB00E9D919 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				834DA1C31DC69BAA00E9D919 /* KenKen */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		834DA1C21DC69BAA00E9D919 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				834DA1D51DC69BAB00E9D919 /* LaunchScreen.storyboard in Resources */,
+				834DA1D21DC69BAB00E9D919 /* Assets.xcassets in Resources */,
+				834DA1CD1DC69BAB00E9D919 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		834DA1C01DC69BAA00E9D919 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				834DA1CA1DC69BAB00E9D919 /* ViewController.swift in Sources */,
+				834DA1D01DC69BAB00E9D919 /* KenKen.xcdatamodeld in Sources */,
+				834DA1C81DC69BAB00E9D919 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		834DA1CB1DC69BAB00E9D919 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				834DA1CC1DC69BAB00E9D919 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		834DA1D31DC69BAB00E9D919 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				834DA1D41DC69BAB00E9D919 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		834DA1D71DC69BAB00E9D919 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		834DA1D81DC69BAB00E9D919 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		834DA1DA1DC69BAB00E9D919 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KenKen/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "DeepHause-Inc..KenKen";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		834DA1DB1DC69BAB00E9D919 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KenKen/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "DeepHause-Inc..KenKen";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		834DA1BF1DC69BAA00E9D919 /* Build configuration list for PBXProject "KenKen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				834DA1D71DC69BAB00E9D919 /* Debug */,
+				834DA1D81DC69BAB00E9D919 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		834DA1D91DC69BAB00E9D919 /* Build configuration list for PBXNativeTarget "KenKen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				834DA1DA1DC69BAB00E9D919 /* Debug */,
+				834DA1DB1DC69BAB00E9D919 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		834DA1CE1DC69BAB00E9D919 /* KenKen.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				834DA1CF1DC69BAB00E9D919 /* KenKen.xcdatamodel */,
+			);
+			currentVersion = 834DA1CF1DC69BAB00E9D919 /* KenKen.xcdatamodel */;
+			path = KenKen.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 834DA1BC1DC69BAA00E9D919 /* Project object */;
+}
