@@ -1,38 +1,15 @@
 //
-//  ViewController.swift
+//  ChallengeViewController.swift
 //  KenKen
 //
-//  Created by Chris Fetterolf on 10/30/16.
+//  Created by Chris Fetterolf on 11/19/16.
 //  Copyright © 2016 DeepHause. All rights reserved.
 //
 
 import UIKit
 
-// Init Global Variables
-var allPossible = [[[Int]]]()
-var field = KenKenField(blocks: 2)
-var currentField = Array(repeating: Array(repeating: 0, count: 4), count: 4)
-var completedField = Array(repeating: Array(repeating: 0, count: 4), count: 4)
-var finishTime = "00:00"
-var totalDifficulty = 0
-var totalCages = 0
-var avgDifficulty:Float = 0.0
 
-let easyColor = UIColor(hue: 0.99, saturation: 0.31, brightness: 0.82, alpha: 1.0)
-
-// Protocall used to call generatePuzzle() from outside of VC
-protocol ParentProtocol : class
-{
-    func method()
-}
-
-/*
- Scaling used to determine difficulty:
- avg > 1.86 = hard
- 1.86 > avg > 1.5 = medium
- avg < 1.5 = easy
-*/
-class ViewController: UIViewController {
+class ChallengeViewController: UIViewController {
 
     // Init local variables
     var buttonTag = 0
@@ -46,6 +23,8 @@ class ViewController: UIViewController {
     var closeHint = 0
     var stopWatchString: String = "00:00"
     
+    var CHALLENGE_MODE = "Easy"
+    
     @IBOutlet var popUpViewHint: UIView!
     @IBOutlet var popUpView: UIView!
     @IBOutlet var timerView: UIView!
@@ -53,7 +32,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.topItem?.title = ""
+        countdown = initCountdown
+        self.navigationItem.title = selectedDiff
+        let myBackButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
+        myBackButton.addTarget(self, action: "popToRoot:", for: UIControlEvents.touchUpInside)
+        myBackButton.setTitle("Quit", for: UIControlState.normal)
+        myBackButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        myBackButton.sizeToFit()
+        let myCustomBackButtonItem:UIBarButtonItem = UIBarButtonItem(customView: myBackButton)
+        self.navigationItem.leftBarButtonItem  = myCustomBackButtonItem
+        
         
         self.view.clipsToBounds = true
         
@@ -65,11 +53,21 @@ class ViewController: UIViewController {
         popUpView.isHidden = true
         popUpViewHint.isHidden = true
         
+        //Intro PopOver
+        showPopUp(time: <#T##String#>)
+        
         //Generate field
-        generatePuzzle()
+        //generatePuzzle()
         
-        NotificationCenter.default.addObserver(self, selector: Selector(("refreshList:")), name:NSNotification.Name(rawValue: "refresh"), object: nil)
-        
+    }
+    
+    @IBAction func popToRoot(_ sender: UIBarButtonItem) {
+        self.displayAlert("Quit to Menu?", message:"You will lose all progress in current challenge.")
+    }
+    
+    @IBAction func backToMenu(_ sender: Any) {
+        timer.invalidate()
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - User Input
@@ -162,19 +160,37 @@ class ViewController: UIViewController {
         button = sender
         
     }
-
+    
     // MARK: - Finished View
     
     func showPopUp(time: String) {
         finishTime = time
-        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbPopUpID") as! PopUpViewController
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFinishedID") as! FinishedViewController
         self.addChildViewController(popOverVC)
-        popOverVC.delegate = self
         popOverVC.view.frame = (self.parent?.view.frame)!
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
     }
     
+    func showStart() {
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbStartID") as! StartViewController
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = (self.parent?.view.frame)!
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+    }
+    
+    func showFailed() {
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbFailedID") as! FailedViewController
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = (self.parent?.view.frame)!
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+    }
+    
+    @IBAction func nextPressed(_ sender: Any) {
+        self.generatePuzzle()
+    }
     
     // MARK: - Note (Hint) View
     
@@ -196,7 +212,7 @@ class ViewController: UIViewController {
         } else {
             tmpButton1?.backgroundColor = UIColor(white: 0.7, alpha: 0.5)
         }
-
+        
     }
     
     @IBAction func hintSet(_ sender: UIButton) {
@@ -222,7 +238,7 @@ class ViewController: UIViewController {
                 tmpButton1?.backgroundColor = UIColor(white: 0.7, alpha: 0.5)
                 tmpButton0?.backgroundColor = .clear
             }
-
+            
             
             if closeHint == 1 {
                 button.backgroundColor = .clear
@@ -249,25 +265,35 @@ class ViewController: UIViewController {
     }
     
     func clearTimer() {
-        totalSeconds = 0
-        minutes = 0
-        seconds = 0
-        fractions = 0
-        stopwatchLabel.text = "00:00"
+        countdown = initCountdown
+        formatCountdown()
+        stopwatchLabel.text = stopWatchString
     }
     
     func result() {
-        seconds += 1
-        totalSeconds += 1
-        if seconds == 60 {
-            minutes += 1
-            seconds = 0
+        countdown -= 1
+        //print(countdown)
+        formatCountdown()
+        
+        stopwatchLabel.text = stopWatchString
+        
+        if countdown < 6 {
+            stopwatchLabel.textColor = UIColor(hue: 0.0, saturation: 0.5, brightness: 1.0, alpha: 1.0)
         }
+        
+        if countdown == 0 {
+            timer.invalidate()
+            stopwatchLabel.textColor = .white
+            showFailed()
+        }
+    }
+    
+    func formatCountdown() {
+        minutes = countdown / 60
+        seconds = countdown - (60*minutes)
         let secondsString = seconds > 9 ? "\(seconds)" : "0\(seconds)"
         let minutesString = minutes > 9 ? "\(minutes)" : "0\(minutes)"
         stopWatchString = "\(minutesString):\(secondsString)"
-        
-        stopwatchLabel.text = stopWatchString
     }
     
     func updateTimesArray(seconds: Int) {
@@ -372,11 +398,11 @@ class ViewController: UIViewController {
         if avgDifficulty < 1.3 {
             //stopwatchLabel.backgroundColor = UIColor.green
         }
-        // MEDIUM
+            // MEDIUM
         else if (avgDifficulty >= 1.3) && (avgDifficulty < 1.8) {
             //stopwatchLabel.backgroundColor = UIColor.blue
         }
-        // HARD
+            // HARD
         else { // > 1.86
             //stopwatchLabel.backgroundColor = UIColor.red
         }
@@ -482,7 +508,7 @@ class ViewController: UIViewController {
                 label12.text = result
                 
             }
-
+            
             
         } else if  cageName == "grid5.png" {
             
@@ -493,7 +519,7 @@ class ViewController: UIViewController {
             } else if (completedField[1][0] == completedField[3][1]) && (completedField[1][1] == completedField[3][0]) {
                 generatePuzzle(cageName: cageName)
             }
-            
+                
             else {
                 
                 
@@ -595,7 +621,7 @@ class ViewController: UIViewController {
                 totalCages += 1
                 
                 label2.text = result
-
+                
                 
                 // Set label4
                 a = completedField[1][0]
@@ -635,7 +661,7 @@ class ViewController: UIViewController {
                 totalCages += 1
                 label13.text = result
             }
-
+            
         } else if cageName == "grid4.png" {
             
             //Check if bad
@@ -714,7 +740,7 @@ class ViewController: UIViewController {
                 label12.text = result
                 
             }
-
+            
             
         } else if cageName == "grid2.png" {
             
@@ -724,12 +750,12 @@ class ViewController: UIViewController {
                 generatePuzzle(cageName: cageName)
             } else if (completedField[1][0] == completedField[2][1]) && (completedField[1][1] == completedField[2][0]) {
                 generatePuzzle(cageName: cageName)
-
+                
             } else if (completedField[2][0] == completedField[3][2]) && (completedField[2][2] == completedField[3][0]) {
                 generatePuzzle(cageName: cageName)
             }
-
-            
+                
+                
             else {
                 var a: Int
                 var b: Int
@@ -791,7 +817,7 @@ class ViewController: UIViewController {
                 totalCages += 1
                 label11.text = result
             }
-
+            
         } else if cageName == "grid6.png" {
             
             //Check if bad
@@ -872,7 +898,7 @@ class ViewController: UIViewController {
                 totalCages += 1
                 label13.text = result
             }
-
+            
             
             
         } else if cageName == "grid7.png" {
@@ -1016,7 +1042,7 @@ class ViewController: UIViewController {
                 newStr += String(characters[i])
             }
             strArr.append(Int(newStr) as AnyObject)
-
+            
             return resultsArray[randNum]
         }
     }
@@ -1048,8 +1074,8 @@ class ViewController: UIViewController {
             }
         }
     }
-
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -1063,6 +1089,7 @@ class ViewController: UIViewController {
         mainbg.layer.shadowOpacity = 0.4
         mainbg.layer.shadowRadius = 3
         mainbg.layer.shadowOffset = CGSize(width: 3, height: 3)
+
         
         bg1.layer.cornerRadius = 12.0
         bg1.clipsToBounds = true
@@ -1079,13 +1106,6 @@ class ViewController: UIViewController {
         bg5.layer.cornerRadius = 12.0
         bg5.clipsToBounds = true
         
-        bg6.layer.cornerRadius = 12.0
-        bg6.layer.shadowColor = UIColor.black.cgColor
-        bg6.layer.shadowOpacity = 0.4
-        bg6.layer.shadowRadius = 3
-        bg6.layer.shadowOffset = CGSize(width: 3, height: 3)
-
-        
         bg7.layer.cornerRadius = 12.0
         bg7.layer.shadowColor = UIColor.black.cgColor
         bg7.layer.shadowOpacity = 0.4
@@ -1099,10 +1119,6 @@ class ViewController: UIViewController {
         bg8.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg10.layer.cornerRadius = 12.0
-        bg10.layer.shadowColor = UIColor.black.cgColor
-        bg10.layer.shadowOpacity = 0.4
-        bg10.layer.shadowRadius = 3
-        bg10.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg11.layer.cornerRadius = 12.0
         bg11.clipsToBounds = true
@@ -1149,7 +1165,6 @@ class ViewController: UIViewController {
     @IBOutlet var bg3: UIImageView!
     @IBOutlet var bg4: UIImageView!
     @IBOutlet var bg5: UIImageView!
-    @IBOutlet var bg6: UIImageView!
     @IBOutlet var bg7: UIView!
     @IBOutlet var bg8: UIImageView!
     @IBOutlet var mainbg: UIImageView!
@@ -1166,16 +1181,15 @@ class ViewController: UIViewController {
     // Alert Function
     func displayAlert(_ title:String, message:String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Next", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Quit", style: UIAlertActionStyle.cancel, handler: { (action) in
+            // Quit to Menu
+            self.timer.invalidate()
+            self.performSegue(withIdentifier: "unwindToMenu", sender: self)
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Resume", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
     
-}
 
-extension ViewController : ParentProtocol {
-    func method() {
-        self.generatePuzzle()
-    }
 }
-

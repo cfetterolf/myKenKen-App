@@ -7,15 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		831589E01DE0F20200ABC3AE /* FailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589DF1DE0F20200ABC3AE /* FailedViewController.swift */; };
+		831589E21DE15C1300ABC3AE /* ChallengeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589E11DE15C1300ABC3AE /* ChallengeTableViewCell.swift */; };
+		831589E41DE20EDF00ABC3AE /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589E31DE20EDF00ABC3AE /* InfoViewController.swift */; };
+		831589E61DE2132000ABC3AE /* ExtensionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589E51DE2132000ABC3AE /* ExtensionsViewController.swift */; };
+		831589E81DE2895F00ABC3AE /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589E71DE2895F00ABC3AE /* StartViewController.swift */; };
 		834DA1C81DC69BAB00E9D919 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */; };
 		834DA1CA1DC69BAB00E9D919 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1C91DC69BAB00E9D919 /* ViewController.swift */; };
 		834DA1CD1DC69BAB00E9D919 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834DA1CB1DC69BAB00E9D919 /* Main.storyboard */; };
 		834DA1D01DC69BAB00E9D919 /* KenKen.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1CE1DC69BAB00E9D919 /* KenKen.xcdatamodeld */; };
 		834DA1D21DC69BAB00E9D919 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 834DA1D11DC69BAB00E9D919 /* Assets.xcassets */; };
 		834DA1D51DC69BAB00E9D919 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834DA1D31DC69BAB00E9D919 /* LaunchScreen.storyboard */; };
+		834DA1DD1DC8415700E9D919 /* KenKenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1DC1DC8415700E9D919 /* KenKenCell.swift */; };
+		834DA1DF1DC90B9000E9D919 /* KenKenField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1DE1DC90B9000E9D919 /* KenKenField.swift */; };
+		8359EBDE1DE0DBCD002834E5 /* ScoreBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBDD1DE0DBCD002834E5 /* ScoreBoardViewController.swift */; };
+		8359EBE31DE0DE64002834E5 /* ChallengeMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBE21DE0DE64002834E5 /* ChallengeMenuViewController.swift */; };
+		8359EBE51DE0E418002834E5 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBE41DE0E418002834E5 /* ChallengeViewController.swift */; };
+		8359EBE71DE0E6A4002834E5 /* FinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */; };
+		83A05DCF1DDA1B4900FE77BA /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A05DCE1DDA1B4900FE77BA /* PopUpViewController.swift */; };
+		83A05DD11DDA3D6700FE77BA /* TutorialContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A05DD01DDA3D6700FE77BA /* TutorialContainerViewController.swift */; };
+		83A05DD31DDA9C9700FE77BA /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A05DD21DDA9C9700FE77BA /* HomePageViewController.swift */; };
+		83A98D061DDBA54400EF70B4 /* Slide2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A98D051DDBA54400EF70B4 /* Slide2ViewController.swift */; };
+		83A98D081DDBB24200EF70B4 /* FirstTutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A98D071DDBB24200EF70B4 /* FirstTutVC.swift */; };
+		83A98D0C1DDBB45100EF70B4 /* SecondTutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A98D0B1DDBB45100EF70B4 /* SecondTutVC.swift */; };
+		83A98D0E1DDBB47E00EF70B4 /* ThirdTutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A98D0D1DDBB47E00EF70B4 /* ThirdTutVC.swift */; };
+		83A98D101DDBB48B00EF70B4 /* FourthTutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A98D0F1DDBB48B00EF70B4 /* FourthTutVC.swift */; };
+		83A98D141DDBCFE300EF70B4 /* TopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A98D131DDBCFE300EF70B4 /* TopAlignedLabel.swift */; };
+		83FC41B71DD5696B008FAAFE /* MyCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC41B61DD5696B008FAAFE /* MyCustomCell.swift */; };
+		83FC41B91DD56A39008FAAFE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC41B81DD56A39008FAAFE /* HomeViewController.swift */; };
+		83FC41BB1DD7B081008FAAFE /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC41BA1DD7B081008FAAFE /* TutorialPageViewController.swift */; };
+		83FC41BF1DD8DD6F008FAAFE /* Slide1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC41BE1DD8DD6F008FAAFE /* Slide1ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		831589DF1DE0F20200ABC3AE /* FailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedViewController.swift; sourceTree = "<group>"; };
+		831589E11DE15C1300ABC3AE /* ChallengeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeTableViewCell.swift; sourceTree = "<group>"; };
+		831589E31DE20EDF00ABC3AE /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		831589E51DE2132000ABC3AE /* ExtensionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsViewController.swift; sourceTree = "<group>"; };
+		831589E71DE2895F00ABC3AE /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		834DA1C41DC69BAB00E9D919 /* KenKen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KenKen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		834DA1C91DC69BAB00E9D919 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +53,25 @@
 		834DA1D11DC69BAB00E9D919 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		834DA1D41DC69BAB00E9D919 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		834DA1D61DC69BAB00E9D919 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		834DA1DC1DC8415700E9D919 /* KenKenCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KenKenCell.swift; sourceTree = "<group>"; };
+		834DA1DE1DC90B9000E9D919 /* KenKenField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KenKenField.swift; sourceTree = "<group>"; };
+		8359EBDD1DE0DBCD002834E5 /* ScoreBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreBoardViewController.swift; sourceTree = "<group>"; };
+		8359EBE21DE0DE64002834E5 /* ChallengeMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeMenuViewController.swift; sourceTree = "<group>"; };
+		8359EBE41DE0E418002834E5 /* ChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
+		8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedViewController.swift; sourceTree = "<group>"; };
+		83A05DCE1DDA1B4900FE77BA /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		83A05DD01DDA3D6700FE77BA /* TutorialContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialContainerViewController.swift; sourceTree = "<group>"; };
+		83A05DD21DDA9C9700FE77BA /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		83A98D051DDBA54400EF70B4 /* Slide2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slide2ViewController.swift; sourceTree = "<group>"; };
+		83A98D071DDBB24200EF70B4 /* FirstTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTutVC.swift; sourceTree = "<group>"; };
+		83A98D0B1DDBB45100EF70B4 /* SecondTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondTutVC.swift; sourceTree = "<group>"; };
+		83A98D0D1DDBB47E00EF70B4 /* ThirdTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTutVC.swift; sourceTree = "<group>"; };
+		83A98D0F1DDBB48B00EF70B4 /* FourthTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthTutVC.swift; sourceTree = "<group>"; };
+		83A98D131DDBCFE300EF70B4 /* TopAlignedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopAlignedLabel.swift; path = ../TopAlignedLabel.swift; sourceTree = "<group>"; };
+		83FC41B61DD5696B008FAAFE /* MyCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomCell.swift; sourceTree = "<group>"; };
+		83FC41B81DD56A39008FAAFE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		83FC41BA1DD7B081008FAAFE /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
+		83FC41BE1DD8DD6F008FAAFE /* Slide1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slide1ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,14 +105,86 @@
 			isa = PBXGroup;
 			children = (
 				834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */,
-				834DA1C91DC69BAB00E9D919 /* ViewController.swift */,
+				83A98D121DDBB4C800EF70B4 /* Play */,
+				83A98D041DDAC28D00EF70B4 /* Home */,
+				8359EBE11DE0DE48002834E5 /* Challenge */,
+				83FC41C01DD8DD7B008FAAFE /* Tutorial */,
+				8359EBDF1DE0DBDD002834E5 /* Scoreboard */,
+				83A98D111DDBB4B500EF70B4 /* Classes */,
 				834DA1CB1DC69BAB00E9D919 /* Main.storyboard */,
-				834DA1D11DC69BAB00E9D919 /* Assets.xcassets */,
 				834DA1D31DC69BAB00E9D919 /* LaunchScreen.storyboard */,
+				834DA1D11DC69BAB00E9D919 /* Assets.xcassets */,
 				834DA1D61DC69BAB00E9D919 /* Info.plist */,
 				834DA1CE1DC69BAB00E9D919 /* KenKen.xcdatamodeld */,
 			);
 			path = KenKen;
+			sourceTree = "<group>";
+		};
+		8359EBDF1DE0DBDD002834E5 /* Scoreboard */ = {
+			isa = PBXGroup;
+			children = (
+				8359EBDD1DE0DBCD002834E5 /* ScoreBoardViewController.swift */,
+			);
+			name = Scoreboard;
+			sourceTree = "<group>";
+		};
+		8359EBE11DE0DE48002834E5 /* Challenge */ = {
+			isa = PBXGroup;
+			children = (
+				8359EBE21DE0DE64002834E5 /* ChallengeMenuViewController.swift */,
+				8359EBE41DE0E418002834E5 /* ChallengeViewController.swift */,
+				8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */,
+				831589E71DE2895F00ABC3AE /* StartViewController.swift */,
+				831589DF1DE0F20200ABC3AE /* FailedViewController.swift */,
+				831589E31DE20EDF00ABC3AE /* InfoViewController.swift */,
+				831589E51DE2132000ABC3AE /* ExtensionsViewController.swift */,
+			);
+			name = Challenge;
+			sourceTree = "<group>";
+		};
+		83A98D041DDAC28D00EF70B4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				83FC41B81DD56A39008FAAFE /* HomeViewController.swift */,
+				83FC41BE1DD8DD6F008FAAFE /* Slide1ViewController.swift */,
+				83A98D051DDBA54400EF70B4 /* Slide2ViewController.swift */,
+				83A05DD21DDA9C9700FE77BA /* HomePageViewController.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		83A98D111DDBB4B500EF70B4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				834DA1DC1DC8415700E9D919 /* KenKenCell.swift */,
+				834DA1DE1DC90B9000E9D919 /* KenKenField.swift */,
+				83FC41B61DD5696B008FAAFE /* MyCustomCell.swift */,
+				831589E11DE15C1300ABC3AE /* ChallengeTableViewCell.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		83A98D121DDBB4C800EF70B4 /* Play */ = {
+			isa = PBXGroup;
+			children = (
+				834DA1C91DC69BAB00E9D919 /* ViewController.swift */,
+				83A05DCE1DDA1B4900FE77BA /* PopUpViewController.swift */,
+			);
+			name = Play;
+			sourceTree = "<group>";
+		};
+		83FC41C01DD8DD7B008FAAFE /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				83A98D131DDBCFE300EF70B4 /* TopAlignedLabel.swift */,
+				83FC41BA1DD7B081008FAAFE /* TutorialPageViewController.swift */,
+				83A05DD01DDA3D6700FE77BA /* TutorialContainerViewController.swift */,
+				83A98D071DDBB24200EF70B4 /* FirstTutVC.swift */,
+				83A98D0B1DDBB45100EF70B4 /* SecondTutVC.swift */,
+				83A98D0D1DDBB47E00EF70B4 /* ThirdTutVC.swift */,
+				83A98D0F1DDBB48B00EF70B4 /* FourthTutVC.swift */,
+			);
+			name = Tutorial;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +219,7 @@
 				TargetAttributes = {
 					834DA1C31DC69BAA00E9D919 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 35LSJ2T87U;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -139,9 +260,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83A05DD11DDA3D6700FE77BA /* TutorialContainerViewController.swift in Sources */,
+				83FC41BF1DD8DD6F008FAAFE /* Slide1ViewController.swift in Sources */,
+				83A98D101DDBB48B00EF70B4 /* FourthTutVC.swift in Sources */,
 				834DA1CA1DC69BAB00E9D919 /* ViewController.swift in Sources */,
+				831589E41DE20EDF00ABC3AE /* InfoViewController.swift in Sources */,
+				831589E81DE2895F00ABC3AE /* StartViewController.swift in Sources */,
+				8359EBE51DE0E418002834E5 /* ChallengeViewController.swift in Sources */,
 				834DA1D01DC69BAB00E9D919 /* KenKen.xcdatamodeld in Sources */,
+				8359EBE31DE0DE64002834E5 /* ChallengeMenuViewController.swift in Sources */,
+				83A98D061DDBA54400EF70B4 /* Slide2ViewController.swift in Sources */,
+				83FC41BB1DD7B081008FAAFE /* TutorialPageViewController.swift in Sources */,
+				831589E01DE0F20200ABC3AE /* FailedViewController.swift in Sources */,
+				83FC41B71DD5696B008FAAFE /* MyCustomCell.swift in Sources */,
+				83A05DCF1DDA1B4900FE77BA /* PopUpViewController.swift in Sources */,
+				834DA1DD1DC8415700E9D919 /* KenKenCell.swift in Sources */,
+				83A05DD31DDA9C9700FE77BA /* HomePageViewController.swift in Sources */,
+				8359EBDE1DE0DBCD002834E5 /* ScoreBoardViewController.swift in Sources */,
+				834DA1DF1DC90B9000E9D919 /* KenKenField.swift in Sources */,
+				83A98D141DDBCFE300EF70B4 /* TopAlignedLabel.swift in Sources */,
+				83FC41B91DD56A39008FAAFE /* HomeViewController.swift in Sources */,
+				83A98D0E1DDBB47E00EF70B4 /* ThirdTutVC.swift in Sources */,
 				834DA1C81DC69BAB00E9D919 /* AppDelegate.swift in Sources */,
+				83A98D081DDBB24200EF70B4 /* FirstTutVC.swift in Sources */,
+				831589E61DE2132000ABC3AE /* ExtensionsViewController.swift in Sources */,
+				831589E21DE15C1300ABC3AE /* ChallengeTableViewCell.swift in Sources */,
+				8359EBE71DE0E6A4002834E5 /* FinishedViewController.swift in Sources */,
+				83A98D0C1DDBB45100EF70B4 /* SecondTutVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,11 +407,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 35LSJ2T87U;
 				INFOPLIST_FILE = KenKen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "DeepHause-Inc..KenKen";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -274,11 +423,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 35LSJ2T87U;
 				INFOPLIST_FILE = KenKen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "DeepHause-Inc..KenKen";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -301,6 +454,7 @@
 				834DA1DB1DC69BAB00E9D919 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
