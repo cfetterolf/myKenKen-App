@@ -34,8 +34,9 @@ class SecondTutVC: UIViewController {
         rulesLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         rulesLabel.numberOfLines = 0
         
-        let rules:String = "The numbers in a bolded region, called a cage, must follow the operation in the upper left corner.\n\nFor example, the circled cage follows the rule, since 4 + 1 = 5."
+        let rules:String = "A bolded region is called a cage.  Each cage has an operator and target in the upper left corner.  The values inside the cage must use the operator to make the target number.  For example, the circled cage follows the rule, since 3 - 1 = 2.\n\nTip: Begin the puzzle by filling in the \"starter\" tile (the 4 in the example above)."
         rulesLabel.text = rules
+        rulesLabel.font = UIFont(name: rulesLabel.font.fontName, size: 17.0)
         rulesLabel.sizeToFit()
 
         

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,13 +22,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="BSH-JZ-uFa">
-                                <rect key="frame" x="56" y="225" width="262" height="79"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="79" id="Ptz-Pz-w0u"/>
-                                    <constraint firstAttribute="width" constant="262" id="Yc1-He-IVz"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHk-fW-Pgd">
                                 <rect key="frame" x="166" y="323" width="42" height="21"/>
                                 <constraints>
@@ -38,12 +32,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_title_3" translatesAutoresizingMaskIntoConstraints="NO" id="BSH-JZ-uFa">
+                                <rect key="frame" x="56" y="161" width="262" height="183"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" cyan="0.58157792399999997" magenta="0.0" yellow="0.41512044269999998" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                         <constraints>
-                            <constraint firstItem="BSH-JZ-uFa" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1N4-Pk-uXQ"/>
                             <constraint firstItem="GHk-fW-Pgd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="2Zl-VM-eES"/>
-                            <constraint firstItem="GHk-fW-Pgd" firstAttribute="top" secondItem="BSH-JZ-uFa" secondAttribute="bottom" constant="19" id="aEv-J2-yIT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BSH-JZ-uFa" secondAttribute="trailing" constant="41" id="FF7-Nx-nD5"/>
+                            <constraint firstItem="BSH-JZ-uFa" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="141" id="rf3-qP-VdA"/>
+                            <constraint firstItem="BSH-JZ-uFa" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="tnx-ul-muo"/>
+                            <constraint firstItem="BSH-JZ-uFa" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="40" id="wmg-eD-KKj"/>
                             <constraint firstItem="GHk-fW-Pgd" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="yXr-ji-gID"/>
                         </constraints>
                     </view>
@@ -54,6 +53,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Title" width="892" height="183"/>
+        <image name="new_title_3" width="892" height="183"/>
     </resources>
 </document>

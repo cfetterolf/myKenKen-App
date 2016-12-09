@@ -43,8 +43,13 @@ extension Dimmable where Self: UIViewController {
                 
                 if performSG == true {
                     self.performSegue(withIdentifier: "segueToChallenge", sender: self)
+                    firstPuzzle = true
                     performSG = false
+                } else if (performSGFinish == true) {
+                    self.navigationController?.popViewController(animated: true)
+                    performSGFinish = false
                 }
+                
                 
             })
         }

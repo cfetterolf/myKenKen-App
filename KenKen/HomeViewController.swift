@@ -12,6 +12,8 @@ var timesArray = [Int]()
 var difficultyDictPair = [String: Int]()
 var difficultyDictTriple = [String: Int]()
 var difficultyDictL = [String: Int]()
+var scoreBoard:Scoreboard = Scoreboard()
+var starRank:StarRank = StarRank()
 
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -20,6 +22,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var shadowView: UIView!
+    var timer:Timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +46,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .scaleAspectFit
-        let image = UIImage(named: "title_bold.png")
+        let image = UIImage(named: "new_title_3.png")
         imageView.image = image
         self.navigationItem.titleView = imageView
         
         updateBestTimes()
         
         configureDifficultyDict()
+        
+        scoreBoard.setTimes()
+        starRank.setRank()
+        
+        checkIfFirstLaunch()
 
     }
     
@@ -93,21 +101,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:MyCustomCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! MyCustomCell
         
-        cell.rankLabel.text = String(indexPath.row + 1)
+        cell.rankLabel.text = "\(String(indexPath.row + 1))."
         
         if indexPath.row > timesArray.count-1 {
             cell.timeLabel.text = ""
-            print(indexPath.row, timesArray.count)
         } else {
             cell.timeLabel.text = convertToTime(seconds: timesArray[indexPath.row])
         }
         
         return cell
-    }
-    
-    // method to run when table view cell is tapped
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
     }
 
 
@@ -245,6 +247,38 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         
+    }
+    
+    func formatScoreboard() {
+        
+        scoreBoard.formatScoreBoard()
+        
+    }
+    
+    func checkIfFirstLaunch() {
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: "appLaunched") != nil {
+            return
+        } else {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewController.result), userInfo: nil, repeats: true)
+            defaults.set(true, forKey: "appLaunched")
+        }
+    }
+    
+    func result() {
+        presentStartTut()
+        timer.invalidate()
+    }
+    
+    func presentStartTut() {
+        
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbStartTutID") as! StartTutorialViewController
+        self.addChildViewController(popOverVC)
+        //popOverVC.delegate = self
+        popOverVC.view.frame = (self.parent?.view.frame)!
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+ 
     }
     
 }

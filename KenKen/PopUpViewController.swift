@@ -9,6 +9,8 @@
 import UIKit
 
 class PopUpViewController: UIViewController {
+    
+    let congratsArray: [String] = ["Nice Job!","Good Work!","Oh Yeah!","Fantastic!","Great Job!", "Sweet!", "Excellent Work!"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +27,28 @@ class PopUpViewController: UIViewController {
         finishedView.layer.masksToBounds = false
         
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        finishLabel.text = "You finished the puzzle in \(finishTime)"
+        configureLabels()
         self.showAnimate()
     }
     
     @IBAction func nextPuzzle(_ sender: Any) {
         self.removeAnimate()
         callDelegate()
+    }
+    
+    func configureLabels() {
+        
+        // If else to account for a/an
+        if puzzleDifficulty == "Easy" {
+            self.finishLabel.text = "You finished an Easy puzzle in \(finishTime)"
+        } else {
+            self.finishLabel.text = "You finished a \(puzzleDifficulty) puzzle in \(finishTime)"
+        }
+        
+        // Choose random congragulatory title
+        let randNum = Int(arc4random_uniform(UInt32(congratsArray.count)))
+        let messege = congratsArray[randNum]
+        congratsLabel.text = messege
     }
     
     func showAnimate() {
@@ -79,5 +96,6 @@ class PopUpViewController: UIViewController {
     @IBOutlet var finishedView: UIView!
     @IBOutlet var bg1: UIImageView!
     @IBOutlet var finishLabel: UILabel!
+    @IBOutlet var congratsLabel: UILabel!
 
 }

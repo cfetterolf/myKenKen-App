@@ -16,6 +16,7 @@ class InfoViewController: UIViewController {
     @IBOutlet var challengeLabel2: UILabel!
     @IBOutlet var challengeLabel3: UILabel!
     @IBOutlet var gradBG: UIImageView!
+    @IBOutlet var rewardLabel: UILabel!
     
 
     override func viewDidLoad() {
@@ -36,8 +37,20 @@ class InfoViewController: UIViewController {
         gradBG.layer.borderWidth = 0.25
         
         challengeTitle.text = "Challenge: \(selectedDiff)"
+        setRewardScore(diff: selectedDiff)
         setDescription(diff: selectedDiff)
         
+    }
+    
+    func setRewardScore(diff: String) {
+    
+        if selectedDiff == "Easy" {
+            rewardLabel.text = "Reward Score: \(10)"
+        } else if selectedDiff == "Medium" {
+            rewardLabel.text = "Reward Score: \(25)"
+        } else if selectedDiff == "Hard" {
+            rewardLabel.text = "Reward Score: \(50)"
+        }
     }
     
     @IBAction func changeBool(_ sender: Any) {
@@ -53,21 +66,33 @@ class InfoViewController: UIViewController {
             challengeLabel1.text = "Difficulty: Easy  \nTime Limit: 1:30"
             challengeLabel2.text = "Difficulty: Easy  \nTime Limit: 1:15"
             challengeLabel3.text = "Difficulty: Medium  \nTime Limit: 2:30"
-        
+            currentChallenge.initCountdownArray = [90, 75, 150]
+            currentChallenge.difficultyArray = ["Easy", "Easy", "Medium"]
+            currentChallenge.numberPuzzles = 3
+            currentChallenge.nextPuzzleIndex = 0
+            currentChallenge.restart()
         } else if diff == "Medium" {
             let description = "To beat this challenge, you must solve 3 puzzles in a row within their respective time limits."
             challengeDescription.text = description
             challengeLabel1.text = "Difficulty: Easy  \nTime Limit: 1:00"
             challengeLabel2.text = "Difficulty: Medium  \nTime Limit: 1:30"
             challengeLabel3.text = "Difficulty: Hard  \nTime Limit: 2:30"
-
+            currentChallenge.initCountdownArray = [60, 90, 150]
+            currentChallenge.difficultyArray = ["Easy", "Medium", "Hard"]
+            currentChallenge.numberPuzzles = 3
+            currentChallenge.nextPuzzleIndex = 0
+            currentChallenge.restart()
         } else if diff == "Hard" {
             let description = "To beat this challenge, you must solve 3 puzzles in a row within their respective time limits."
             challengeDescription.text = description
             challengeLabel1.text = "Difficulty: Easy  \nTime Limit: 0:30"
             challengeLabel2.text = "Difficulty: Medium  \nTime Limit: 1:00"
             challengeLabel3.text = "Difficulty: Hard  \nTime Limit: 1:30"
-            
+            currentChallenge.initCountdownArray = [30, 60, 90]
+            currentChallenge.difficultyArray = ["Easy", "Medium", "Hard"]
+            currentChallenge.numberPuzzles = 3
+            currentChallenge.nextPuzzleIndex = 0
+            currentChallenge.restart()
         }
         
     }

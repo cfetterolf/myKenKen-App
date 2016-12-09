@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol StartViewControllerDelegate: class {
+    func didFinishTask(sender: StartViewController)
+}
 
-class ChallengeViewController: UIViewController {
+var diffIndex:Int = 0
+
+
+class ChallengeViewController: UIViewController, Dimmable {
 
     // Init local variables
     var buttonTag = 0
@@ -22,8 +28,12 @@ class ChallengeViewController: UIViewController {
     var hintButton = 0
     var closeHint = 0
     var stopWatchString: String = "00:00"
+    let dimLevel: CGFloat = 0.5
+    let dimSpeed: Double = 0.5
+    var currentDifficulty = ""
+    var cageArray:[Cage] = []
     
-    var CHALLENGE_MODE = "Easy"
+    //var CHALLENGE_MODE = "Easy"
     
     @IBOutlet var popUpViewHint: UIView!
     @IBOutlet var popUpView: UIView!
@@ -35,7 +45,7 @@ class ChallengeViewController: UIViewController {
         countdown = initCountdown
         self.navigationItem.title = selectedDiff
         let myBackButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
-        myBackButton.addTarget(self, action: "popToRoot:", for: UIControlEvents.touchUpInside)
+        myBackButton.addTarget(self, action: #selector(ChallengeViewController.popToRoot(_:)), for: UIControlEvents.touchUpInside)
         myBackButton.setTitle("Quit", for: UIControlState.normal)
         myBackButton.setTitleColor(UIColor.white, for: UIControlState.normal)
         myBackButton.sizeToFit()
@@ -54,10 +64,9 @@ class ChallengeViewController: UIViewController {
         popUpViewHint.isHidden = true
         
         //Intro PopOver
-        showPopUp(time: <#T##String#>)
-        
-        //Generate field
-        //generatePuzzle()
+        performSegue(withIdentifier: "startChallenge", sender: self)
+        currentDifficulty = currentChallenge.difficultyArray[currentChallenge.nextPuzzleIndex]
+        performSG = false
         
     }
     
@@ -117,12 +126,28 @@ class ChallengeViewController: UIViewController {
                         }
                     }
                 }
-                
                 // Puzzle is completed
-                if match == true {
-                    timer.invalidate()
-                    updateTimesArray(seconds: totalSeconds)
-                    showPopUp(time: stopWatchString)
+                let finish = checkIfCompleted()
+                print(finish)
+                
+                if match == true || finish == true  {
+                    let sec = currentChallenge.initCountdownArray[currentChallenge.nextPuzzleIndex]-countdown
+                    currentChallenge.timeFinishedArray.append((sec))
+                    scoreBoard.addTime(difficulty: currentDifficulty, seconds: sec)
+                    updateTimesArray(seconds: sec)
+                    
+                    if currentChallenge.nextPuzzleIndex == 2 {
+                        //FINSHED CHALLENGE!
+                        timer.invalidate()
+                        self.performSegue(withIdentifier: "challengeCompleted", sender: self)
+                        self.navigationController?.setNavigationBarHidden(true, animated: true)
+                        
+                    } else {
+                        timer.invalidate()
+                        showPopUp(time: stopWatchString)
+                        currentChallenge.nextPuzzleIndex += 1
+                    }
+                   
                 }
                 
             }
@@ -135,6 +160,9 @@ class ChallengeViewController: UIViewController {
     @IBAction func buttonPressed(_ sender: UIButton) {
         popUpView.isHidden = false
         timerView.isHidden = true
+        popUpViewHint.isHidden = true
+        tmpButton0?.backgroundColor = .clear
+        tmpButton1?.backgroundColor = .clear
         
         // Reset index in array
         sender.setTitle(nil, for: .normal)
@@ -160,6 +188,79 @@ class ChallengeViewController: UIViewController {
         button = sender
         
     }
+    
+    func checkIfCompleted() -> Bool {
+        
+        var cageValueArray:[Int:Int] = [0:0,1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0]
+        
+        // Fill cages with values
+        for i in 0...3 {
+            for j in 0...3 {
+                
+                let cageValue = cageField[i][j]
+                let index = cageValueArray[cageValue]
+                let cageItem = cageArray[cageValue]
+                
+                if currentField[i][j] != 0 {
+                    cageItem.valuesInCage[index!] = currentField[i][j]
+                } else {
+                    cageItem.valuesInCage[index!] = -100
+                }
+                
+                cageValueArray[cageValue] = index!+1
+            }
+        }
+        
+        print("Filled vales")
+        
+        // Check if cages will accept
+        for cage in cageArray {
+            if cage.cageWillAccept() == false {
+                print("didn't follow rules")
+                return false
+            }
+        }
+        
+        // Make sure there are no reapeats in rows or columns
+        if latinSquare(array: currentField) == false {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func latinSquare(array: [[Int]]) -> Bool {
+        for i in 0...array.count-1 {
+            // check for duplicates in each row
+            if(duplicates(array: array[i])) {
+                return false
+            }
+            
+            // create a column array
+            var column = [Int](repeating: 0, count: array[i].count)
+            for j in 0...array.count-1 {
+                column[j] = array[j][i]
+            }
+            
+            // check for duplicates in each column
+            if(duplicates(array: column)) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func duplicates(array: [Int]) -> Bool {
+        for i in 0...array.count-1 {
+            for j in 0...array.count-1 {
+                if (i != j && array[i] == array[j]) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     
     // MARK: - Finished View
     
@@ -189,7 +290,13 @@ class ChallengeViewController: UIViewController {
     }
     
     @IBAction func nextPressed(_ sender: Any) {
-        self.generatePuzzle()
+        self.clearTiles(self)
+        self.clearLabels()
+        firstPuzzle = false
+        self.performSegue(withIdentifier: "startChallenge", sender: self)
+        currentDifficulty = currentChallenge.difficultyArray[currentChallenge.nextPuzzleIndex]
+        self.stopwatchLabel.text = "00:00"
+        self.stopwatchLabel.textColor = .white
     }
     
     // MARK: - Note (Hint) View
@@ -216,41 +323,42 @@ class ChallengeViewController: UIViewController {
     }
     
     @IBAction func hintSet(_ sender: UIButton) {
-        if (sender.titleLabel?.text == "Value") {
-            popUpViewHint.isHidden = true
-            popUpView.isHidden = false
-            tmpButton0?.backgroundColor = .clear
-            tmpButton1?.backgroundColor = .clear
-        } else {
-            let hintText = (sender.titleLabel?.text!)!
-            
-            if hintButton % 2 == 0 {
-                tmpButton0?.setTitle(hintText, for: .normal)
+        let hintText = (sender.titleLabel?.text!)!
+        
+        if hintButton % 2 == 0 {
+            if hintText == "Delete" {
+                tmpButton0?.setTitle(nil, for: .normal)
             } else {
+                tmpButton0?.setTitle(hintText, for: .normal)
+            }
+        } else {
+            if hintText == "Delete" {
+                tmpButton1?.setTitle(nil, for: .normal)
+            }else {
                 tmpButton1?.setTitle(hintText, for: .normal)
             }
-            hintButton += 1
-            
-            if hintButton % 2 == 0 {
-                tmpButton0?.backgroundColor = UIColor(white: 0.7, alpha: 0.5)
-                tmpButton1?.backgroundColor = .clear
-            } else {
-                tmpButton1?.backgroundColor = UIColor(white: 0.7, alpha: 0.5)
-                tmpButton0?.backgroundColor = .clear
-            }
-            
-            
-            if closeHint == 1 {
-                button.backgroundColor = .clear
-                tmpButton0?.backgroundColor = .clear
-                tmpButton1?.backgroundColor = .clear
-                popUpView.isHidden = true
-                popUpViewHint.isHidden = true
-                timerView.isHidden = false
-                closeHint = 0
-            } else {
-                closeHint += 1
-            }
+        }
+        hintButton += 1
+        
+        if hintButton % 2 == 0 {
+            tmpButton0?.backgroundColor = UIColor(white: 0.7, alpha: 0.5)
+            tmpButton1?.backgroundColor = .clear
+        } else {
+            tmpButton1?.backgroundColor = UIColor(white: 0.7, alpha: 0.5)
+            tmpButton0?.backgroundColor = .clear
+        }
+        
+        
+        if closeHint == 1 {
+            button.backgroundColor = .clear
+            tmpButton0?.backgroundColor = .clear
+            tmpButton1?.backgroundColor = .clear
+            popUpView.isHidden = true
+            popUpViewHint.isHidden = true
+            timerView.isHidden = false
+            closeHint = 0
+        } else {
+            closeHint += 1
         }
     }
     
@@ -279,6 +387,8 @@ class ChallengeViewController: UIViewController {
         
         if countdown < 6 {
             stopwatchLabel.textColor = UIColor(hue: 0.0, saturation: 0.5, brightness: 1.0, alpha: 1.0)
+        } else {
+            stopwatchLabel.textColor = .white
         }
         
         if countdown == 0 {
@@ -300,15 +410,10 @@ class ChallengeViewController: UIViewController {
         timesArray.append(seconds)
         timesArray.sort()
         
-        // Save top 10 in Array
-        let i = 10
-        while (timesArray.count > 10) {
-            timesArray.remove(at: i)
-        }
-        
         // Save array
         let defaults = UserDefaults.standard
         defaults.set(timesArray, forKey: "timesArray")
+       
     }
     
     
@@ -328,7 +433,7 @@ class ChallengeViewController: UIViewController {
     @IBAction func clearTiles(_ sender: Any) {
         
         //clear buttons
-        for i in 0...45 {
+        for i in 0...47 {
             let tmpButton = self.view.viewWithTag(i) as? UIButton
             tmpButton?.setTitle(nil, for: .normal)
         }
@@ -337,6 +442,14 @@ class ChallengeViewController: UIViewController {
         currentField = Array(repeating: Array(repeating: 0, count: 4), count: 4)
         
     }
+    
+    
+    func startChallenge() {
+        generatePuzzle()
+        
+    }
+    
+    
     
     // Generates a random field with a random board
     func generatePuzzle() {
@@ -353,10 +466,12 @@ class ChallengeViewController: UIViewController {
             }
         }
         currentField = Array(repeating: Array(repeating: 0, count: 4), count: 4)
+        cageField = Array(repeating: Array(repeating: -1, count: 4), count: 4)
+        cageArray = []
         
         // Pick a board
         // Number in arc4random is how many cage pngs we have to choose from
-        let randNum = Int(arc4random_uniform(7)) + 1
+        let randNum = Int(arc4random_uniform(10)) + 1
         let cageName = "grid\(randNum).png"
         cageView.image = UIImage(named: cageName)
         setCageInfo(cageName: cageName)
@@ -382,6 +497,8 @@ class ChallengeViewController: UIViewController {
             }
         }
         currentField = Array(repeating: Array(repeating: 0, count: 4), count: 4)
+        cageField = Array(repeating: Array(repeating: -1, count: 4), count: 4)
+        cageArray = []
         
         cageView.image = UIImage(named: cageName)
         setCageInfo(cageName: cageName)
@@ -396,15 +513,18 @@ class ChallengeViewController: UIViewController {
     func setDifficultyBG() {
         // EASY
         if avgDifficulty < 1.3 {
-            //stopwatchLabel.backgroundColor = UIColor.green
+            bg10.backgroundColor = easyGreen
+            puzzleDifficulty = "Easy"
         }
             // MEDIUM
         else if (avgDifficulty >= 1.3) && (avgDifficulty < 1.8) {
-            //stopwatchLabel.backgroundColor = UIColor.blue
+            bg10.backgroundColor = mediumBlue
+            puzzleDifficulty = "Medium"
         }
             // HARD
         else { // > 1.86
-            //stopwatchLabel.backgroundColor = UIColor.red
+            bg10.backgroundColor = hardRed
+            puzzleDifficulty = "Hard"
         }
     }
     
@@ -454,7 +574,10 @@ class ChallengeViewController: UIViewController {
                 b = completedField[0][1]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][0] = totalCages
+                cageField[0][1] = totalCages
                 totalCages += 1
+                cageArray.append(Cage(size: 2, code: result))
                 label0.text = result
                 
                 // Set label2
@@ -464,6 +587,10 @@ class ChallengeViewController: UIViewController {
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
                 totalCages += 1
+                cageField[0][2] = 1
+                cageField[0][3] = 1
+                cageField[1][3] = 1
+                cageArray.append(Cage(size: 3, code: result))
                 label2.text = result
                 
                 // Set label4
@@ -472,6 +599,9 @@ class ChallengeViewController: UIViewController {
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
                 totalCages += 1
+                cageField[1][0] = 2
+                cageField[2][0] = 2
+                cageArray.append(Cage(size: 2, code: result))
                 label4.text = result
                 
                 // Set label5
@@ -481,6 +611,10 @@ class ChallengeViewController: UIViewController {
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
                 totalCages += 1
+                cageField[1][1] = 3
+                cageField[1][2] = 3
+                cageField[2][1] = 3
+                cageArray.append(Cage(size: 3, code: result))
                 label5.text = result
                 
                 // Set label10
@@ -489,6 +623,9 @@ class ChallengeViewController: UIViewController {
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
                 totalCages += 1
+                cageField[2][2] = 4
+                cageField[3][2] = 4
+                cageArray.append(Cage(size: 2, code: result))
                 label10.text = result
                 
                 // Set label11
@@ -497,6 +634,9 @@ class ChallengeViewController: UIViewController {
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
                 totalCages += 1
+                cageField[2][3] = 5
+                cageField[3][3] = 5
+                cageArray.append(Cage(size: 2, code: result))
                 label11.text = result
                 
                 // Set label12
@@ -505,6 +645,9 @@ class ChallengeViewController: UIViewController {
                 result = pickRandomOp(a: a, b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
                 totalCages += 1
+                cageField[3][0] = 6
+                cageField[3][1] = 6
+                cageArray.append(Cage(size: 2, code: result))
                 label12.text = result
                 
             }
@@ -533,11 +676,16 @@ class ChallengeViewController: UIViewController {
                 b = completedField[0][1]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][0] = totalCages
+                cageField[0][1] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label0.text = result
                 
                 // Set label2
                 a = completedField[0][2]
+                cageField[0][2] = totalCages
+                cageArray.append(Cage(size: 1, code: String(a)))
                 totalCages += 1
                 label2.text = String(a)
                 
@@ -547,6 +695,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[1][3]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[0][3] = totalCages
+                cageField[1][2] = totalCages
+                cageField[1][3] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label3.text = result
                 
@@ -556,6 +708,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[2][0]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[1][0] = totalCages
+                cageField[1][1] = totalCages
+                cageField[2][0] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label4.text = result
                 
@@ -565,6 +721,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[3][2]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[2][1] = totalCages
+                cageField[2][2] = totalCages
+                cageField[3][2] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label9.text = result
                 
@@ -573,6 +733,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[3][3]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[2][3] = totalCages
+                cageField[3][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label11.text = result
                 
@@ -581,6 +744,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[3][1]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[3][0] = totalCages
+                cageField[3][1] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label12.text = result
             }
@@ -609,6 +775,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[0][1]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][0] = totalCages
+                cageField[0][1] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label0.text = result
                 
@@ -618,6 +787,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[1][2]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[0][2] = totalCages
+                cageField[0][3] = totalCages
+                cageField[1][2] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 
                 label2.text = result
@@ -628,6 +801,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[1][1]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[1][0] = totalCages
+                cageField[1][1] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label4.text = result
                 
@@ -636,6 +812,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[2][3]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[1][3] = totalCages
+                cageField[2][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label7.text = result
                 
@@ -645,10 +824,16 @@ class ChallengeViewController: UIViewController {
                 c = completedField[3][0]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[2][0] = totalCages
+                cageField[2][1] = totalCages
+                cageField[3][0] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label8.text = result
                 
                 // Set label10
+                cageField[2][2] = totalCages
+                cageArray.append(Cage(size: 1, code: String(completedField[2][2])))
                 label10.text = String(completedField[2][2])
                 totalCages += 1
                 
@@ -658,6 +843,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[3][3]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictTriple[result]!
+                cageField[3][1] = totalCages
+                cageField[3][2] = totalCages
+                cageField[3][3] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label13.text = result
             }
@@ -684,6 +873,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[1][0]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][0] = totalCages
+                cageField[1][0] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label0.text = result
                 
@@ -692,6 +884,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[0][2]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][1] = totalCages
+                cageField[0][2] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label1.text = result
                 
@@ -701,6 +896,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[2][3]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictTriple[result]!
+                cageField[0][3] = totalCages
+                cageField[1][3] = totalCages
+                cageField[2][3] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label3.text = result
                 
@@ -709,16 +908,23 @@ class ChallengeViewController: UIViewController {
                 b = completedField[2][1]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[1][1] = totalCages
+                cageField[2][1] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label5.text = result
                 
                 // Set label6
                 a = completedField[1][2]
+                cageField[1][2] = totalCages
+                cageArray.append(Cage(size: 1, code: String(a)))
                 totalCages += 1
                 label6.text = String(a)
                 
                 // Set label8
                 a = completedField[2][0]
+                cageField[2][0] = totalCages
+                cageArray.append(Cage(size: 1, code: String(a)))
                 totalCages += 1
                 label8.text = String(a)
                 
@@ -728,6 +934,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[3][3]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[2][2] = totalCages
+                cageField[3][2] = totalCages
+                cageField[3][3] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label10.text = result
                 
@@ -736,8 +946,13 @@ class ChallengeViewController: UIViewController {
                 b = completedField[3][1]
                 result = pickRandomOp(a: a, b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[3][0] = totalCages
+                cageField[3][1] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label12.text = result
+                
+                totalCages += 1
                 
             }
             
@@ -767,6 +982,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[0][1]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][0] = totalCages
+                cageField[0][1] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label0.text = result
                 
@@ -776,12 +994,19 @@ class ChallengeViewController: UIViewController {
                 c = completedField[1][3]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[0][2] = totalCages
+                cageField[1][2] = totalCages
+                cageField[1][3] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label2.text = result
                 
                 // Set label3
-                label3.text = String(completedField[0][3])
+                a = completedField[0][3]
+                cageField[0][3] = totalCages
+                cageArray.append(Cage(size: 1, code: String(a)))
                 totalCages += 1
+                label3.text = String(a)
                 
                 // Set label4
                 a = completedField[1][0]
@@ -789,6 +1014,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[3][0]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictTriple[result]!
+                cageField[1][0] = totalCages
+                cageField[2][0] = totalCages
+                cageField[3][0] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label4.text = result
                 
@@ -797,6 +1026,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[2][1]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[1][1] = totalCages
+                cageField[2][1] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label5.text = result
                 
@@ -806,6 +1038,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[3][2]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[2][2] = totalCages
+                cageField[3][1] = totalCages
+                cageField[3][2] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label10.text = result
                 
@@ -814,6 +1050,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[3][3]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[2][3] = totalCages
+                cageField[3][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label11.text = result
             }
@@ -845,6 +1084,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[1][0]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][0] = totalCages
+                cageField[1][0] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label0.text = result
                 
@@ -853,6 +1095,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[0][2]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][1] = totalCages
+                cageField[0][2] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label1.text = result
                 
@@ -861,6 +1106,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[1][3]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][3] = totalCages
+                cageField[1][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label3.text = result
                 
@@ -870,6 +1118,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[2][2]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[1][1] = totalCages
+                cageField[1][2] = totalCages
+                cageField[2][2] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label5.text = result
                 
@@ -879,6 +1131,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[3][0]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[2][0] = totalCages
+                cageField[2][1] = totalCages
+                cageField[3][0] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label8.text = result
                 
@@ -887,6 +1143,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[3][3]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[2][3] = totalCages
+                cageField[3][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label11.text = result
                 
@@ -895,6 +1154,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[3][2]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[3][1] = totalCages
+                cageField[3][2] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label13.text = result
             }
@@ -929,6 +1191,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[1][0]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[0][0] = totalCages
+                cageField[0][1] = totalCages
+                cageField[1][0] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label0.text = result
                 
@@ -937,6 +1203,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[1][2]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][2] = totalCages
+                cageField[1][2] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label2.text = result
                 
@@ -945,6 +1214,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[1][3]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[0][3] = totalCages
+                cageField[1][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label3.text = result
                 
@@ -953,6 +1225,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[2][1]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[1][1] = totalCages
+                cageField[2][1] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label5.text = result
                 
@@ -962,6 +1237,10 @@ class ChallengeViewController: UIViewController {
                 c = completedField[3][1]
                 result = pickRandomOp(a: a,b: b, c: c)
                 totalDifficulty += difficultyDictL[result]!
+                cageField[2][0] = totalCages
+                cageField[3][0] = totalCages
+                cageField[3][1] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
                 totalCages += 1
                 label8.text = result
                 
@@ -970,6 +1249,9 @@ class ChallengeViewController: UIViewController {
                 b = completedField[2][3]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[2][2] = totalCages
+                cageField[2][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label10.text = result
                 
@@ -978,15 +1260,359 @@ class ChallengeViewController: UIViewController {
                 b = completedField[3][3]
                 result = pickRandomOp(a: a,b: b, c: -1)
                 totalDifficulty += difficultyDictPair[result]!
+                cageField[3][2] = totalCages
+                cageField[3][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label14.text = result
             }
             
             
             
+        } else if cageName == "grid8.png" {
+            
+            //Check if bad
+            
+            if (completedField[0][0] == completedField[1][2]) && (completedField[1][0] == completedField[0][2]) {
+                generatePuzzle(cageName: cageName)
+            } else if (completedField[0][0] == completedField[1][3]) && (completedField[1][0] == completedField[0][3]) {
+                generatePuzzle(cageName: cageName)
+                
+            } else if (completedField[2][0] == completedField[1][3]) && (completedField[3][0] == completedField[2][3]) {
+                generatePuzzle(cageName: cageName)
+            } else if (completedField[2][1] == completedField[3][2]) && (completedField[2][2] == completedField[3][1]) {
+                generatePuzzle(cageName: cageName)
+            }
+                
+                
+            else {
+                var a: Int
+                var b: Int
+                var c: Int
+                var result: String
+                
+                // Set label0
+                a = completedField[0][0]
+                b = completedField[1][0]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[0][0] = totalCages
+                cageField[1][0] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label0.text = result
+                
+                
+                // Set label1
+                a = completedField[0][1]
+                cageField[0][1] = totalCages
+                cageArray.append(Cage(size: 1, code: String(a)))
+                totalCages += 1
+                label1.text = String(a)
+                
+                // Set label2
+                a = completedField[0][2]
+                b = completedField[1][2]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[0][2] = totalCages
+                cageField[1][2] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label2.text = result
+                
+                // Set label3
+                a = completedField[0][3]
+                b = completedField[1][3]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[0][3] = totalCages
+                cageField[1][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label3.text = result
+                
+                // Set label5
+                a = completedField[1][1]
+                b = completedField[2][1]
+                c = completedField[2][2]
+                result = pickRandomOp(a: a,b: b, c: c)
+                totalDifficulty += difficultyDictL[result]!
+                cageField[1][1] = totalCages
+                cageField[2][1] = totalCages
+                cageField[2][2] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
+                totalCages += 1
+                label5.text = result
+                
+                // Set label8
+                a = completedField[2][0]
+                b = completedField[3][0]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[2][0] = totalCages
+                cageField[3][0] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label8.text = result
+                
+                // Set label11
+                a = completedField[2][3]
+                b = completedField[3][3]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[2][3] = totalCages
+                cageField[3][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label11.text = result
+                
+                // Set label13
+                a = completedField[3][1]
+                b = completedField[3][2]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[3][1] = totalCages
+                cageField[3][2] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label13.text = result
+            }
+            
+            
+            
+        } else if cageName == "grid9.png" {
+            
+            //Check if bad
+            
+            if (completedField[0][0] == completedField[1][3]) && (completedField[1][0] == completedField[0][3]) {
+                generatePuzzle(cageName: cageName)
+            } else if (completedField[0][1] == completedField[1][2]) && (completedField[0][2] == completedField[1][1]) {
+                generatePuzzle(cageName: cageName)
+                
+            } else if (completedField[0][1] == completedField[3][2]) && (completedField[0][2] == completedField[3][1]) {
+                generatePuzzle(cageName: cageName)
+            }
+                
+                
+            else {
+                var a: Int
+                var b: Int
+                var c: Int
+                var result: String
+                
+                // Set label0
+                a = completedField[0][0]
+                b = completedField[1][0]
+                c = completedField[2][0]
+                result = pickRandomOp(a: a,b: b, c: c)
+                totalDifficulty += difficultyDictTriple[result]!
+                cageField[0][0] = totalCages
+                cageField[1][0] = totalCages
+                cageField[2][0] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
+                totalCages += 1
+                label0.text = result
+                
+                
+                // Set label1
+                a = completedField[0][1]
+                b = completedField[0][2]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[0][1] = totalCages
+                cageField[0][2] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label1.text = result
+                
+                // Set label3
+                a = completedField[0][3]
+                b = completedField[1][3]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[0][3] = totalCages
+                cageField[1][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label3.text = result
+                
+                // Set label5
+                a = completedField[1][1]
+                b = completedField[1][2]
+                c = completedField[2][2]
+                result = pickRandomOp(a: a,b: b, c: c)
+                totalDifficulty += difficultyDictL[result]!
+                cageField[1][1] = totalCages
+                cageField[1][2] = totalCages
+                cageField[2][2] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
+                totalCages += 1
+                label5.text = result
+                
+                // Set label9
+                a = completedField[2][1]
+                b = completedField[3][1]
+                c = completedField[3][2]
+                result = pickRandomOp(a: a,b: b, c: c)
+                totalDifficulty += difficultyDictL[result]!
+                cageField[2][1] = totalCages
+                cageField[3][1] = totalCages
+                cageField[3][2] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
+                totalCages += 1
+                label9.text = result
+                
+                // Set label11
+                a = completedField[2][3]
+                b = completedField[3][3]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[2][3] = totalCages
+                cageField[3][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label11.text = result
+                
+                // Set label12
+                a = completedField[3][0]
+                cageField[3][0] = totalCages
+                cageArray.append(Cage(size: 1, code: String(a)))
+                totalCages += 1
+                label12.text = String(a)
+                
+                totalCages -= 2
+            }
+            
+            
+            
+        } else if cageName == "grid10.png" {
+            
+            //Check if bad
+            
+            if (completedField[0][0] == completedField[1][3]) && (completedField[1][0] == completedField[0][3]) {
+                generatePuzzle(cageName: cageName)
+            } else if (completedField[0][1] == completedField[1][2]) && (completedField[0][2] == completedField[1][1]) {
+                generatePuzzle(cageName: cageName)
+            } else if (completedField[0][1] == completedField[2][2]) && (completedField[0][2] == completedField[2][1]) {
+                generatePuzzle(cageName: cageName)
+            } else if (completedField[2][0] == completedField[3][1]) && (completedField[2][1] == completedField[3][0]) {
+                generatePuzzle(cageName: cageName)
+            } else if (completedField[1][1] == completedField[2][2]) && (completedField[1][2] == completedField[2][1]) {
+                generatePuzzle(cageName: cageName)
+            }
+                
+                
+            else {
+                var a: Int
+                var b: Int
+                var c: Int
+                var result: String
+                
+                // Set label0
+                a = completedField[0][0]
+                b = completedField[1][0]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[0][0] = totalCages
+                cageField[1][0] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label0.text = result
+                
+                // Set label1
+                a = completedField[0][1]
+                b = completedField[0][2]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[0][1] = totalCages
+                cageField[0][2] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label1.text = result
+                
+                // Set label3
+                a = completedField[0][3]
+                b = completedField[1][3]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[0][3] = totalCages
+                cageField[1][3] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label3.text = result
+                
+                // Set label5
+                a = completedField[1][1]
+                b = completedField[1][2]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[1][1] = totalCages
+                cageField[1][2] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label5.text = result
+                
+                // Set label8
+                a = completedField[2][0]
+                b = completedField[2][1]
+                c = completedField[2][2]
+                result = pickRandomOp(a: a,b: b, c: c)
+                totalDifficulty += difficultyDictTriple[result]!
+                cageField[2][0] = totalCages
+                cageField[2][1] = totalCages
+                cageField[2][2] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
+                totalCages += 1
+                label8.text = result
+                
+                // Set label11
+                a = completedField[2][3]
+                b = completedField[3][2]
+                c = completedField[3][3]
+                result = pickRandomOp(a: a,b: b, c: c)
+                totalDifficulty += difficultyDictL[result]!
+                cageField[2][3] = totalCages
+                cageField[3][2] = totalCages
+                cageField[3][3] = totalCages
+                cageArray.append(Cage(size: 3, code: result))
+                totalCages += 1
+                label11.text = result
+                
+                // Set label12
+                a = completedField[3][0]
+                b = completedField[3][1]
+                result = pickRandomOp(a: a,b: b, c: -1)
+                totalDifficulty += difficultyDictPair[result]!
+                cageField[3][0] = totalCages
+                cageField[3][1] = totalCages
+                cageArray.append(Cage(size: 2, code: result))
+                totalCages += 1
+                label12.text = result
+                
+            }
+            
+            
+            
         }
+
         
         avgDifficulty = Float(totalDifficulty)/Float(totalCages)
+        
+        if currentDifficulty == "Easy" {
+            if avgDifficulty > 1.3 {
+                generatePuzzle()
+            }
+        } else if currentDifficulty == "Medium" {
+            if (avgDifficulty < 1.3) || (avgDifficulty > 1.8) {
+                generatePuzzle()
+            }
+        } else if currentDifficulty == "Hard" {
+            if avgDifficulty < 1.8 {
+                generatePuzzle()
+            }
+        }
+        
         
     }
     
@@ -1092,19 +1718,34 @@ class ChallengeViewController: UIViewController {
 
         
         bg1.layer.cornerRadius = 12.0
-        bg1.clipsToBounds = true
+        bg1.layer.shadowColor = UIColor.black.cgColor
+        bg1.layer.shadowOpacity = 0.4
+        bg1.layer.shadowRadius = 3
+        bg1.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg2.layer.cornerRadius = 12.0
-        bg2.clipsToBounds = true
+        bg2.layer.shadowColor = UIColor.black.cgColor
+        bg2.layer.shadowOpacity = 0.4
+        bg2.layer.shadowRadius = 3
+        bg2.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg3.layer.cornerRadius = 12.0
-        bg3.clipsToBounds = true
+        bg3.layer.shadowColor = UIColor.black.cgColor
+        bg3.layer.shadowOpacity = 0.4
+        bg3.layer.shadowRadius = 3
+        bg3.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg4.layer.cornerRadius = 12.0
-        bg4.clipsToBounds = true
+        bg4.layer.shadowColor = UIColor.black.cgColor
+        bg4.layer.shadowOpacity = 0.4
+        bg4.layer.shadowRadius = 3
+        bg4.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg5.layer.cornerRadius = 12.0
-        bg5.clipsToBounds = true
+        bg5.layer.shadowColor = UIColor.black.cgColor
+        bg5.layer.shadowOpacity = 0.4
+        bg5.layer.shadowRadius = 3
+        bg5.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg7.layer.cornerRadius = 12.0
         bg7.layer.shadowColor = UIColor.black.cgColor
@@ -1121,26 +1762,66 @@ class ChallengeViewController: UIViewController {
         bg10.layer.cornerRadius = 12.0
         
         bg11.layer.cornerRadius = 12.0
-        bg11.clipsToBounds = true
+        bg11.layer.shadowColor = UIColor.black.cgColor
+        bg11.layer.shadowOpacity = 0.4
+        bg11.layer.shadowRadius = 3
+        bg11.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg12.layer.cornerRadius = 12.0
-        bg12.clipsToBounds = true
+        bg12.layer.shadowColor = UIColor.black.cgColor
+        bg12.layer.shadowOpacity = 0.4
+        bg12.layer.shadowRadius = 3
+        bg12.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg13.layer.cornerRadius = 12.0
-        bg13.clipsToBounds = true
+        bg13.layer.shadowColor = UIColor.black.cgColor
+        bg13.layer.shadowOpacity = 0.4
+        bg13.layer.shadowRadius = 3
+        bg13.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg14.layer.cornerRadius = 12.0
-        bg14.clipsToBounds = true
+        bg14.layer.shadowColor = UIColor.black.cgColor
+        bg14.layer.shadowOpacity = 0.4
+        bg14.layer.shadowRadius = 3
+        bg14.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg15.layer.cornerRadius = 12.0
-        bg15.clipsToBounds = true
+        bg15.layer.shadowColor = UIColor.black.cgColor
+        bg15.layer.shadowOpacity = 0.4
+        bg15.layer.shadowRadius = 3
+        bg15.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg16.layer.cornerRadius = 12.0
-        bg16.clipsToBounds = true
+        bg16.layer.shadowColor = UIColor.black.cgColor
+        bg16.layer.shadowOpacity = 0.4
+        bg16.layer.shadowRadius = 3
+        bg16.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         bg17.layer.cornerRadius = 12.0
-        bg17.clipsToBounds = true
+        bg17.layer.shadowColor = UIColor.black.cgColor
+        bg17.layer.shadowOpacity = 0.4
+        bg17.layer.shadowRadius = 3
+        bg17.layer.shadowOffset = CGSize(width: 3, height: 3)
         
+    }
+    
+    func clearLabels() {
+        label0.text = ""
+        label1.text = ""
+        label2.text = ""
+        label3.text = ""
+        label4.text = ""
+        label5.text = ""
+        label6.text = ""
+        label7.text = ""
+        label8.text = ""
+        label9.text = ""
+        label10.text = ""
+        label11.text = ""
+        label12.text = ""
+        label13.text = ""
+        label14.text = ""
+        label15.text = ""
     }
     
     @IBOutlet var label0: UILabel!
@@ -1191,5 +1872,40 @@ class ChallengeViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "startChallenge" {
+            if firstPuzzle == false {
+                dim(direction: .In, alpha: dimLevel, speed: 0.36)
+                let dest = segue.destination as! StartViewController
+                dest.delegate = self
+            } else {
+                dim(direction: .In, alpha: dimLevel, speed: dimSpeed)
+                currentChallenge.restart()
+                let dest = segue.destination as! StartViewController
+                dest.delegate = self
+            }
+        } else if segue.identifier == "challengeCompleted" {
+            dim(direction: .In, alpha: dimLevel, speed: dimSpeed)
+            //let dest = segue.destination as! StartViewController
+            //dest.delegate = self
+        }
+        
+    }
+    
+    @IBAction func unwindFromSecondary(segue: UIStoryboardSegue) {
+        dim(direction: .Out, speed: dimSpeed)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 
+    
+
+}
+
+extension ChallengeViewController: StartViewControllerDelegate {
+    func didFinishTask(sender: StartViewController) {
+        // do stuff like updating the UI
+        self.startChallenge()
+    }
 }

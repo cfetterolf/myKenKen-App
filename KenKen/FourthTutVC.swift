@@ -50,7 +50,7 @@ class FourthTutVC: UIViewController {
         rulesLabel.text = rules
         rulesLabel.sizeToFit()
 
-        let rules2:String = "And that's it!  Go solve some KenKen's!"
+        let rules2:String = "And that's it!  Go solve some puzzles!"
         rulesLabel2.text = rules2
         rulesLabel2.sizeToFit()
         

@@ -25,13 +25,14 @@ class FinishedViewController: UIViewController {
         finishedView.layer.masksToBounds = false
         
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        finishLabel.text = "You finished the \(selectedDiff) puzzle with \(finishTime) to spare."
-        
+        finishLabel.text = "You finished the \(currentChallenge.difficultyArray[currentChallenge.nextPuzzleIndex]) puzzle with \(finishTime) to spare."
+                
         self.showAnimate()
     }
     
     @IBAction func nextPuzzle(_ sender: Any) {
         self.removeAnimate()
+        firstPuzzle = false
     }
     
     func showAnimate() {
@@ -46,7 +47,7 @@ class FinishedViewController: UIViewController {
     func removeAnimate() {
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-            self.view.alpha = 0.0
+            self.finishedView.alpha = 0.0
         }, completion:{(finished: Bool) in
             if (finished) {
                 self.view.removeFromSuperview()

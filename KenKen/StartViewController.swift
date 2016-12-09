@@ -8,8 +8,12 @@
 
 import UIKit
 
+var currentPuzzle = 0
+
 class StartViewController: UIViewController {
 
+    weak var delegate:StartViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,18 +22,33 @@ class StartViewController: UIViewController {
         bg1.clipsToBounds = true
         
         finishedView.layer.cornerRadius = 15.0
+        finishedView.layer.borderColor = UIColor.black.cgColor
+        finishedView.layer.borderWidth = 0.25
         finishedView.layer.shadowColor = UIColor.black.cgColor
-        finishedView.layer.shadowOpacity = 0.4
-        finishedView.layer.shadowRadius = 3
-        finishedView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        finishedView.layer.shadowOpacity = 0.6
+        finishedView.layer.shadowRadius = 15
+        finishedView.layer.shadowOffset = CGSize(width: 5, height: 5)
         finishedView.layer.masksToBounds = false
         
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        finishLabel.text = "You finished the \(selectedDiff) puzzle with \(finishTime) to spare."
+        // Config start time
+        initCountdown = currentChallenge.initCountdownArray[currentChallenge.nextPuzzleIndex]
+        let minutes = initCountdown / 60
+        let seconds = initCountdown - (60*minutes)
+        let secondsString = seconds > 9 ? "\(seconds)" : "0\(seconds)"
+        let minutesString = String(minutes)
+        let stopWatchString = "\(minutesString):\(secondsString)"
+        finishLabel.text = "You have \(stopWatchString) to complete this \(currentChallenge.difficultyArray[currentChallenge.nextPuzzleIndex]) puzzle"
         
-        self.showAnimate()
+        puzzleTitle.text = "Puzzle \((currentChallenge.nextPuzzleIndex) + 1)"
+        
     }
     
+    @IBAction func startChallenge(_ sender: Any) {
+        delegate?.didFinishTask(sender: self)
+    }
+    
+    
+    /*
     @IBAction func nextPuzzle(_ sender: Any) {
         self.removeAnimate()
     }
@@ -53,7 +72,7 @@ class StartViewController: UIViewController {
             }
         })
     }
-    
+    */
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -73,5 +92,6 @@ class StartViewController: UIViewController {
     @IBOutlet var finishedView: UIView!
     @IBOutlet var bg1: UIImageView!
     @IBOutlet var finishLabel: UILabel!
+    @IBOutlet var puzzleTitle: UILabel!
 
 }

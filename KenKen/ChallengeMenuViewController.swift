@@ -11,6 +11,11 @@ import UIKit
 var countdown = 0
 var initCountdown = 40
 var performSG = false
+var performSGFinish = false
+var firstPuzzle = true
+
+var currentChallenge:Challenge = Challenge(countdownArray: [], diffArray: [], numPuzzles: 0)
+
 
 let easyGreen = UIColor(hue: 0.275, saturation: 0.4, brightness: 0.84, alpha: 0.8)
 let mediumBlue = UIColor(hue: 0.5778, saturation: 0.67, brightness: 0.84, alpha: 0.8)
@@ -34,6 +39,7 @@ class ChallengeMenuViewController: UIViewController, UITableViewDelegate, UITabl
         //tableView.backgroundColor = UIColor(hue: 0.5389, saturation: 0.18, brightness: 0.94, alpha: 1.0)
         // Do any additional setup after loading the view.
         //InfoViewController.delegate = self
+         tableView.backgroundColor = .clear
     }
     
     // number of rows in table view
@@ -45,20 +51,25 @@ class ChallengeMenuViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:ChallengeTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! ChallengeTableViewCell
         
+        cell.contentView.backgroundColor = .clear
+        cell.backgroundColor = .clear
+        
         
         
         if difficultyOptions[indexPath.row] == "Easy" {
             cell.difficultyBG.backgroundColor = easyGreen
             cell.challengeName.text = "Easy"
-            cell.challengeDescription.text = "To learn, and grow"
+            cell.challengeDescription.text = "To learn and grow"
         } else if difficultyOptions[indexPath.row] == "Medium" {
             cell.difficultyBG.backgroundColor = mediumBlue
             cell.challengeName.text = "Medium"
             cell.challengeDescription.text = "To hone your skills"
+            
         } else if difficultyOptions[indexPath.row] == "Hard" {
             cell.difficultyBG.backgroundColor = hardRed
             cell.challengeName.text = "Hard"
             cell.challengeDescription.text = "For the brave at heart"
+            
         } else {
             cell.difficultyBG.backgroundColor = .clear
             
@@ -70,6 +81,11 @@ class ChallengeMenuViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Select a Challenge:"
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 35.0
+    }
+
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -95,10 +111,13 @@ class ChallengeMenuViewController: UIViewController, UITableViewDelegate, UITabl
         performSegue(withIdentifier: "segueToChallenge", sender: self)
     }
     
+    /*
     @IBAction func beginChallenge(_ sender: UIButton) {
         performSegue(withIdentifier: "segueToChallenge", sender: self)
+        
     }
-    
+    */
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -123,8 +142,8 @@ class ChallengeMenuViewController: UIViewController, UITableViewDelegate, UITabl
             //let infoView = segue.destination as! InfoViewController
             //infoView.delegate = self
         } else if segue.identifier == "segueToChallenge" {
-            let destView = segue.destination as! ChallengeViewController
-            destView.CHALLENGE_MODE = selectedDiff
+            //let destView = segue.destination as! ChallengeViewController
+            //destView.CHALLENGE_MODE = selectedDiff
         }
         
     }

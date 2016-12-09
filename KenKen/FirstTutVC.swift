@@ -19,10 +19,6 @@ class FirstTutVC: UIViewController {
         view1.layer.shadowRadius = 4
         view1.layer.shouldRasterize = true
         
-        
-        board.layer.cornerRadius = 12.0
-        board.clipsToBounds = true
-        
         blur.layer.cornerRadius = 12.0
         blur.clipsToBounds = true
         
@@ -31,7 +27,7 @@ class FirstTutVC: UIViewController {
         rulesLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         rulesLabel.numberOfLines = 0
         
-        let rules:String = "This tutorial will teach you the basics of solving KenKen puzzles.\n\nRules of KenKen:\n\n1. The only numbers you may use are 1, 2, 3, or 4.\n\n2. No numbers may appear more than once in any row or column.\n\n3. The numbers must follow the rules of their cage."
+        let rules:String = "Rules of Fours:\n\n1. The only numbers you may use are 1, 2, 3, or 4.\n\n2. Every row and column must contain each number exactly once (like Sudoku).\n\n3. The numbers must follow the rules of their cage (see next slide for details)."
         rulesLabel.text = rules
         rulesLabel.sizeToFit()
         
@@ -56,7 +52,6 @@ class FirstTutVC: UIViewController {
     */
 
     @IBOutlet var view1: UIView!
-    @IBOutlet var board: UIImageView!
     @IBOutlet var blur: UIVisualEffectView!
     @IBOutlet var rulesLabel: UILabel!
     

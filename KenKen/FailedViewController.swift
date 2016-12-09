@@ -30,6 +30,8 @@ class FailedViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         self.showAnimate()
+        currentChallenge.nextPuzzleIndex = 0
+        currentChallenge.restart()
     }
     
     @IBAction func nextPuzzle(_ sender: Any) {
