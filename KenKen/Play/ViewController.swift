@@ -196,24 +196,27 @@ class ViewController: UIViewController {
         return invalidArray
     }
     
+    
     var tile = UIButton()
-    var flashTimer = Timer()
     
     //Takes as input a button tag.  Flashes that buttons bg red
     func flashRed(tag: Int) {
-        
-        tile = (self.view.viewWithTag(tag) as? UIButton)!
+        //Get the tile to flash
+        tile = self.view.viewWithTag(tag) as! UIButton
         tile.layer.cornerRadius = 12.0
         tile.clipsToBounds = true
         let lightRed = UIColor(hue: 0.99, saturation: 0.28, brightness: 0.84, alpha: 0.5)
         tile.backgroundColor = UIColor(hue: 0.99, saturation: 0.28, brightness: 0.84, alpha: 0)
-        UIView.animate(withDuration: 0.2, animations: {
+        
+        //Animate Flash
+        UIView.animate(withDuration: 0.4, animations: {
             self.tile.backgroundColor = lightRed
         })
         UIView.animate(withDuration: 0.2, delay: 1.0, options: [], animations: {
             self.tile.backgroundColor = .clear
         }, completion: nil)
         
+        //Vibrate
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
     

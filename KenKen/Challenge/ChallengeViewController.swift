@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 protocol StartViewControllerDelegate: class {
     func didFinishTask(sender: StartViewController)
@@ -114,6 +115,20 @@ class ChallengeViewController: UIViewController, Dimmable {
                 // Update current Field
                 currentField[i][j] = Int(buttonText)!
                 
+                //Check if there are any repeats in rows or columns
+                //If so, display error to user
+                let inValArr = checkIfValueRepeated(field: currentField, x:i, y:j)
+                for i in 0...3 {
+                    for j in 0...3 {
+                        let val = inValArr[i][j]
+                        if val == 1 {
+                            //Flash index bg red
+                            let tag = (i*4) + j
+                            flashRed(tag:tag)
+                        }
+                    }
+                }
+                
                 // Check if puzzle completed
                 var match: Bool = false
                 outerLoop: for i in 0...3{
@@ -155,6 +170,60 @@ class ChallengeViewController: UIViewController, Dimmable {
             timerView.isHidden = false
         }
     }
+    
+    /*
+     Checks if input value repeats in any other values in rows and columns.
+     Returns new array of same size as currentField, with 1's where invalid repeats occur and
+     0's everywhere else
+     */
+    func checkIfValueRepeated(field: [[Int]], x:Int, y: Int) -> [[Int]] {
+        
+        //Create invalidArray
+        var invalidArray = Array(repeating: Array(repeating: 0, count: 4), count: 4)
+        
+        //Check row
+        let row:[Int] = field[x]
+        for j in 0...row.count-1 {
+            if row[j] == field[x][y] && j != y {
+                invalidArray[x][j] = 1
+            }
+        }
+        
+        //Check column
+        for i in 0...field.count-1 {
+            if field[i][y] == field[x][y] && i != x {
+                invalidArray[i][y] = 1
+            }
+        }
+        
+        return invalidArray
+    }
+    
+    
+    var tile = UIButton()
+    
+    //Takes as input a button tag.  Flashes that buttons bg red
+    func flashRed(tag: Int) {
+        //Get the tile to flash
+        tile = self.view.viewWithTag(tag) as! UIButton
+        tile.layer.cornerRadius = 12.0
+        tile.clipsToBounds = true
+        let lightRed = UIColor(hue: 0.99, saturation: 0.28, brightness: 0.84, alpha: 0.5)
+        tile.backgroundColor = UIColor(hue: 0.99, saturation: 0.28, brightness: 0.84, alpha: 0)
+        
+        //Animate Flash
+        UIView.animate(withDuration: 0.4, animations: {
+            self.tile.backgroundColor = lightRed
+        })
+        UIView.animate(withDuration: 0.2, delay: 1.0, options: [], animations: {
+            self.tile.backgroundColor = .clear
+        }, completion: nil)
+        
+        //Vibrate
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+    }
+    
+
     
     // Called when user taps on tile.  Sets up above function to recieve user input.
     @IBAction func buttonPressed(_ sender: UIButton) {
