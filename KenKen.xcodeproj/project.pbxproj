@@ -10,7 +10,6 @@
 		830D3D5F1DECA3AF00D0DF44 /* ScoreboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D3D5E1DECA3AF00D0DF44 /* ScoreboardTableViewCell.swift */; };
 		830D3D611DECAF1000D0DF44 /* StarRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D3D601DECAF1000D0DF44 /* StarRank.swift */; };
 		830D3D631DED33CB00D0DF44 /* StartTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D3D621DED33CB00D0DF44 /* StartTutorialViewController.swift */; };
-		8312326D1DEE01CD008F9C89 /* Agilis.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8312326B1DEE01BB008F9C89 /* Agilis.otf */; };
 		8312326F1DEE099B008F9C89 /* Cage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8312326E1DEE099B008F9C89 /* Cage.swift */; };
 		831589E01DE0F20200ABC3AE /* FailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589DF1DE0F20200ABC3AE /* FailedViewController.swift */; };
 		831589E21DE15C1300ABC3AE /* ChallengeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589E11DE15C1300ABC3AE /* ChallengeTableViewCell.swift */; };
@@ -51,49 +50,49 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		830D3D5E1DECA3AF00D0DF44 /* ScoreboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreboardTableViewCell.swift; sourceTree = "<group>"; };
-		830D3D601DECAF1000D0DF44 /* StarRank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarRank.swift; sourceTree = "<group>"; };
-		830D3D621DED33CB00D0DF44 /* StartTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartTutorialViewController.swift; sourceTree = "<group>"; };
-		8312326B1DEE01BB008F9C89 /* Agilis.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Agilis.otf; sourceTree = "<group>"; };
-		8312326E1DEE099B008F9C89 /* Cage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cage.swift; sourceTree = "<group>"; };
-		831589DF1DE0F20200ABC3AE /* FailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailedViewController.swift; sourceTree = "<group>"; };
-		831589E11DE15C1300ABC3AE /* ChallengeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeTableViewCell.swift; sourceTree = "<group>"; };
-		831589E31DE20EDF00ABC3AE /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		831589E51DE2132000ABC3AE /* ExtensionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsViewController.swift; sourceTree = "<group>"; };
-		831589E71DE2895F00ABC3AE /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		831589E91DE3567300ABC3AE /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		830D3D5E1DECA3AF00D0DF44 /* ScoreboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreboardTableViewCell.swift; path = Scoreboard/ScoreboardTableViewCell.swift; sourceTree = "<group>"; };
+		830D3D601DECAF1000D0DF44 /* StarRank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StarRank.swift; path = Classes/StarRank.swift; sourceTree = "<group>"; };
+		830D3D621DED33CB00D0DF44 /* StartTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartTutorialViewController.swift; path = Tutorial/StartTutorialViewController.swift; sourceTree = "<group>"; };
+		8312326E1DEE099B008F9C89 /* Cage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cage.swift; path = Classes/Cage.swift; sourceTree = "<group>"; };
+		831589DF1DE0F20200ABC3AE /* FailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FailedViewController.swift; path = Challenge/FailedViewController.swift; sourceTree = "<group>"; };
+		831589E11DE15C1300ABC3AE /* ChallengeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeTableViewCell.swift; path = Classes/ChallengeTableViewCell.swift; sourceTree = "<group>"; };
+		831589E31DE20EDF00ABC3AE /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoViewController.swift; path = Challenge/InfoViewController.swift; sourceTree = "<group>"; };
+		831589E51DE2132000ABC3AE /* ExtensionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsViewController.swift; path = Challenge/ExtensionsViewController.swift; sourceTree = "<group>"; };
+		831589E71DE2895F00ABC3AE /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartViewController.swift; path = Challenge/StartViewController.swift; sourceTree = "<group>"; };
+		831589E91DE3567300ABC3AE /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Challenge.swift; path = Challenge/Challenge.swift; sourceTree = "<group>"; };
 		834DA1C41DC69BAB00E9D919 /* KenKen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KenKen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		834DA1C91DC69BAB00E9D919 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		834DA1C91DC69BAB00E9D919 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Play/ViewController.swift; sourceTree = "<group>"; };
 		834DA1CC1DC69BAB00E9D919 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		834DA1CF1DC69BAB00E9D919 /* KenKen.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KenKen.xcdatamodel; sourceTree = "<group>"; };
 		834DA1D11DC69BAB00E9D919 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		834DA1D41DC69BAB00E9D919 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		834DA1D61DC69BAB00E9D919 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		834DA1DC1DC8415700E9D919 /* KenKenCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KenKenCell.swift; sourceTree = "<group>"; };
-		834DA1DE1DC90B9000E9D919 /* KenKenField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KenKenField.swift; sourceTree = "<group>"; };
-		8359EBDD1DE0DBCD002834E5 /* ScoreBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreBoardViewController.swift; sourceTree = "<group>"; };
-		8359EBE21DE0DE64002834E5 /* ChallengeMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeMenuViewController.swift; sourceTree = "<group>"; };
-		8359EBE41DE0E418002834E5 /* ChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
-		8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedViewController.swift; sourceTree = "<group>"; };
-		83922B331DF7064E0084D0BF /* PlayHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayHelpViewController.swift; sourceTree = "<group>"; };
-		839E7FB81DF3207300FAD13E /* TopAlignedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopAlignedLabel.swift; sourceTree = "<group>"; };
-		839E7FBA1DF32AF700FAD13E /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
-		83A05DCE1DDA1B4900FE77BA /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
-		83A05DD01DDA3D6700FE77BA /* TutorialContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialContainerViewController.swift; sourceTree = "<group>"; };
-		83A05DD21DDA9C9700FE77BA /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
-		83A98D051DDBA54400EF70B4 /* Slide2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slide2ViewController.swift; sourceTree = "<group>"; };
-		83A98D071DDBB24200EF70B4 /* FirstTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTutVC.swift; sourceTree = "<group>"; };
-		83A98D0B1DDBB45100EF70B4 /* SecondTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondTutVC.swift; sourceTree = "<group>"; };
-		83A98D0D1DDBB47E00EF70B4 /* ThirdTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTutVC.swift; sourceTree = "<group>"; };
-		83A98D0F1DDBB48B00EF70B4 /* FourthTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthTutVC.swift; sourceTree = "<group>"; };
-		83AB46451DE3BB6500643DD9 /* ChallengeCompletedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeCompletedViewController.swift; sourceTree = "<group>"; };
-		83AB46471DE3F07200643DD9 /* Scoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
-		83FC41B61DD5696B008FAAFE /* MyCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomCell.swift; sourceTree = "<group>"; };
-		83FC41B81DD56A39008FAAFE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		83FC41BA1DD7B081008FAAFE /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
-		83FC41BE1DD8DD6F008FAAFE /* Slide1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slide1ViewController.swift; sourceTree = "<group>"; };
-		83FE29911DE613C20006A334 /* ScoreDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreDetailTableViewController.swift; sourceTree = "<group>"; };
+		834DA1DC1DC8415700E9D919 /* KenKenCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KenKenCell.swift; path = Classes/KenKenCell.swift; sourceTree = "<group>"; };
+		834DA1DE1DC90B9000E9D919 /* KenKenField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KenKenField.swift; path = Classes/KenKenField.swift; sourceTree = "<group>"; };
+		8359EBDD1DE0DBCD002834E5 /* ScoreBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreBoardViewController.swift; path = Scoreboard/ScoreBoardViewController.swift; sourceTree = "<group>"; };
+		8359EBE21DE0DE64002834E5 /* ChallengeMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeMenuViewController.swift; path = Challenge/ChallengeMenuViewController.swift; sourceTree = "<group>"; };
+		8359EBE41DE0E418002834E5 /* ChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeViewController.swift; path = Challenge/ChallengeViewController.swift; sourceTree = "<group>"; };
+		8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinishedViewController.swift; path = Challenge/FinishedViewController.swift; sourceTree = "<group>"; };
+		83922B331DF7064E0084D0BF /* PlayHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayHelpViewController.swift; path = Play/PlayHelpViewController.swift; sourceTree = "<group>"; };
+		839E7FB81DF3207300FAD13E /* TopAlignedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopAlignedLabel.swift; path = Classes/TopAlignedLabel.swift; sourceTree = "<group>"; };
+		839E7FBA1DF32AF700FAD13E /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = Scoreboard/HelpViewController.swift; sourceTree = "<group>"; };
+		83A05DCE1DDA1B4900FE77BA /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUpViewController.swift; path = Play/PopUpViewController.swift; sourceTree = "<group>"; };
+		83A05DD01DDA3D6700FE77BA /* TutorialContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialContainerViewController.swift; path = Tutorial/TutorialContainerViewController.swift; sourceTree = "<group>"; };
+		83A05DD21DDA9C9700FE77BA /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePageViewController.swift; path = Home/HomePageViewController.swift; sourceTree = "<group>"; };
+		83A98D051DDBA54400EF70B4 /* Slide2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Slide2ViewController.swift; path = Home/Slide2ViewController.swift; sourceTree = "<group>"; };
+		83A98D071DDBB24200EF70B4 /* FirstTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirstTutVC.swift; path = Tutorial/FirstTutVC.swift; sourceTree = "<group>"; };
+		83A98D0B1DDBB45100EF70B4 /* SecondTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondTutVC.swift; path = Tutorial/SecondTutVC.swift; sourceTree = "<group>"; };
+		83A98D0D1DDBB47E00EF70B4 /* ThirdTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThirdTutVC.swift; path = Tutorial/ThirdTutVC.swift; sourceTree = "<group>"; };
+		83A98D0F1DDBB48B00EF70B4 /* FourthTutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FourthTutVC.swift; path = Tutorial/FourthTutVC.swift; sourceTree = "<group>"; };
+		83AB46451DE3BB6500643DD9 /* ChallengeCompletedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeCompletedViewController.swift; path = Challenge/ChallengeCompletedViewController.swift; sourceTree = "<group>"; };
+		83AB46471DE3F07200643DD9 /* Scoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scoreboard.swift; path = Scoreboard/Scoreboard.swift; sourceTree = "<group>"; };
+		83D4D6FA1E121318004A5C96 /* Agilis.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Agilis.otf; path = Fonts/Agilis.otf; sourceTree = "<group>"; };
+		83FC41B61DD5696B008FAAFE /* MyCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyCustomCell.swift; path = Classes/MyCustomCell.swift; sourceTree = "<group>"; };
+		83FC41B81DD56A39008FAAFE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Home/HomeViewController.swift; sourceTree = "<group>"; };
+		83FC41BA1DD7B081008FAAFE /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialPageViewController.swift; path = Tutorial/TutorialPageViewController.swift; sourceTree = "<group>"; };
+		83FC41BE1DD8DD6F008FAAFE /* Slide1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Slide1ViewController.swift; path = Home/Slide1ViewController.swift; sourceTree = "<group>"; };
+		83FE29911DE613C20006A334 /* ScoreDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreDetailTableViewController.swift; path = Scoreboard/ScoreDetailTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +109,6 @@
 		8312326C1DEE01C0008F9C89 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8312326B1DEE01BB008F9C89 /* Agilis.otf */,
 			);
 			name = Resources;
 			path = KenKen;
@@ -143,6 +141,7 @@
 				83FC41C01DD8DD7B008FAAFE /* Tutorial */,
 				8359EBDF1DE0DBDD002834E5 /* Scoreboard */,
 				83A98D111DDBB4B500EF70B4 /* Classes */,
+				83D4D6FB1E1228A6004A5C96 /* Fonts */,
 				834DA1CB1DC69BAB00E9D919 /* Main.storyboard */,
 				834DA1D31DC69BAB00E9D919 /* LaunchScreen.storyboard */,
 				834DA1D11DC69BAB00E9D919 /* Assets.xcassets */,
@@ -183,10 +182,10 @@
 		83A98D041DDAC28D00EF70B4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				83A05DD21DDA9C9700FE77BA /* HomePageViewController.swift */,
 				83FC41B81DD56A39008FAAFE /* HomeViewController.swift */,
 				83FC41BE1DD8DD6F008FAAFE /* Slide1ViewController.swift */,
 				83A98D051DDBA54400EF70B4 /* Slide2ViewController.swift */,
-				83A05DD21DDA9C9700FE77BA /* HomePageViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -213,6 +212,14 @@
 				83922B331DF7064E0084D0BF /* PlayHelpViewController.swift */,
 			);
 			name = Play;
+			sourceTree = "<group>";
+		};
+		83D4D6FB1E1228A6004A5C96 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				83D4D6FA1E121318004A5C96 /* Agilis.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		83FC41C01DD8DD7B008FAAFE /* Tutorial */ = {
@@ -291,7 +298,6 @@
 			files = (
 				834DA1D51DC69BAB00E9D919 /* LaunchScreen.storyboard in Resources */,
 				834DA1D21DC69BAB00E9D919 /* Assets.xcassets in Resources */,
-				8312326D1DEE01CD008F9C89 /* Agilis.otf in Resources */,
 				834DA1CD1DC69BAB00E9D919 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,7 +411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -448,7 +454,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

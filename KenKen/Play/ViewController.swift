@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import AudioToolbox
 
-// Init Global Variables
+//MARK: - Init Global Variables
+
 var allPossible = [[[Int]]]()
 var field = KenKenField(blocks: 2)
 var currentField = Array(repeating: Array(repeating: 0, count: 4), count: 4)
@@ -20,7 +22,9 @@ var totalCages = 0
 var avgDifficulty:Float = 0.0
 var puzzleDifficulty = "Easy"
 
-let easyColor = UIColor(hue: 0.99, saturation: 0.31, brightness: 0.82, alpha: 1.0)
+
+
+//MARK: - Protocol Methods
 
 // Protocall used to call generatePuzzle() from outside of VC
 protocol ParentProtocol : class
@@ -29,10 +33,8 @@ protocol ParentProtocol : class
 }
 
 /*
- Scaling used to determine difficulty:
- avg > 1.86 = hard
- 1.86 > avg > 1.5 = medium
- avg < 1.5 = easy
+ Main ViewController class for the Play section.
+ Handles generating new puzzles, checking entries, and keeping track of finish times.
 */
 class ViewController: UIViewController {
 
@@ -47,39 +49,43 @@ class ViewController: UIViewController {
     var hintButton = 0
     var closeHint = 0
     var stopWatchString: String = "00:00"
-    
     var cageArray:[Cage] = []
-    
-    
     @IBOutlet var popUpViewHint: UIView!
     @IBOutlet var popUpView: UIView!
     @IBOutlet var timerView: UIView!
     @IBOutlet var stopwatchLabel: UILabel!
     
+
+    //Set Nav Bar title back to "Play" when load view
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Play"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.topItem?.title = ""
         
         self.view.clipsToBounds = true
         
         //Config Nav Bar
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.topItem?.title = ""
         
+        //Set corner radius of all shapes
         initBackgrounds()
         
+        //Configure Timer/Generate Puzzle views
         popUpView.isHidden = true
         popUpViewHint.isHidden = true
         
-        //Generate field
+        //Generate a new puzzle
         generatePuzzle()
         
         NotificationCenter.default.addObserver(self, selector: Selector(("refreshList:")), name:NSNotification.Name(rawValue: "refresh"), object: nil)
         
     }
+    
+    
+    
     
     // MARK: - User Input
     
@@ -106,21 +112,34 @@ class ViewController: UIViewController {
             tmpButton0?.backgroundColor = .clear
             tmpButton1?.backgroundColor = .clear
         } else {
+            //Set tile text to input number
             buttonText = (sender.titleLabel?.text!)!
             button.setTitle(buttonText, for: UIControlState.normal)
             
             if button.tag < 16 {
+                //Get index of tile to update field Array
                 let i = button.tag / 4
                 let j = button.tag % 4
                 
                 // Update current Field
                 currentField[i][j] = Int(buttonText)!
                 
-                // Check if puzzle completed
+                //Check if there are any repeats in rows or columns
+                //If so, display error to user
+                let inValArr = checkIfValueRepeated(field: currentField, x:i, y:j)
+                for i in 0...3 {
+                    for j in 0...3 {
+                        let val = inValArr[i][j]
+                        if val == 1 {
+                            //Flash index bg red
+                            let tag = (i*4) + j
+                            flashRed(tag:tag)
+                        }
+                    }
+                }
                 
+                // Check if currentField matches completedField
                 var match: Bool = false
-                
-                
                 outerLoop: for i in 0...3{
                     for j in 0...3 {
                         if currentField[i][j] == completedField[i][j] {
@@ -131,26 +150,74 @@ class ViewController: UIViewController {
                         }
                     }
                 }
-                
  
-                // Puzzle is completed
+                // Check if tiles satisfy board rules
                 let finish = checkIfCompleted()
-                print(finish)
                 
+                // If board follows all rules or matches generated board, accept
                 if match == true || finish == true {
                     timer.invalidate()
                     updateTimesArray(seconds: totalSeconds)
                     scoreBoard.addTime(difficulty: puzzleDifficulty, seconds: totalSeconds)
                     showPopUp(time: stopWatchString)
                 }
- 
-                
             }
- 
+            //Change views
             popUpView.isHidden = true
             timerView.isHidden = false
         }
     }
+    
+    /*
+     Checks if input value repeats in any other values in rows and columns.
+     Returns new array of same size as currentField, with 1's where invalid repeats occur and 
+     0's everywhere else
+    */
+    func checkIfValueRepeated(field: [[Int]], x:Int, y: Int) -> [[Int]] {
+        
+        //Create invalidArray
+        var invalidArray = Array(repeating: Array(repeating: 0, count: 4), count: 4)
+        
+        //Check row
+        let row:[Int] = field[x]
+        for j in 0...row.count-1 {
+            if row[j] == field[x][y] && j != y {
+                invalidArray[x][j] = 1
+            }
+        }
+        
+        //Check column
+        for i in 0...field.count-1 {
+            if field[i][y] == field[x][y] && i != x {
+                invalidArray[i][y] = 1
+            }
+        }
+        
+        return invalidArray
+    }
+    
+    var tile = UIButton()
+    var flashTimer = Timer()
+    
+    //Takes as input a button tag.  Flashes that buttons bg red
+    func flashRed(tag: Int) {
+        
+        tile = (self.view.viewWithTag(tag) as? UIButton)!
+        tile.layer.cornerRadius = 12.0
+        tile.clipsToBounds = true
+        let lightRed = UIColor(hue: 0.99, saturation: 0.28, brightness: 0.84, alpha: 0.5)
+        tile.backgroundColor = UIColor(hue: 0.99, saturation: 0.28, brightness: 0.84, alpha: 0)
+        UIView.animate(withDuration: 0.2, animations: {
+            self.tile.backgroundColor = lightRed
+        })
+        UIView.animate(withDuration: 0.2, delay: 1.0, options: [], animations: {
+            self.tile.backgroundColor = .clear
+        }, completion: nil)
+        
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+    }
+    
+   
     
     // Called when user taps on tile.  Sets up above function to recieve user input.
     @IBAction func buttonPressed(_ sender: UIButton) {
@@ -185,6 +252,12 @@ class ViewController: UIViewController {
         
     }
     
+    
+    /*
+     Function to check if board follows all rules, in the off chance that
+     a board is generated with more than 1 possible solution.
+     Returns true if answer is accetable, false otherwise
+    */
     func checkIfCompleted() -> Bool {
         
         var cageValueArray:[Int:Int] = [0:0,1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0]
@@ -200,24 +273,22 @@ class ViewController: UIViewController {
                 if currentField[i][j] != 0 {
                     cageItem.valuesInCage[index!] = currentField[i][j]
                 } else {
+                    //default value to return false
                     cageItem.valuesInCage[index!] = -100
                 }
-                
                 cageValueArray[cageValue] = index!+1
             }
         }
         
-        print("Filled vales")
-        
-        // Check if cages will accept
+        // Check if cages will not accept
         for cage in cageArray {
             if cage.cageWillAccept() == false {
-                print("didn't follow rules")
                 return false
             }
         }
         
-        // Make sure there are no reapeats in rows or columns
+        // Make sure there are no reapeats in rows or columns.
+        // If not, return true
         if latinSquare(array: currentField) == false {
             return false
         } else {
@@ -225,7 +296,10 @@ class ViewController: UIViewController {
         }
     }
     
+    // Function to check is there are any repeated values in any rows or columns
+    // Returns true is there are none, false otherwise
     func latinSquare(array: [[Int]]) -> Bool {
+        
         for i in 0...array.count-1 {
             // check for duplicates in each row
             if(duplicates(array: array[i])) {
@@ -246,6 +320,7 @@ class ViewController: UIViewController {
         return true
     }
     
+    // Simple function to check for repeated values in an array
     func duplicates(array: [Int]) -> Bool {
         for i in 0...array.count-1 {
             for j in 0...array.count-1 {
@@ -256,9 +331,13 @@ class ViewController: UIViewController {
         }
         return false
     }
-
+    
+    
+    
+    
     // MARK: - Finished View
     
+    // Shows popOver View that shows completion message and finish time
     func showPopUp(time: String) {
         finishTime = time
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbPopUpID") as! PopUpViewController
@@ -270,10 +349,11 @@ class ViewController: UIViewController {
     }
     
     
+    
+    
     // MARK: - Note (Hint) View
     
-    
-    
+    // Shows the Hint view
     @IBAction func hintPressed(_ sender: UIButton) {
         popUpViewHint.isHidden = false
         popUpView.isHidden = true
@@ -293,6 +373,8 @@ class ViewController: UIViewController {
 
     }
     
+    // Sets the hints of a tile
+    // Accepts 2 in a row, then exits the view
     @IBAction func hintSet(_ sender: UIButton) {
         let hintText = (sender.titleLabel?.text!)!
         
@@ -351,6 +433,8 @@ class ViewController: UIViewController {
         stopwatchLabel.text = "00:00"
     }
     
+    // Function that increments the counter
+    // Called every second
     func result() {
         seconds += 1
         totalSeconds += 1
@@ -365,6 +449,7 @@ class ViewController: UIViewController {
         stopwatchLabel.text = stopWatchString
     }
     
+    // Updates global array that stores total best times.  Saves in UserDefaults.
     func updateTimesArray(seconds: Int) {
         timesArray.append(seconds)
         timesArray.sort()
@@ -377,14 +462,14 @@ class ViewController: UIViewController {
     
     
     
-    
-    
     // MARK: - Format Board
     
     @IBOutlet var firstButton: UIButton!
     @IBOutlet var button: UIButton!
     @IBOutlet var cageView: UIImageView!
     
+    // If board is empty, generate a new Puzzle.
+    // Otherwise, ask the user if they want to generate a new puzzle
     @IBAction func generateButton(_ sender: Any) {
         if boardIsEmpty() {
             generatePuzzle()
@@ -393,6 +478,7 @@ class ViewController: UIViewController {
         }
     }
     
+    //Checks is the board is empty.  If so, return true.
     func boardIsEmpty() -> Bool {
         for array in currentField {
             for element in array {
@@ -404,20 +490,22 @@ class ViewController: UIViewController {
         return true
     }
     
+    // Clears all progress on current board
     @IBAction func clearTiles(_ sender: Any) {
         
-        //clear buttons
         for i in 0...47 {
             let tmpButton = self.view.viewWithTag(i) as? UIButton
             tmpButton?.setTitle(nil, for: .normal)
         }
         firstButton.setTitle(nil, for: .normal)
-        //clear progress Array
         currentField = Array(repeating: Array(repeating: 0, count: 4), count: 4)
-        
     }
     
-    // Generates a random field with a random board
+    
+    /*
+     Generate a random field.
+     Randomly selects a board png, then randomly assigns labels based on field.
+    */
     func generatePuzzle() {
         // Reset Field
         field = KenKenField(blocks: 2)
@@ -450,10 +538,14 @@ class ViewController: UIViewController {
         //print(avgDifficulty)
     }
     
-    // Generates a random field with a given board
+    // Same as generatePuzzle(), but uses the same png board.
+    // If in case some boards tend to recursively call generatePuzzle because of infractions
+    // more than others, they will not get chosen any less frequently.
     func generatePuzzle(cageName: String) {
+        
         // Reset Field
         field = KenKenField(blocks: 2)
+        
         // Generate new field
         generateFullField(row: 1, column: 1)
         
@@ -475,9 +567,9 @@ class ViewController: UIViewController {
         clearTimer()
         startTimer()
         setDifficultyBG()
-        print(avgDifficulty)
     }
     
+    // Sets the board background to green if Easy, blue is Medium, and red is Hard
     func setDifficultyBG() {
         // EASY
         if avgDifficulty < 1.3 {
@@ -495,6 +587,7 @@ class ViewController: UIViewController {
             puzzleDifficulty = "Hard"
         }
     }
+    
     
     // Sets random cage info for a given cagename
     private func setCageInfo(cageName: String) {
@@ -519,6 +612,12 @@ class ViewController: UIViewController {
         
         totalDifficulty = 0
         totalCages = 0
+        
+        /*
+         HARCODED SECTION
+         
+         This section is where I have hardcoded which labels (hints) should be generated for each board png, as that is the easiest way to do it.
+        */
         
         if cageName == "grid1.png" {
             
