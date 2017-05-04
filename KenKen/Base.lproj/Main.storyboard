@@ -299,10 +299,10 @@
                                         <color key="backgroundColor" cyan="0.58157792399999997" magenta="0.0" yellow="0.41512044269999998" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell2" rowHeight="66" id="5qw-XK-fWk">
-                                                <rect key="frame" x="0.0" y="56" width="343" height="66"/>
+                                                <rect key="frame" x="0.0" y="55.5" width="343" height="66"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5qw-XK-fWk" id="Z5N-e4-qRP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="310" height="65"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="310" height="65.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -379,10 +379,10 @@
                         <color key="backgroundColor" cyan="0.58157792399999997" magenta="0.0" yellow="0.41512044269999998" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell3" rowHeight="104" id="LZb-V1-QIj" customClass="ScoreboardTableViewCell" customModule="KenKen" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="375" height="104"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="104"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LZb-V1-QIj" id="CnD-n5-pwa">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="103"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="103.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmV-K9-VXD">
@@ -611,7 +611,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="336" height="65"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hPF-Ul-Oaw" id="jzR-JZ-R6s">
-                                                    <rect key="frame" x="0.0" y="0.0" width="336" height="64"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="336" height="64.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Yt-97-236">
@@ -2189,7 +2189,7 @@
         <scene sceneID="K1E-bj-8vf">
             <objects>
                 <navigationController title="Challenge Navigaton View" id="3DV-Tj-IXG" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="AmF-hH-GrF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="AmF-hH-GrF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" cyan="0.58157792399999997" magenta="0.0" yellow="0.41512044269999998" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
@@ -2241,7 +2241,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Challenge Cell" rowHeight="149" id="PCJ-PV-1iZ" customClass="ChallengeTableViewCell" customModule="KenKen" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="149"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="149"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PCJ-PV-1iZ" id="dJJ-3E-WcU">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>

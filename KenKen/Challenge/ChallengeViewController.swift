@@ -204,25 +204,40 @@ class ChallengeViewController: UIViewController, Dimmable {
     
     //Takes as input a button tag.  Flashes that buttons bg red
     func flashRed(tag: Int) {
-        //Get the tile to flash
-        tile = self.view.viewWithTag(tag) as! UIButton
-        tile.layer.cornerRadius = 12.0
-        tile.clipsToBounds = true
         let lightRed = UIColor(hue: 0.99, saturation: 0.28, brightness: 0.84, alpha: 0.5)
-        tile.backgroundColor = UIColor(hue: 0.99, saturation: 0.28, brightness: 0.84, alpha: 0)
         
-        //Animate Flash
-        UIView.animate(withDuration: 0.4, animations: {
-            self.tile.backgroundColor = lightRed
-        })
-        UIView.animate(withDuration: 0.2, delay: 1.0, options: [], animations: {
-            self.tile.backgroundColor = .clear
-        }, completion: nil)
-        
-        //Vibrate
-        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-    }
-    
+        if tag == 0 {
+            firstButton.backgroundColor = UIColor(hue: 0.99, saturation: 0.28, brightness: 0.84, alpha: 0)
+            
+            //Animate Flash
+            UIView.animate(withDuration: 0.4, animations: {
+                self.firstButton.backgroundColor = lightRed
+            })
+            UIView.animate(withDuration: 0.2, delay: 1.0, options: [], animations: {
+                self.firstButton.backgroundColor = .clear
+            }, completion: nil)
+            
+            //Vibrate
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        } else {
+            //Get the tile to flash
+            tile = self.view.viewWithTag(tag) as! UIButton
+            tile.layer.cornerRadius = 12.0
+            tile.clipsToBounds = true
+            tile.backgroundColor = UIColor(hue: 0.99, saturation: 0.28, brightness: 0.84, alpha: 0)
+            
+            //Animate Flash
+            UIView.animate(withDuration: 0.4, animations: {
+                self.tile.backgroundColor = lightRed
+            })
+            UIView.animate(withDuration: 0.2, delay: 1.0, options: [], animations: {
+                self.tile.backgroundColor = .clear
+            }, completion: nil)
+            
+            //Vibrate
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        }
+    }    
 
     
     // Called when user taps on tile.  Sets up above function to recieve user input.
