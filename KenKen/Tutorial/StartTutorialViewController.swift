@@ -14,8 +14,9 @@ class StartTutorialViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        formatView(view: labelView)
+        formatView(view: buttonView)
         self.showAnimate()
     }
 
@@ -45,6 +46,18 @@ class StartTutorialViewController: UIViewController {
                 self.view.removeFromSuperview()
             }
         })
+    }
+    
+    @IBOutlet var labelView: UIView!
+    @IBOutlet var buttonView: UIView!
+    
+    func formatView(view: UIView) {
+        view.layer.cornerRadius = 15.0
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.4
+        view.layer.shadowRadius = 3
+        view.layer.shadowOffset = CGSize(width: 3, height: 3)
+        view.layer.masksToBounds = false
     }
 
 

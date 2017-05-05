@@ -8,6 +8,8 @@
 
 import UIKit
 
+var playFirst = false
+
 class TutorialContainerViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -19,6 +21,27 @@ class TutorialContainerViewController: UIViewController {
     @IBAction func letsGo(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    @IBAction func playFirstSegue(_ sender: Any) {
+        if let homeNav = self.presentingViewController as? HomeNavigationController {
+            self.dismiss(animated: true) {
+                homeNav.playFirstPuzzle()
+                playFirst = true
+            }
+        }
+        
+        //callDelegate()
+    }
+    
+    weak var delegate : ParentProtocol2?
+    
+    func callDelegate () {
+        delegate?.method()
+    }
+
+ 
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

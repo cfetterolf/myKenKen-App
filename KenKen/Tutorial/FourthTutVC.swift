@@ -15,7 +15,10 @@ class FourthTutVC: UIViewController {
     @IBOutlet var blur1: UIVisualEffectView!
     @IBOutlet var blur2: UIVisualEffectView!
     @IBOutlet var rulesLabel: TopAlignedLabel!
-    @IBOutlet var rulesLabel2: TopAlignedLabel!
+    @IBAction func playExample(_ sender: UIButton) {
+        playFirst = true
+        tutorialOver = false
+    }
     
     
     override func viewDidLoad() {
@@ -43,16 +46,15 @@ class FourthTutVC: UIViewController {
         rulesLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         rulesLabel.numberOfLines = 0
         
-        rulesLabel2.lineBreakMode = NSLineBreakMode.byWordWrapping
-        rulesLabel2.numberOfLines = 0
-        
         let rules:String = "Tap a tile to clear it.  You can then select a value, cancel the action, or insert a note (a reminder of possible values)."
         rulesLabel.text = rules
         rulesLabel.sizeToFit()
 
+        /*
         let rules2:String = "And that's it!  Go solve some puzzles!"
         rulesLabel2.text = rules2
         rulesLabel2.sizeToFit()
+        */
         
     }
 

@@ -15,6 +15,10 @@ var difficultyDictL = [String: Int]()
 var scoreBoard:Scoreboard = Scoreboard()
 var starRank:StarRank = StarRank()
 
+protocol ParentProtocol2 : class
+{
+    func method()
+}
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -23,6 +27,36 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var tableView: UITableView!
     @IBOutlet var shadowView: UIView!
     var timer:Timer = Timer()
+    
+    @IBAction func appReview(_ sender: Any) {
+        let appID = "1181549788"
+        let reviewString = "https://itunes.apple.com/us/app/id\(appID)?ls=1&mt=8&action=write-review"
+        
+        if let checkURL = URL(string: "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(appID)&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8") {
+            open(url: checkURL)
+        } else {
+            print("invalid url")
+        }
+    }
+    
+    func open(url: URL) {
+        rateApp(appId: "id1181549788") { success in
+            print("RateApp \(success)")
+        }
+    }
+    
+    func rateApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
+        guard let url = URL(string : "itms-apps://itunes.apple.com/app/" + appId) else {
+            completion(false)
+            return
+        }
+        guard #available(iOS 10, *) else {
+            completion(UIApplication.shared.openURL(url))
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: completion)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +77,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         shadowView.layer.shadowRadius = 5
         shadowView.layer.shouldRasterize = true
 
-        
+        /*
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .scaleAspectFit
         let image = UIImage(named: "new_title_3.png")
         imageView.image = image
         self.navigationItem.titleView = imageView
-        
+            */
+ 
         updateBestTimes()
         
         configureDifficultyDict()
@@ -63,6 +98,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func segueWithName(name: String) {
@@ -152,6 +194,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func playPuzzle(_ sender: Any) {
+        performSegue(withIdentifier: "playSegue", sender: self)
+    }
+    
+    func playFirstPuzzle() {
         performSegue(withIdentifier: "playSegue", sender: self)
     }
     
@@ -249,6 +295,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    
     func formatScoreboard() {
         
         scoreBoard.formatScoreBoard()
@@ -280,5 +327,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         popOverVC.didMove(toParentViewController: self)
  
     }
-    
+}
+
+extension HomeViewController : ParentProtocol2 {
+    func method() {
+        performSegue(withIdentifier: "playSegue", sender: self)
+    }
 }

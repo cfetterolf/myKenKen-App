@@ -107,7 +107,7 @@ class ChallengeMenuViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func segueToChallenge(_ sender: Any) {
-        print("OK")
+        //print("OK")
         performSegue(withIdentifier: "segueToChallenge", sender: self)
     }
     

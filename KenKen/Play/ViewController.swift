@@ -21,6 +21,7 @@ var totalDifficulty = 0
 var totalCages = 0
 var avgDifficulty:Float = 0.0
 var puzzleDifficulty = "Easy"
+var tutorialOver = true
 
 
 
@@ -30,6 +31,7 @@ var puzzleDifficulty = "Easy"
 protocol ParentProtocol : class
 {
     func method()
+    func resume()
 }
 
 /*
@@ -59,6 +61,11 @@ class ViewController: UIViewController {
     //Set Nav Bar title back to "Play" when load view
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Play"
+        
+    }
+    override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+        tutorialOver = true
+        print("UNWIND")
     }
     
     override func viewDidLoad() {
@@ -77,12 +84,82 @@ class ViewController: UIViewController {
         popUpView.isHidden = true
         popUpViewHint.isHidden = true
         
-        //Generate a new puzzle
-        generatePuzzle()
+        
+        if (playFirst == true) {
+            generateFirstPuzzle()
+            greyOut()
+        } else {
+            generatePuzzle()
+        }
         
         NotificationCenter.default.addObserver(self, selector: Selector(("refreshList:")), name:NSNotification.Name(rawValue: "refresh"), object: nil)
         
     }
+    
+    
+    // MARK : - First Puzzle Tutorial
+    
+    var firstTutProgress = true
+    var firstSlide = true
+    var progressCount = 0;
+    var tutTitleArr = ["Welcome to Fours!", "Starter Tiles","Easy Cages", "Great Job!","Completing the Cage","Nice Work!","More Logic", "Awesome!","Great Work!", "Almost There...","Fantastic!"]
+    
+    var tutDescArr = ["Let's use this easy puzzle to learn Fours.  A green border indicates easy, blue means medium, and red is hard.  Keep this in mind when generating puzzles!",
+                      "Let's solve this one together.  If the puzzle you generate has a 'starter' tile, like the highlighted one above, always begin by filling it in with the number in the upper left, or the 'target' number.  In this case, tap the tile and select '2.'",
+                      "We can use some basic logic to figure out another tile.  Look at the '4x' cage: what two different numbers, when multiplied, equal 4?  Now that  we know 3 of the 4 numbers in the top row, we can fill in the highlighted tile with the remaining number.  Don't fill in the 1 or 4 yet - we don't know which tile holds which!",
+                      "That wasn't too hard!  Now look at the '2x' cage in the far right column, and use the same logic to figure out what number should fill the highlighted tile.",
+                      "Now that we know 2 of the 3 numbers in our '8+' cage, we can use basic arithmetic to figure out the third: 3 + 4 + what = 8?  Fill in the highlighted tile.",
+                      "There are a few different directions you can take the puzzle from here, but let's look at the 2nd row.  You know that this row still need 2 and 3, so you can use this info to figure out the highlighted tile.  2 x 3 x what = 24?",
+                      "Great!  Now that we know where the 4 is in the first column, we can logic our way into the order of the '4x' cage.  Can you figure out which numbers go where?  Remember, two of the same number can't occupy the same row or column",
+                      "Nice work.  Now put some of the tricks we've learned together, and figure out what goes in the '3x' cage in the bottom row.",
+                      "You're really getting the hang of this!  Now fill in the '2x' cage.",
+                      "Perfect!  From here, you should be able to figure out the rest of the tiles using everything you've learned so far.  See you on the other side, partner.",
+                      "Amazing work - you've really come a long way.  Keep all of these tips in mind when solving puzzles, and don't worry if you get stuck.  Remember, the color of the border tells you the puzzle's difficulty (if you forget, just click the '?' in the corner).  Until next time, partner."]
+    var tutTagArr = [[],[2],[3],[7],[6],[8],[0,1],[12,13],[11,15],[4,5,9,10,14],[]]
+    
+    func pause(title: String, desc: String) {
+        timer.invalidate()
+        showPause(title: title, description: desc)
+    }
+    
+    func startFirstTut() {
+        //Delay for .25 sec
+        
+        let when = DispatchTime.now() + 0.25 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            //Highlight the appropriate cells
+            for tag in self.tutTagArr[self.progressCount] {
+                if tag == 0 {self.tile = self.firstButton}
+                else {self.tile = self.view.viewWithTag(tag) as! UIButton}
+                self.tile.backgroundColor = UIColor(hue: 0.64, saturation: 0.26, brightness: 1.0, alpha: 0.5)
+                self.tile.layer.cornerRadius = 12.0
+                self.tile.clipsToBounds = true
+            }
+            self.pause(title: self.tutTitleArr[self.progressCount], desc: self.tutDescArr[self.progressCount])
+            self.progressCount += 1
+
+        }
+    }
+    
+    func greyOut() {
+        newPuzzle.isEnabled = false
+        bg6.alpha = 0.5
+        clearButton.isEnabled = false
+        bg8.alpha = 0.5
+        
+    }
+    
+    func unGreyOut() {
+        newPuzzle.isEnabled = true
+        bg6.alpha = 1.0
+        clearButton.isEnabled = true
+        bg8.alpha = 1.0
+    }
+    
+    
+    
+    
     
     
     
@@ -138,6 +215,27 @@ class ViewController: UIViewController {
                     }
                 }
                 
+                print(tutorialOver)
+                // Check if progress is made in Tutorial
+                if tutorialOver == false {
+                    
+                    var continueTut: Bool = false
+                    outerLoop: for i in 0...3{
+                        for j in 0...3 {
+                            if currentField[i][j] == tutProgressArr[progressCount-2][i][j] {
+                                continueTut = true
+                            } else {
+                                continueTut = false
+                                break outerLoop
+                            }
+                        }
+                    }
+                    if continueTut == true {
+                        startFirstTut()
+                    }
+
+                }
+                
                 // Check if currentField matches completedField
                 var match: Bool = false
                 outerLoop: for i in 0...3{
@@ -155,7 +253,7 @@ class ViewController: UIViewController {
                 let finish = checkIfCompleted()
                 
                 // If board follows all rules or matches generated board, accept
-                if match == true || finish == true {
+                if (match == true || finish == true) && tutorialOver == true {
                     timer.invalidate()
                     updateTimesArray(seconds: totalSeconds)
                     scoreBoard.addTime(difficulty: puzzleDifficulty, seconds: totalSeconds)
@@ -368,6 +466,19 @@ class ViewController: UIViewController {
     }
     
     
+    func showPause(title: String, description: String) {
+        pauseTitle = title
+        pauseDesc = description
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbPauseID") as! PauseViewController
+        self.addChildViewController(popOverVC)
+        popOverVC.delegate = self
+        popOverVC.view.frame = (self.parent?.view.frame)!
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+    }
+
+    
+    
     
     
     // MARK: - Note (Hint) View
@@ -526,6 +637,8 @@ class ViewController: UIViewController {
      Randomly selects a board png, then randomly assigns labels based on field.
     */
     func generatePuzzle() {
+        unGreyOut()
+        tutorialOver = true
         // Reset Field
         field = KenKenField(blocks: 2)
         // Generate new field
@@ -556,6 +669,43 @@ class ViewController: UIViewController {
         setDifficultyBG()
         //print(avgDifficulty)
     }
+    
+    
+    
+    /*
+        Generates tutorial starter puzzle.  Same every time, includeds tutorial
+    */
+    func generateFirstPuzzle() {
+        // Reset Field
+        field = KenKenField(blocks: 2)
+        
+        // Generate new field
+        completedField = [[1,4,2,3],[2,3,1,4],[4,2,3,1],[3,1,4,2]]
+        
+        clearTiles(self)
+        
+        currentField = Array(repeating: Array(repeating: 0, count: 4), count: 4)
+        cageField = Array(repeating: Array(repeating: -1, count: 4), count: 4)
+        cageArray = []
+        
+        // Pick a board
+        // Number in arc4random is how many cage pngs we have to choose from
+        let randNum = 5
+        let cageName = "grid\(randNum).png"
+        cageView.image = UIImage(named: cageName)
+        setCageInfo(cageName: cageName)
+        //print(cageArray)
+        //print(cageField)
+        timer.invalidate()
+        clearTimer()
+        startTimer()
+        setDifficultyBG()
+        //print(avgDifficulty)
+        startFirstTut()
+    }
+    
+    
+    
     
     // Same as generatePuzzle(), but uses the same png board.
     // If in case some boards tend to recursively call generatePuzzle because of infractions
@@ -741,26 +891,13 @@ class ViewController: UIViewController {
             
         } else if  cageName == "grid5.png" {
             
-            //Check if bad
-            
-            if (completedField[1][0] == completedField[2][1]) && (completedField[1][1] == completedField[2][0]) {
-                generatePuzzle(cageName: cageName)
-            } else if (completedField[1][0] == completedField[3][1]) && (completedField[1][1] == completedField[3][0]) {
-                generatePuzzle(cageName: cageName)
-            }
-            
-            else {
-                
-                
-                var a: Int
-                var b: Int
-                var c: Int
+            if playFirst == true {
+                playFirst = false
                 var result: String
+                var a: Int
                 
                 // Set label0
-                a = completedField[0][0]
-                b = completedField[0][1]
-                result = pickRandomOp(a: a,b: b, c: -1)
+                result = "4x"
                 totalDifficulty += difficultyDictPair[result]!
                 cageField[0][0] = totalCages
                 cageField[0][1] = totalCages
@@ -776,10 +913,7 @@ class ViewController: UIViewController {
                 label2.text = String(a)
                 
                 // Set label3
-                a = completedField[0][3]
-                b = completedField[1][2]
-                c = completedField[1][3]
-                result = pickRandomOp(a: a,b: b, c: c)
+                result = "8+"
                 totalDifficulty += difficultyDictL[result]!
                 cageField[0][3] = totalCages
                 cageField[1][2] = totalCages
@@ -789,10 +923,7 @@ class ViewController: UIViewController {
                 label3.text = result
                 
                 // Set label4
-                a = completedField[1][0]
-                b = completedField[1][1]
-                c = completedField[2][0]
-                result = pickRandomOp(a: a,b: b, c: c)
+                result = "24x"
                 totalDifficulty += difficultyDictL[result]!
                 cageField[1][0] = totalCages
                 cageField[1][1] = totalCages
@@ -802,10 +933,7 @@ class ViewController: UIViewController {
                 label4.text = result
                 
                 // Set label9
-                a = completedField[2][1]
-                b = completedField[2][2]
-                c = completedField[3][2]
-                result = pickRandomOp(a: a,b: b, c: c)
+                result = "9+"
                 totalDifficulty += difficultyDictL[result]!
                 cageField[2][1] = totalCages
                 cageField[2][2] = totalCages
@@ -815,9 +943,7 @@ class ViewController: UIViewController {
                 label9.text = result
                 
                 // Set label11
-                a = completedField[2][3]
-                b = completedField[3][3]
-                result = pickRandomOp(a: a,b: b, c: -1)
+                result = "2x"
                 totalDifficulty += difficultyDictPair[result]!
                 cageField[2][3] = totalCages
                 cageField[3][3] = totalCages
@@ -826,16 +952,113 @@ class ViewController: UIViewController {
                 label11.text = result
                 
                 // Set label12
-                a = completedField[3][0]
-                b = completedField[3][1]
-                result = pickRandomOp(a: a,b: b, c: -1)
+                result = "3x"
                 totalDifficulty += difficultyDictPair[result]!
                 cageField[3][0] = totalCages
                 cageField[3][1] = totalCages
                 cageArray.append(Cage(size: 2, code: result))
                 totalCages += 1
                 label12.text = result
+                
+                
+            } else {
+                //Check if bad
+                
+                if (completedField[1][0] == completedField[2][1]) && (completedField[1][1] == completedField[2][0]) {
+                    generatePuzzle(cageName: cageName)
+                } else if (completedField[1][0] == completedField[3][1]) && (completedField[1][1] == completedField[3][0]) {
+                    generatePuzzle(cageName: cageName)
+                }
+                    
+                else {
+                    
+                    
+                    var a: Int
+                    var b: Int
+                    var c: Int
+                    var result: String
+                    
+                    // Set label0
+                    a = completedField[0][0]
+                    b = completedField[0][1]
+                    result = pickRandomOp(a: a,b: b, c: -1)
+                    totalDifficulty += difficultyDictPair[result]!
+                    cageField[0][0] = totalCages
+                    cageField[0][1] = totalCages
+                    cageArray.append(Cage(size: 2, code: result))
+                    totalCages += 1
+                    label0.text = result
+                    
+                    // Set label2
+                    a = completedField[0][2]
+                    cageField[0][2] = totalCages
+                    cageArray.append(Cage(size: 1, code: String(a)))
+                    totalCages += 1
+                    label2.text = String(a)
+                    
+                    // Set label3
+                    a = completedField[0][3]
+                    b = completedField[1][2]
+                    c = completedField[1][3]
+                    result = pickRandomOp(a: a,b: b, c: c)
+                    totalDifficulty += difficultyDictL[result]!
+                    cageField[0][3] = totalCages
+                    cageField[1][2] = totalCages
+                    cageField[1][3] = totalCages
+                    cageArray.append(Cage(size: 3, code: result))
+                    totalCages += 1
+                    label3.text = result
+                    
+                    // Set label4
+                    a = completedField[1][0]
+                    b = completedField[1][1]
+                    c = completedField[2][0]
+                    result = pickRandomOp(a: a,b: b, c: c)
+                    totalDifficulty += difficultyDictL[result]!
+                    cageField[1][0] = totalCages
+                    cageField[1][1] = totalCages
+                    cageField[2][0] = totalCages
+                    cageArray.append(Cage(size: 3, code: result))
+                    totalCages += 1
+                    label4.text = result
+                    
+                    // Set label9
+                    a = completedField[2][1]
+                    b = completedField[2][2]
+                    c = completedField[3][2]
+                    result = pickRandomOp(a: a,b: b, c: c)
+                    totalDifficulty += difficultyDictL[result]!
+                    cageField[2][1] = totalCages
+                    cageField[2][2] = totalCages
+                    cageField[3][2] = totalCages
+                    cageArray.append(Cage(size: 3, code: result))
+                    totalCages += 1
+                    label9.text = result
+                    
+                    // Set label11
+                    a = completedField[2][3]
+                    b = completedField[3][3]
+                    result = pickRandomOp(a: a,b: b, c: -1)
+                    totalDifficulty += difficultyDictPair[result]!
+                    cageField[2][3] = totalCages
+                    cageField[3][3] = totalCages
+                    cageArray.append(Cage(size: 2, code: result))
+                    totalCages += 1
+                    label11.text = result
+                    
+                    // Set label12
+                    a = completedField[3][0]
+                    b = completedField[3][1]
+                    result = pickRandomOp(a: a,b: b, c: -1)
+                    totalDifficulty += difficultyDictPair[result]!
+                    cageField[3][0] = totalCages
+                    cageField[3][1] = totalCages
+                    cageArray.append(Cage(size: 2, code: result))
+                    totalCages += 1
+                    label12.text = result
+                }
             }
+            
             
         } else if cageName == "grid3.png" {
             //Check if bad
@@ -1886,6 +2109,10 @@ class ViewController: UIViewController {
         
     }
     
+    @IBOutlet var newPuzzle: UIButton!
+    @IBOutlet var clearButton: UIButton!
+    
+    
     @IBOutlet var label0: UILabel!
     @IBOutlet var label1: UILabel!
     @IBOutlet var label2: UILabel!
@@ -1941,6 +2168,18 @@ class ViewController: UIViewController {
 extension ViewController : ParentProtocol {
     func method() {
         self.generatePuzzle()
+    }
+    func resume() {
+        // If puzzle has been completed
+        if progressCount == tutTitleArr.count {
+            generatePuzzle()
+        } else {
+            startTimer()
+            if firstSlide == true {
+                firstSlide = false
+                startFirstTut()
+            }
+        }
     }
 }
 

@@ -29,6 +29,8 @@
 		8359EBE31DE0DE64002834E5 /* ChallengeMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBE21DE0DE64002834E5 /* ChallengeMenuViewController.swift */; };
 		8359EBE51DE0E418002834E5 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBE41DE0E418002834E5 /* ChallengeViewController.swift */; };
 		8359EBE71DE0E6A4002834E5 /* FinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */; };
+		837358C81EBB25B200E81DA5 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837358C71EBB25B200E81DA5 /* HomeNavigationController.swift */; };
+		837358CA1EBB510B00E81DA5 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837358C91EBB510B00E81DA5 /* PauseViewController.swift */; };
 		83922B341DF7064E0084D0BF /* PlayHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83922B331DF7064E0084D0BF /* PlayHelpViewController.swift */; };
 		839E7FB91DF3207300FAD13E /* TopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839E7FB81DF3207300FAD13E /* TopAlignedLabel.swift */; };
 		839E7FBB1DF32AF700FAD13E /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839E7FBA1DF32AF700FAD13E /* HelpViewController.swift */; };
@@ -74,6 +76,8 @@
 		8359EBE21DE0DE64002834E5 /* ChallengeMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeMenuViewController.swift; path = Challenge/ChallengeMenuViewController.swift; sourceTree = "<group>"; };
 		8359EBE41DE0E418002834E5 /* ChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeViewController.swift; path = Challenge/ChallengeViewController.swift; sourceTree = "<group>"; };
 		8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinishedViewController.swift; path = Challenge/FinishedViewController.swift; sourceTree = "<group>"; };
+		837358C71EBB25B200E81DA5 /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeNavigationController.swift; path = Home/HomeNavigationController.swift; sourceTree = "<group>"; };
+		837358C91EBB510B00E81DA5 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PauseViewController.swift; path = Play/PauseViewController.swift; sourceTree = "<group>"; };
 		83922B331DF7064E0084D0BF /* PlayHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayHelpViewController.swift; path = Play/PlayHelpViewController.swift; sourceTree = "<group>"; };
 		839E7FB81DF3207300FAD13E /* TopAlignedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopAlignedLabel.swift; path = Classes/TopAlignedLabel.swift; sourceTree = "<group>"; };
 		839E7FBA1DF32AF700FAD13E /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = Scoreboard/HelpViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 		83A98D041DDAC28D00EF70B4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				837358C71EBB25B200E81DA5 /* HomeNavigationController.swift */,
 				83A05DD21DDA9C9700FE77BA /* HomePageViewController.swift */,
 				83FC41B81DD56A39008FAAFE /* HomeViewController.swift */,
 				83FC41BE1DD8DD6F008FAAFE /* Slide1ViewController.swift */,
@@ -210,6 +215,7 @@
 				834DA1C91DC69BAB00E9D919 /* ViewController.swift */,
 				83A05DCE1DDA1B4900FE77BA /* PopUpViewController.swift */,
 				83922B331DF7064E0084D0BF /* PlayHelpViewController.swift */,
+				837358C91EBB510B00E81DA5 /* PauseViewController.swift */,
 			);
 			name = Play;
 			sourceTree = "<group>";
@@ -333,6 +339,7 @@
 				8359EBDE1DE0DBCD002834E5 /* ScoreBoardViewController.swift in Sources */,
 				834DA1DF1DC90B9000E9D919 /* KenKenField.swift in Sources */,
 				830D3D611DECAF1000D0DF44 /* StarRank.swift in Sources */,
+				837358C81EBB25B200E81DA5 /* HomeNavigationController.swift in Sources */,
 				83FC41B91DD56A39008FAAFE /* HomeViewController.swift in Sources */,
 				83A98D0E1DDBB47E00EF70B4 /* ThirdTutVC.swift in Sources */,
 				831589EA1DE3567300ABC3AE /* Challenge.swift in Sources */,
@@ -343,6 +350,7 @@
 				831589E21DE15C1300ABC3AE /* ChallengeTableViewCell.swift in Sources */,
 				839E7FBB1DF32AF700FAD13E /* HelpViewController.swift in Sources */,
 				8359EBE71DE0E6A4002834E5 /* FinishedViewController.swift in Sources */,
+				837358CA1EBB510B00E81DA5 /* PauseViewController.swift in Sources */,
 				83A98D0C1DDBB45100EF70B4 /* SecondTutVC.swift in Sources */,
 				83AB46461DE3BB6500643DD9 /* ChallengeCompletedViewController.swift in Sources */,
 				830D3D5F1DECA3AF00D0DF44 /* ScoreboardTableViewCell.swift in Sources */,
