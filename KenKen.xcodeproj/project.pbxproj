@@ -17,6 +17,8 @@
 		831589E61DE2132000ABC3AE /* ExtensionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589E51DE2132000ABC3AE /* ExtensionsViewController.swift */; };
 		831589E81DE2895F00ABC3AE /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589E71DE2895F00ABC3AE /* StartViewController.swift */; };
 		831589EA1DE3567300ABC3AE /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589E91DE3567300ABC3AE /* Challenge.swift */; };
+		832225ED1EBD42BB00CAF17E /* RateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832225EC1EBD42BB00CAF17E /* RateViewController.swift */; };
+		8348ADAE1EDD544C005331C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8348ADAD1EDD544C005331C0 /* GoogleService-Info.plist */; };
 		834DA1C81DC69BAB00E9D919 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */; };
 		834DA1CA1DC69BAB00E9D919 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1C91DC69BAB00E9D919 /* ViewController.swift */; };
 		834DA1CD1DC69BAB00E9D919 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834DA1CB1DC69BAB00E9D919 /* Main.storyboard */; };
@@ -62,6 +64,8 @@
 		831589E51DE2132000ABC3AE /* ExtensionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsViewController.swift; path = Challenge/ExtensionsViewController.swift; sourceTree = "<group>"; };
 		831589E71DE2895F00ABC3AE /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartViewController.swift; path = Challenge/StartViewController.swift; sourceTree = "<group>"; };
 		831589E91DE3567300ABC3AE /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Challenge.swift; path = Challenge/Challenge.swift; sourceTree = "<group>"; };
+		832225EC1EBD42BB00CAF17E /* RateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateViewController.swift; path = Home/RateViewController.swift; sourceTree = "<group>"; };
+		8348ADAD1EDD544C005331C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		834DA1C41DC69BAB00E9D919 /* KenKen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KenKen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		834DA1C91DC69BAB00E9D919 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Play/ViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				834DA1D31DC69BAB00E9D919 /* LaunchScreen.storyboard */,
 				834DA1D11DC69BAB00E9D919 /* Assets.xcassets */,
 				834DA1D61DC69BAB00E9D919 /* Info.plist */,
+				8348ADAD1EDD544C005331C0 /* GoogleService-Info.plist */,
 				834DA1CE1DC69BAB00E9D919 /* KenKen.xcdatamodeld */,
 			);
 			path = KenKen;
@@ -191,6 +196,7 @@
 				83FC41B81DD56A39008FAAFE /* HomeViewController.swift */,
 				83FC41BE1DD8DD6F008FAAFE /* Slide1ViewController.swift */,
 				83A98D051DDBA54400EF70B4 /* Slide2ViewController.swift */,
+				832225EC1EBD42BB00CAF17E /* RateViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -269,7 +275,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = DeepHouse;
 				TargetAttributes = {
 					834DA1C31DC69BAA00E9D919 = {
@@ -303,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				834DA1D51DC69BAB00E9D919 /* LaunchScreen.storyboard in Resources */,
+				8348ADAE1EDD544C005331C0 /* GoogleService-Info.plist in Resources */,
 				834DA1D21DC69BAB00E9D919 /* Assets.xcassets in Resources */,
 				834DA1CD1DC69BAB00E9D919 /* Main.storyboard in Resources */,
 			);
@@ -353,6 +360,7 @@
 				837358CA1EBB510B00E81DA5 /* PauseViewController.swift in Sources */,
 				83A98D0C1DDBB45100EF70B4 /* SecondTutVC.swift in Sources */,
 				83AB46461DE3BB6500643DD9 /* ChallengeCompletedViewController.swift in Sources */,
+				832225ED1EBD42BB00CAF17E /* RateViewController.swift in Sources */,
 				830D3D5F1DECA3AF00D0DF44 /* ScoreboardTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,6 +405,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -446,6 +455,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

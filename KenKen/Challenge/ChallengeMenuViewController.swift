@@ -135,15 +135,9 @@ class ChallengeMenuViewController: UIViewController, UITableViewDelegate, UITabl
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         if segue.identifier == "showInfo" {
             dim(direction: .In, alpha: dimLevel, speed: dimSpeed)
-            //let infoView = segue.destination as! InfoViewController
-            //infoView.delegate = self
         } else if segue.identifier == "segueToChallenge" {
-            //let destView = segue.destination as! ChallengeViewController
-            //destView.CHALLENGE_MODE = selectedDiff
         }
         
     }

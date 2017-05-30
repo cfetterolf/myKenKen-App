@@ -15,10 +15,6 @@ var difficultyDictL = [String: Int]()
 var scoreBoard:Scoreboard = Scoreboard()
 var starRank:StarRank = StarRank()
 
-protocol ParentProtocol2 : class
-{
-    func method()
-}
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -29,17 +25,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var timer:Timer = Timer()
     
     @IBAction func appReview(_ sender: Any) {
-        let appID = "1181549788"
-        let reviewString = "https://itunes.apple.com/us/app/id\(appID)?ls=1&mt=8&action=write-review"
-        
-        if let checkURL = URL(string: "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(appID)&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8") {
-            open(url: checkURL)
-        } else {
-            print("invalid url")
-        }
-    }
-    
-    func open(url: URL) {
         rateApp(appId: "id1181549788") { success in
             print("RateApp \(success)")
         }
@@ -58,10 +43,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    func showRate() {
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbRateID") as! RateViewController
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = (self.parent?.view.frame)!
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(self)
         // Do any additional setup after loading the view.
         
         tableView.delegate = self
@@ -99,6 +91,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        if (timesArray.count >= 5) {
+            checkIfRated()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -312,6 +307,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func checkIfRated() {
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: "appRated") != nil {
+            return
+        } else {
+            showRate()
+            defaults.set(true, forKey: "appRated")
+        }
+    }
+    
     func result() {
         presentStartTut()
         timer.invalidate()
@@ -326,11 +331,5 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
  
-    }
-}
-
-extension HomeViewController : ParentProtocol2 {
-    func method() {
-        performSegue(withIdentifier: "playSegue", sender: self)
     }
 }

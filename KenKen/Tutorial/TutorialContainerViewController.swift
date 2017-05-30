@@ -34,11 +34,6 @@ class TutorialContainerViewController: UIViewController {
         //callDelegate()
     }
     
-    weak var delegate : ParentProtocol2?
-    
-    func callDelegate () {
-        delegate?.method()
-    }
 
  
  

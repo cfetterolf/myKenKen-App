@@ -109,7 +109,7 @@ class ViewController: UIViewController {
                       "We can use some basic logic to figure out another tile.  Look at the '4x' cage: what two different numbers, when multiplied, equal 4?  Now that  we know 3 of the 4 numbers in the top row, we can fill in the highlighted tile with the remaining number.  Don't fill in the 1 or 4 yet - we don't know which tile holds which!",
                       "That wasn't too hard!  Now look at the '2x' cage in the far right column, and use the same logic to figure out what number should fill the highlighted tile.",
                       "Now that we know 2 of the 3 numbers in our '8+' cage, we can use basic arithmetic to figure out the third: 3 + 4 + what = 8?  Fill in the highlighted tile.",
-                      "There are a few different directions you can take the puzzle from here, but let's look at the 2nd row.  You know that this row still need 2 and 3, so you can use this info to figure out the highlighted tile.  2 x 3 x what = 24?",
+                      "There are a few different directions you can take the puzzle from here, but let's look at the 2nd row.  You know that this row still needs 2 and 3, so you can use this info to figure out the highlighted tile.  2 x 3 x what = 24?",
                       "Great!  Now that we know where the 4 is in the first column, we can logic our way into the order of the '4x' cage.  Can you figure out which numbers go where?  Remember, two of the same number can't occupy the same row or column",
                       "Nice work.  Now put some of the tricks we've learned together, and figure out what goes in the '3x' cage in the bottom row.",
                       "You're really getting the hang of this!  Now fill in the '2x' cage.",

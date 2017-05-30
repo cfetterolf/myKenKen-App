@@ -12,19 +12,40 @@ class StartTutorialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        labelView2.frame = CGRect(x: self.view.frame.width, y: buttonView.frame.origin.y, width: labelView2.frame.width, height: labelView2.frame.height)
 
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         formatView(view: labelView)
         formatView(view: buttonView)
+        formatView(view: labelView2)
         self.showAnimate()
     }
 
     
     @IBAction func exitHome(_ sender: Any) {
         
-        self.removeAnimate()
+        slideToNext()
+        //self.removeAnimate()
+    }
+    
+    func slideToNext() {
         
+        UIView.animate(withDuration: 0.25) {
+            //Annimate out current views
+            self.slideFrame(view: self.labelView)
+            self.slideFrame(view: self.buttonView)
+            self.slideFrame(view: self.imageView)
+            
+            
+            let frameSize: CGPoint = CGPoint(x: (UIScreen.main.bounds.size.width*0.5)-self.labelView2.frame.width/2, y: self.labelView2.frame.origin.y)
+            self.labelView2.frame = CGRect(origin: frameSize, size: self.labelView2.frame.size)
+        }
+    }
+    
+    func slideFrame(view: UIView) {
+        view.frame = CGRect(x: (view.frame.origin.x - self.view.frame.width), y: view.frame.origin.y, width: view.frame.width, height: view.frame.height)
     }
  
     
@@ -48,8 +69,16 @@ class StartTutorialViewController: UIViewController {
         })
     }
     
+    @IBOutlet var imageView: UIImageView!
     @IBOutlet var labelView: UIView!
+    @IBOutlet var labelView2: UIView!
     @IBOutlet var buttonView: UIView!
+    @IBAction func takeTutorial(_ sender: Any) {
+        self.removeAnimate()
+    }
+    @IBAction func noThanks(_ sender: Any) {
+        self.removeAnimate()
+    }
     
     func formatView(view: UIView) {
         view.layer.cornerRadius = 15.0
