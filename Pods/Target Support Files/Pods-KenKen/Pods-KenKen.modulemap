@@ -1,0 +1,6 @@
+framework module Pods_KenKen {
+  umbrella header "Pods-KenKen-umbrella.h"
+
+  export *
+  module * { export * }
+}

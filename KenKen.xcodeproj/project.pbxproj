@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8123C5965995DA190D72F440 /* Pods_KenKen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96010D6ED883E422E575F257 /* Pods_KenKen.framework */; };
 		830D3D5F1DECA3AF00D0DF44 /* ScoreboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D3D5E1DECA3AF00D0DF44 /* ScoreboardTableViewCell.swift */; };
 		830D3D611DECAF1000D0DF44 /* StarRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D3D601DECAF1000D0DF44 /* StarRank.swift */; };
 		830D3D631DED33CB00D0DF44 /* StartTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D3D621DED33CB00D0DF44 /* StartTutorialViewController.swift */; };
@@ -19,6 +20,7 @@
 		831589EA1DE3567300ABC3AE /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831589E91DE3567300ABC3AE /* Challenge.swift */; };
 		832225ED1EBD42BB00CAF17E /* RateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832225EC1EBD42BB00CAF17E /* RateViewController.swift */; };
 		8348ADAE1EDD544C005331C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8348ADAD1EDD544C005331C0 /* GoogleService-Info.plist */; };
+		8348ADB01EDDBF32005331C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348ADAF1EDDBF32005331C0 /* LoginViewController.swift */; };
 		834DA1C81DC69BAB00E9D919 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */; };
 		834DA1CA1DC69BAB00E9D919 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834DA1C91DC69BAB00E9D919 /* ViewController.swift */; };
 		834DA1CD1DC69BAB00E9D919 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834DA1CB1DC69BAB00E9D919 /* Main.storyboard */; };
@@ -33,6 +35,7 @@
 		8359EBE71DE0E6A4002834E5 /* FinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */; };
 		837358C81EBB25B200E81DA5 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837358C71EBB25B200E81DA5 /* HomeNavigationController.swift */; };
 		837358CA1EBB510B00E81DA5 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837358C91EBB510B00E81DA5 /* PauseViewController.swift */; };
+		83869EC01EE041B200583B9A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83869EBF1EE041B200583B9A /* User.swift */; };
 		83922B341DF7064E0084D0BF /* PlayHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83922B331DF7064E0084D0BF /* PlayHelpViewController.swift */; };
 		839E7FB91DF3207300FAD13E /* TopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839E7FB81DF3207300FAD13E /* TopAlignedLabel.swift */; };
 		839E7FBB1DF32AF700FAD13E /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839E7FBA1DF32AF700FAD13E /* HelpViewController.swift */; };
@@ -54,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		73AA76184E984EFC5DCDA4FC /* Pods-KenKen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KenKen.release.xcconfig"; path = "Pods/Target Support Files/Pods-KenKen/Pods-KenKen.release.xcconfig"; sourceTree = "<group>"; };
 		830D3D5E1DECA3AF00D0DF44 /* ScoreboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreboardTableViewCell.swift; path = Scoreboard/ScoreboardTableViewCell.swift; sourceTree = "<group>"; };
 		830D3D601DECAF1000D0DF44 /* StarRank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StarRank.swift; path = Classes/StarRank.swift; sourceTree = "<group>"; };
 		830D3D621DED33CB00D0DF44 /* StartTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartTutorialViewController.swift; path = Tutorial/StartTutorialViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 		831589E91DE3567300ABC3AE /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Challenge.swift; path = Challenge/Challenge.swift; sourceTree = "<group>"; };
 		832225EC1EBD42BB00CAF17E /* RateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RateViewController.swift; path = Home/RateViewController.swift; sourceTree = "<group>"; };
 		8348ADAD1EDD544C005331C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8348ADAF1EDDBF32005331C0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Home/LoginViewController.swift; sourceTree = "<group>"; };
 		834DA1C41DC69BAB00E9D919 /* KenKen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KenKen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834DA1C71DC69BAB00E9D919 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		834DA1C91DC69BAB00E9D919 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Play/ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +87,7 @@
 		8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinishedViewController.swift; path = Challenge/FinishedViewController.swift; sourceTree = "<group>"; };
 		837358C71EBB25B200E81DA5 /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeNavigationController.swift; path = Home/HomeNavigationController.swift; sourceTree = "<group>"; };
 		837358C91EBB510B00E81DA5 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PauseViewController.swift; path = Play/PauseViewController.swift; sourceTree = "<group>"; };
+		83869EBF1EE041B200583B9A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Classes/User.swift; sourceTree = "<group>"; };
 		83922B331DF7064E0084D0BF /* PlayHelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayHelpViewController.swift; path = Play/PlayHelpViewController.swift; sourceTree = "<group>"; };
 		839E7FB81DF3207300FAD13E /* TopAlignedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopAlignedLabel.swift; path = Classes/TopAlignedLabel.swift; sourceTree = "<group>"; };
 		839E7FBA1DF32AF700FAD13E /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = Scoreboard/HelpViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +107,8 @@
 		83FC41BA1DD7B081008FAAFE /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialPageViewController.swift; path = Tutorial/TutorialPageViewController.swift; sourceTree = "<group>"; };
 		83FC41BE1DD8DD6F008FAAFE /* Slide1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Slide1ViewController.swift; path = Home/Slide1ViewController.swift; sourceTree = "<group>"; };
 		83FE29911DE613C20006A334 /* ScoreDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreDetailTableViewController.swift; path = Scoreboard/ScoreDetailTableViewController.swift; sourceTree = "<group>"; };
+		96010D6ED883E422E575F257 /* Pods_KenKen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KenKen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7F17CCAF2B08613E4D54D64 /* Pods-KenKen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KenKen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KenKen/Pods-KenKen.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,12 +116,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8123C5965995DA190D72F440 /* Pods_KenKen.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53F46A1EF08323560FAF6408 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C7F17CCAF2B08613E4D54D64 /* Pods-KenKen.debug.xcconfig */,
+				73AA76184E984EFC5DCDA4FC /* Pods-KenKen.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8312326C1DEE01C0008F9C89 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +146,8 @@
 				834DA1C61DC69BAB00E9D919 /* KenKen */,
 				8312326C1DEE01C0008F9C89 /* Resources */,
 				834DA1C51DC69BAB00E9D919 /* Products */,
+				53F46A1EF08323560FAF6408 /* Pods */,
+				E0E10C726035D31C6EE3F3E2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -197,6 +217,7 @@
 				83FC41BE1DD8DD6F008FAAFE /* Slide1ViewController.swift */,
 				83A98D051DDBA54400EF70B4 /* Slide2ViewController.swift */,
 				832225EC1EBD42BB00CAF17E /* RateViewController.swift */,
+				8348ADAF1EDDBF32005331C0 /* LoginViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -211,6 +232,7 @@
 				831589E11DE15C1300ABC3AE /* ChallengeTableViewCell.swift */,
 				830D3D601DECAF1000D0DF44 /* StarRank.swift */,
 				8312326E1DEE099B008F9C89 /* Cage.swift */,
+				83869EBF1EE041B200583B9A /* User.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -248,6 +270,14 @@
 			name = Tutorial;
 			sourceTree = "<group>";
 		};
+		E0E10C726035D31C6EE3F3E2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96010D6ED883E422E575F257 /* Pods_KenKen.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -255,9 +285,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 834DA1D91DC69BAB00E9D919 /* Build configuration list for PBXNativeTarget "KenKen" */;
 			buildPhases = (
+				06EF1526464A0CB9C1407D6F /* [CP] Check Pods Manifest.lock */,
 				834DA1C01DC69BAA00E9D919 /* Sources */,
 				834DA1C11DC69BAA00E9D919 /* Frameworks */,
 				834DA1C21DC69BAA00E9D919 /* Resources */,
+				C60DACCAEE6FD5DFCD5D9C3E /* [CP] Embed Pods Frameworks */,
+				59D3F2183834650DB1761B12 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -317,6 +350,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		06EF1526464A0CB9C1407D6F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		59D3F2183834650DB1761B12 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KenKen/Pods-KenKen-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C60DACCAEE6FD5DFCD5D9C3E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KenKen/Pods-KenKen-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		834DA1C01DC69BAA00E9D919 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -324,6 +405,7 @@
 			files = (
 				83922B341DF7064E0084D0BF /* PlayHelpViewController.swift in Sources */,
 				83A05DD11DDA3D6700FE77BA /* TutorialContainerViewController.swift in Sources */,
+				8348ADB01EDDBF32005331C0 /* LoginViewController.swift in Sources */,
 				83FC41BF1DD8DD6F008FAAFE /* Slide1ViewController.swift in Sources */,
 				83A98D101DDBB48B00EF70B4 /* FourthTutVC.swift in Sources */,
 				83AB46481DE3F07200643DD9 /* Scoreboard.swift in Sources */,
@@ -341,6 +423,7 @@
 				83FC41B71DD5696B008FAAFE /* MyCustomCell.swift in Sources */,
 				83A05DCF1DDA1B4900FE77BA /* PopUpViewController.swift in Sources */,
 				834DA1DD1DC8415700E9D919 /* KenKenCell.swift in Sources */,
+				83869EC01EE041B200583B9A /* User.swift in Sources */,
 				8312326F1DEE099B008F9C89 /* Cage.swift in Sources */,
 				83A05DD31DDA9C9700FE77BA /* HomePageViewController.swift in Sources */,
 				8359EBDE1DE0DBCD002834E5 /* ScoreBoardViewController.swift in Sources */,
@@ -482,6 +565,7 @@
 		};
 		834DA1DA1DC69BAB00E9D919 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7F17CCAF2B08613E4D54D64 /* Pods-KenKen.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Chris Fetterolf (D9L57N8ZAK)";
@@ -501,6 +585,7 @@
 		};
 		834DA1DB1DC69BAB00E9D919 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73AA76184E984EFC5DCDA4FC /* Pods-KenKen.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Chris Fetterolf (D9L57N8ZAK)";

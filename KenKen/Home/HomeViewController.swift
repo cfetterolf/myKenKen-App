@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import SwiftSpinner
 
 var timesArray = [Int]()
 var difficultyDictPair = [String: Int]()
@@ -16,10 +18,17 @@ var scoreBoard:Scoreboard = Scoreboard()
 var starRank:StarRank = StarRank()
 
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol HomeDelegate: class {
+    func changeLogin()
+}
+
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Dimmable {
 
     let cellReuseIdentifier = "Cell"
+    let dimLevel: CGFloat = 0.5
+    let dimSpeed: Double = 0.5
     
+    @IBOutlet var loginButton: UIButton!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var shadowView: UIView!
     var timer:Timer = Timer()
@@ -89,11 +98,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         tableView.reloadData()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         if (timesArray.count >= 5) {
             checkIfRated()
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //Check if logged in
+        if Auth.auth().currentUser != nil {
+            loginButton.setTitle("Log Out", for: .normal)
+        } else {
+            loginButton.setTitle("Log In", for: .normal)
+        }
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -126,12 +146,42 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    // MARK: - LOGIN
+    
+    @IBAction func login(_ sender: Any) {
+        if loginButton.titleLabel?.text == "Log In" {
+            performSegue(withIdentifier: "loginSegue", sender: self)
+        } else {
+            //Log Out User
+            SwiftSpinner.show("Logging Out...")
+            try! Auth.auth().signOut()
+            loginButton.setTitle("Log In", for: .normal)
+            let when = DispatchTime.now() + 0.8
+            DispatchQueue.main.asyncAfter(deadline: when){
+                SwiftSpinner.hide()
+            }
+        }
+        
+    }
+    
+    @IBAction func unwindFromLogin(segue: UIStoryboardSegue) {
+        dim(direction: .Out, speed: dimSpeed)
+    }
+    
+    
+    
     
     // MARK: - Config Table View
     
     // number of rows in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
+    }
+    
+    //Cell Height
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 50.0;//Choose your custom row height
     }
     
     // create a cell for each table view row
@@ -213,6 +263,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if segue.identifier == "Embed" {
             segue.destination.view.translatesAutoresizingMaskIntoConstraints = false
+        } else if segue.identifier == "loginSegue" {
+            dim(direction: .In, alpha: dimLevel, speed: dimSpeed)
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            let loginVC = segue.destination as! LoginViewController
+            loginVC.delegate = self
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
@@ -331,5 +386,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
  
+    }
+    
+}
+
+extension HomeViewController: HomeDelegate {
+    func changeLogin() {
+        print("DELEGATE")
+        loginButton.setTitle("Log Out", for: .normal)
     }
 }
