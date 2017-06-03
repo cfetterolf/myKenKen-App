@@ -23,6 +23,12 @@ protocol HomeDelegate: class {
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Dimmable {
+    
+    // MARK: - FIREBASE DATABASE
+//    let ref = Database.database().reference(withPath: "users")
+    
+    
+    
 
     let cellReuseIdentifier = "Cell"
     let dimLevel: CGFloat = 0.5
@@ -110,6 +116,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         //Check if logged in
         if Auth.auth().currentUser != nil {
             loginButton.setTitle("Log Out", for: .normal)
+            let ref = Database.database().reference(withPath: "users")
+            
         } else {
             loginButton.setTitle("Log In", for: .normal)
         }

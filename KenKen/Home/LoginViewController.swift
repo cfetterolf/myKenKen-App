@@ -10,12 +10,13 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import SwiftSpinner
+import AudioToolbox
 
 let handle = Auth.auth().addStateDidChangeListener { (auth, user) in
     // ...
 }
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     var userEmail: String = ""
     var userPassword: String = ""
@@ -35,6 +36,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         
         navBar.topItem?.title = "Log In"
         loginEmailError.text = ""
@@ -60,11 +62,30 @@ class LoginViewController: UIViewController {
         formatBackground(view: loginBG)
         formatBackground(view: signupBG)
         
+        self.loginEmailForm.delegate = self
+        self.loginPassForm.delegate = self
+        self.signupEmailForm.delegate = self
+        self.signupNameForm.delegate = self
+        self.signupSurnameForm.delegate = self
+        self.signupPassForm.delegate = self
+        
         signupView.isHidden = true
 
         // Do any additional setup after loading the view.
     }
+    
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        
+        if textField == self.loginPassForm {
+            self.login(self)
+        } else if textField == self.signupPassForm {
+            self.signUp(self)
+        }
+        return true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -116,8 +137,14 @@ class LoginViewController: UIViewController {
                     return
                 }
                 
+                let ref = Database.database().reference(withPath: "users")
+                let currentUser = User(email: self.signupEmailForm.text!, name: self.signupNameForm.text!, surname: self.signupSurnameForm.text!, password: self.signupPassForm.text!)
+                let currentUserRef = ref.child(user!.uid)
+                currentUserRef.setValue(currentUser.toAnyObject())
+                
+                
                 print("\(user!.email!) created")
-                self.updateUserInfo(userID: user!.uid, userEmail: user!.email!)
+                //self.updateUserInfo(userID: user!.uid, userEmail: user!.email!)
                 self.callDelegate()
                 self.performSegue(withIdentifier: "unwindFromLogin", sender: self)
                 
@@ -127,6 +154,7 @@ class LoginViewController: UIViewController {
         }
         // [END create_user]
     }
+    
     
     func updateUserInfo(userID:String, userEmail:String) {
         
@@ -240,4 +268,16 @@ class LoginViewController: UIViewController {
     }
     
 
+}
+
+extension LoginViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

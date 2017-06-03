@@ -8,6 +8,33 @@
 
 import UIKit
 
+
+/*
+ 
+ // The root of the tree
+ {
+ "global-times": {
+ 
+    // global-times/15
+    "15": {
+ 
+        // global-times/15/name
+        "name": "Milk",
+ 
+        // grocery-items/milk/addedByUser
+        "addedByUser": "Chris"
+    },
+ 
+    "pizza": {
+        "name": "Pizza",
+        "addedByUser": "Alice"
+    },
+ }
+ }
+ 
+ 
+ */
+
 class Scoreboard: NSObject {
     
     let challengeArray = ["Challenge: Easy", "Challenge: Medium", "Challenge: Hard"]

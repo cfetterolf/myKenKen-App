@@ -1978,6 +1978,10 @@ class ChallengeViewController: UIViewController, Dimmable {
         
     }
     
+    @IBAction func tapSound(_ sender: UIButton) {
+        AudioServicesPlaySystemSound(1306)
+    }
+    
     @IBAction func unwindFromSecondary(segue: UIStoryboardSegue) {
         dim(direction: .Out, speed: dimSpeed)
         self.navigationController?.setNavigationBarHidden(false, animated: true)

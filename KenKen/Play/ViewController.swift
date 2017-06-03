@@ -2148,6 +2148,10 @@ class ViewController: UIViewController {
     @IBOutlet var bg16: UIImageView!
     @IBOutlet var bg17: UIImageView!
     
+    @IBAction func tapSound(_ sender: UIButton) {
+        AudioServicesPlaySystemSound(1306)
+    }
+    
     
     // Alert Function
     // Alert Function

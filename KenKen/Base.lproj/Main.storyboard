@@ -2057,6 +2057,7 @@
                                         </state>
                                         <connections>
                                             <action selector="popUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ylb-rS-l1R"/>
+                                            <action selector="tapSound:" destination="BYZ-38-t0r" eventType="touchDown" id="5HW-kw-fe4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpg-sX-MMb">
@@ -2068,6 +2069,7 @@
                                         </state>
                                         <connections>
                                             <action selector="popUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aVY-QF-Gaq"/>
+                                            <action selector="tapSound:" destination="BYZ-38-t0r" eventType="touchDown" id="ypd-FQ-zZD"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHD-pD-KVA">
@@ -2079,6 +2081,7 @@
                                         </state>
                                         <connections>
                                             <action selector="popUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sEa-0j-7Lq"/>
+                                            <action selector="tapSound:" destination="BYZ-38-t0r" eventType="touchDown" id="hAR-Sl-ptX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srh-C6-XwT">
@@ -2090,6 +2093,7 @@
                                         </state>
                                         <connections>
                                             <action selector="popUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GiW-5T-bJO"/>
+                                            <action selector="tapSound:" destination="BYZ-38-t0r" eventType="touchDown" id="mlD-Jf-zGj"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="solid_bg" translatesAutoresizingMaskIntoConstraints="NO" id="xf3-HE-elg">
@@ -3237,6 +3241,7 @@
                                         </state>
                                         <connections>
                                             <action selector="popUpButton:" destination="lbe-dJ-paG" eventType="touchUpInside" id="hDd-mf-yAO"/>
+                                            <action selector="tapSound:" destination="lbe-dJ-paG" eventType="touchDown" id="gMw-uA-12x"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfr-Fx-WMQ">
@@ -4536,7 +4541,7 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="________________________________" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ez-2I-6ge">
                                                         <rect key="frame" x="33" y="17" width="245" height="27"/>
@@ -4570,7 +4575,7 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="________________________________" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQd-Ul-uzU">
                                                         <rect key="frame" x="33" y="17" width="245" height="27"/>
@@ -4597,7 +4602,7 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="________________________________" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gkn-k3-Ldm">
                                                         <rect key="frame" x="33" y="17" width="245" height="27"/>
@@ -4713,7 +4718,10 @@
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="uRf-aC-4J5" id="FsC-fO-C88"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="________________________________" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUm-2J-p8P">
                                                         <rect key="frame" x="33" y="17" width="245" height="27"/>
@@ -4748,6 +4756,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="uRf-aC-4J5" id="x3p-db-iWb"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="________________________________" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8b-CO-sxx">
                                                         <rect key="frame" x="33" y="17" width="245" height="27"/>
