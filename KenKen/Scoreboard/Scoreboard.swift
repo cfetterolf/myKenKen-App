@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 
 /*
  
@@ -37,6 +37,7 @@ import UIKit
 
 class Scoreboard: NSObject {
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let challengeArray = ["Challenge: Easy", "Challenge: Medium", "Challenge: Hard"]
     var difficultyArray = [["Easy", "Easy", "Medium"], ["Easy", "Medium", "Hard"], ["Easy", "Medium", "Hard"]]
     
@@ -116,6 +117,9 @@ class Scoreboard: NSObject {
             defaults.set(hardArray, forKey: "hardArray")
         }
         self.addToTotalScore(time: seconds)
+        
+        // Update user best time
+        if Auth.auth().currentUser != nil {appDelegate.user!.updateBestTime(newTime: seconds, diff: difficulty)}
     }
     
     func addToTotalScore(time: Int) {

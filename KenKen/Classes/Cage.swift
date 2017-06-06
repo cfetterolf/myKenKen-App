@@ -16,11 +16,11 @@ class Cage: NSObject {
     var valuesInCage:[Int]
     
     init(size: Int, code: String) {
-        print(size, code)
+        
         cageSize = size
         
         let opArr:[Character] = ["+","x","-","÷"]
-        print(code.characters.last!)
+        
         if opArr.contains(code.characters.last!) {
             let op = code.characters.last
             var tar = code
@@ -75,8 +75,6 @@ class Cage: NSObject {
                 return false
             }
         } else if operation == 3 {
-            print(valuesInCage)
-            print(valuesInCage.max()!, valuesInCage.min()!)
             let total = valuesInCage.max()! / valuesInCage.min()!
             if total == target {
                 return true

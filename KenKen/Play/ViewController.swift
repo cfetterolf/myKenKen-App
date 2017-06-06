@@ -41,6 +41,7 @@ protocol ParentProtocol : class
 class ViewController: UIViewController {
 
     // Init local variables
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var buttonTag = 0
     var buttonText = ""
     var timer = Timer()

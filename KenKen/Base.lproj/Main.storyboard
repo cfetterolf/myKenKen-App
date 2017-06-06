@@ -566,7 +566,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="9vh-Vn-OfZ"/>
                                                     <constraint firstAttribute="width" constant="100" id="kOC-4x-UQP"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <state key="normal" title="Label">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -2213,7 +2213,7 @@
         <scene sceneID="K1E-bj-8vf">
             <objects>
                 <navigationController title="Challenge Navigaton View" modalPresentationStyle="overCurrentContext" id="3DV-Tj-IXG" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="AmF-hH-GrF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="AmF-hH-GrF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" cyan="0.58157792399999997" magenta="0.0" yellow="0.41512044269999998" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
@@ -4103,7 +4103,7 @@
                                             <constraint firstAttribute="height" constant="45" id="DzU-gX-6aB"/>
                                             <constraint firstAttribute="width" constant="87" id="Ujn-Iv-96y"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="OK"/>
                                         <connections>
                                             <action selector="exitHome:" destination="4fd-so-lmF" eventType="touchUpInside" id="sXx-IU-M0S"/>
@@ -4716,7 +4716,7 @@
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CQP-oa-yqV">
                                                         <rect key="frame" x="33" y="8" width="245" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
                                                         <connections>

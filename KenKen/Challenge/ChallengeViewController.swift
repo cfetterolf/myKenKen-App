@@ -19,6 +19,7 @@ var diffIndex:Int = 0
 class ChallengeViewController: UIViewController, Dimmable {
 
     // Init local variables
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var buttonTag = 0
     var buttonText = ""
     var timer = Timer()
@@ -148,8 +149,9 @@ class ChallengeViewController: UIViewController, Dimmable {
                 if match == true || finish == true  {
                     let sec = currentChallenge.initCountdownArray[currentChallenge.nextPuzzleIndex]-countdown
                     currentChallenge.timeFinishedArray.append((sec))
-                    scoreBoard.addTime(difficulty: currentDifficulty, seconds: sec)
                     updateTimesArray(seconds: sec)
+                    scoreBoard.addTime(difficulty: currentDifficulty, seconds: sec)
+        
                     
                     if currentChallenge.nextPuzzleIndex == 2 {
                         //FINSHED CHALLENGE!

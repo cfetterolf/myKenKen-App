@@ -12,16 +12,13 @@ import FirebaseAuth
 import SwiftSpinner
 import AudioToolbox
 
-let handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-    // ...
-}
-
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     var userEmail: String = ""
     var userPassword: String = ""
     var userName: String = ""
     var userSurname: String = ""
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewWillAppear(_ animated: Bool) {
 //        fhandle = Auth.auth().addStateDidChangeListener { (auth, user) in
@@ -30,7 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        Auth.auth().removeStateDidChangeListener(handle)
+        //Auth.auth().removeStateDidChangeListener(handle)
     }
 
     override func viewDidLoad() {
@@ -113,12 +110,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.showMessagePrompt(message: error.localizedDescription)
                     return
                 }
-                
-                print("\(user!.email!) logged in")
+                self.appDelegate.user = User(email: "testEmail", name: "", surname: "", password: "")
+                self.appDelegate.user!.logIn()
                 self.callDelegate()
                 self.performSegue(withIdentifier: "unwindFromLogin", sender: self)
             }
-
         }
         
     }
@@ -138,9 +134,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                 let ref = Database.database().reference(withPath: "users")
-                let currentUser = User(email: self.signupEmailForm.text!, name: self.signupNameForm.text!, surname: self.signupSurnameForm.text!, password: self.signupPassForm.text!)
+                self.appDelegate.user = User(email: self.signupEmailForm.text!, name: self.signupNameForm.text!, surname: self.signupSurnameForm.text!, password: self.signupPassForm.text!)
                 let currentUserRef = ref.child(user!.uid)
-                currentUserRef.setValue(currentUser.toAnyObject())
+                currentUserRef.setValue(self.appDelegate.user?.toAnyObject())
                 
                 
                 print("\(user!.email!) created")

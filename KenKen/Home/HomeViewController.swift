@@ -22,17 +22,22 @@ protocol HomeDelegate: class {
     func changeLogin()
 }
 
+
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Dimmable {
     
     // MARK: - FIREBASE DATABASE
 //    let ref = Database.database().reference(withPath: "users")
     
-    
+//    let handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+//        // ...
+//        print("CHANGE STATE")
+//    }
     
 
     let cellReuseIdentifier = "Cell"
     let dimLevel: CGFloat = 0.5
     let dimSpeed: Double = 0.5
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var tableView: UITableView!
@@ -113,14 +118,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        
+        
         //Check if logged in
         if Auth.auth().currentUser != nil {
             loginButton.setTitle("Log Out", for: .normal)
-            let ref = Database.database().reference(withPath: "users")
-            
+            //Set up user object
+            appDelegate.user = User(email: "", name: "", surname: "", password: "")
+            appDelegate.user!.logIn()
         } else {
+            appDelegate.user = nil
             loginButton.setTitle("Log In", for: .normal)
         }
+        
+        
 
     }
     
@@ -128,6 +140,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewWillDisappear(animated)
         // Show the navigation bar on other view controllers
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+//         Auth.auth().removeStateDidChangeListener(handle)
     }
     
     func segueWithName(name: String) {
@@ -166,6 +179,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             loginButton.setTitle("Log In", for: .normal)
             let when = DispatchTime.now() + 0.8
             DispatchQueue.main.asyncAfter(deadline: when){
+                self.appDelegate.user = nil
                 SwiftSpinner.hide()
             }
         }
