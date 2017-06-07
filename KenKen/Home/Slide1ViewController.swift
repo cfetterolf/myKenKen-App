@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class Slide1ViewController: UIViewController {
     
     @IBOutlet var slant1: UIImageView!

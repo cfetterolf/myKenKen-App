@@ -19,12 +19,12 @@ class Slide2ViewController: UIViewController {
         // Do any additional setup after loading the view.
         slant1.layer.shadowColor = UIColor.black.cgColor
         slant1.layer.shadowOpacity = 0.4
-        slant1.layer.shadowOffset = CGSize.init(width: 4, height: 4)
+        slant1.layer.shadowOffset = CGSize.init(width: -4, height: 4)
         slant1.layer.shadowRadius = 5
         
         slant2.layer.shadowColor = UIColor.black.cgColor
         slant2.layer.shadowOpacity = 0.4
-        slant2.layer.shadowOffset = CGSize.init(width: 4, height: 4)
+        slant2.layer.shadowOffset = CGSize.init(width: -4, height: 4)
         slant2.layer.shadowRadius = 5
 
     }

@@ -80,14 +80,15 @@ class User: NSObject {
         print("-----------")
     }
     
+    typealias CompletionHandler = () -> Void
     
-    func logIn() {
+    func logIn(completionHandler: @escaping CompletionHandler) {
         print("LOG IN")
         let ref = Database.database().reference(withPath: "users/\((Auth.auth().currentUser?.uid)!)")
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             if !snapshot.exists() { return }
             let value = snapshot.value as! NSDictionary
-            print(value)
+            
             self.userEmail = value["email"] as! String
             self.userName = value["name"] as! String
             self.userSurname = value["surname"] as! String
@@ -106,7 +107,8 @@ class User: NSObject {
             if let hardArr = value.object(forKey: "hard-array") {
                 self.hardArray = hardArr as! [Int]
             }
-            self.printUserData()
+            
+            completionHandler()
         })
 
     }

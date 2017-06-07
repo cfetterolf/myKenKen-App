@@ -111,9 +111,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 self.appDelegate.user = User(email: "testEmail", name: "", surname: "", password: "")
-                self.appDelegate.user!.logIn()
-                self.callDelegate()
-                self.performSegue(withIdentifier: "unwindFromLogin", sender: self)
+                self.appDelegate.user!.logIn(completionHandler: {(success) -> Void in
+                    self.callDelegate()
+                    self.performSegue(withIdentifier: "unwindFromLogin", sender: self)
+                })
             }
         }
         
@@ -261,6 +262,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.layer.shadowOpacity = 0.1
         view.layer.shadowRadius = 4
         view.layer.shadowOffset = CGSize(width: 1, height: 1)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "unwindFromLogin" {
+            segue.destination.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
     }
     
 

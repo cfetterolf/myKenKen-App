@@ -75,8 +75,9 @@ class ViewController: UIViewController {
         self.view.clipsToBounds = true
         
         //Config Nav Bar
-        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.darkGray
         self.navigationController?.navigationBar.topItem?.title = ""
+        //self.navigationController?.navigationBar.alpha = 0.4
         
         //Set corner radius of all shapes
         initBackgrounds()
