@@ -248,9 +248,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func openUserSettings(_ sender: Any) {
         print("OPEN USER SETTINGS")
+        performSegue(withIdentifier: "accountSegue", sender: self)
     }
     
-    
+    @IBAction func unwindFromAccount(segue: UIStoryboardSegue) {
+        dim(direction: .Out, speed: dimSpeed)
+//        login(self)
+    }
     
     
     
@@ -360,7 +364,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             let loginVC = segue.destination as! LoginViewController
             loginVC.delegate = self
+        } else if segue.identifier == "accountSegue" {
+            dim(direction: .In, alpha: dimLevel, speed: dimSpeed)
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            let accountVC = segue.destination as! AccountViewController
+            accountVC.parentVC = self
         }
+
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }

@@ -146,17 +146,17 @@ class ViewController: UIViewController {
     
     func greyOut() {
         newPuzzle.isEnabled = false
-        bg6.alpha = 0.5
+        bg6.alpha = 0.3
         clearButton.isEnabled = false
-        bg8.alpha = 0.5
+        bg8.alpha = 0.3
         
     }
     
     func unGreyOut() {
         newPuzzle.isEnabled = true
-        bg6.alpha = 1.0
+        bg6.alpha = 0.75
         clearButton.isEnabled = true
-        bg8.alpha = 1.0
+        bg8.alpha = 0.75
     }
     
     
@@ -2006,109 +2006,32 @@ class ViewController: UIViewController {
     // MARK: - Labels and backgrounds
     
     func initBackgrounds() {
-        mainbg.layer.cornerRadius = 12.0
-        mainbg.layer.shadowColor = UIColor.black.cgColor
-        mainbg.layer.shadowOpacity = 0.4
-        mainbg.layer.shadowRadius = 3
-        mainbg.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg1.layer.cornerRadius = 12.0
-        bg1.layer.shadowColor = UIColor.black.cgColor
-        bg1.layer.shadowOpacity = 0.4
-        bg1.layer.shadowRadius = 3
-        bg1.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg2.layer.cornerRadius = 12.0
-        bg2.layer.shadowColor = UIColor.black.cgColor
-        bg2.layer.shadowOpacity = 0.4
-        bg2.layer.shadowRadius = 3
-        bg2.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg3.layer.cornerRadius = 12.0
-        bg3.layer.shadowColor = UIColor.black.cgColor
-        bg3.layer.shadowOpacity = 0.4
-        bg3.layer.shadowRadius = 3
-        bg3.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg4.layer.cornerRadius = 12.0
-        bg4.layer.shadowColor = UIColor.black.cgColor
-        bg4.layer.shadowOpacity = 0.4
-        bg4.layer.shadowRadius = 3
-        bg4.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg5.layer.cornerRadius = 12.0
-        bg5.layer.shadowColor = UIColor.black.cgColor
-        bg5.layer.shadowOpacity = 0.4
-        bg5.layer.shadowRadius = 3
-        bg5.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg6.layer.cornerRadius = 12.0
-        bg6.layer.shadowColor = UIColor.black.cgColor
-        bg6.layer.shadowOpacity = 0.4
-        bg6.layer.shadowRadius = 3
-        bg6.layer.shadowOffset = CGSize(width: 3, height: 3)
-
-        
-        bg7.layer.cornerRadius = 12.0
-        bg7.layer.shadowColor = UIColor.black.cgColor
-        bg7.layer.shadowOpacity = 0.4
-        bg7.layer.shadowRadius = 3
-        bg7.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg8.layer.cornerRadius = 12.0
-        bg8.layer.shadowColor = UIColor.black.cgColor
-        bg8.layer.shadowOpacity = 0.4
-        bg8.layer.shadowRadius = 3
-        bg8.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg10.layer.cornerRadius = 12.0
-        bg10.layer.shadowColor = UIColor.black.cgColor
-        bg10.layer.shadowOpacity = 0.4
-        bg10.layer.shadowRadius = 3
-        bg10.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg11.layer.cornerRadius = 12.0
-        bg11.layer.shadowColor = UIColor.black.cgColor
-        bg11.layer.shadowOpacity = 0.4
-        bg11.layer.shadowRadius = 3
-        bg11.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg12.layer.cornerRadius = 12.0
-        bg12.layer.shadowColor = UIColor.black.cgColor
-        bg12.layer.shadowOpacity = 0.4
-        bg12.layer.shadowRadius = 3
-        bg12.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg13.layer.cornerRadius = 12.0
-        bg13.layer.shadowColor = UIColor.black.cgColor
-        bg13.layer.shadowOpacity = 0.4
-        bg13.layer.shadowRadius = 3
-        bg13.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg14.layer.cornerRadius = 12.0
-        bg14.layer.shadowColor = UIColor.black.cgColor
-        bg14.layer.shadowOpacity = 0.4
-        bg14.layer.shadowRadius = 3
-        bg14.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg15.layer.cornerRadius = 12.0
-        bg15.layer.shadowColor = UIColor.black.cgColor
-        bg15.layer.shadowOpacity = 0.4
-        bg15.layer.shadowRadius = 3
-        bg15.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg16.layer.cornerRadius = 12.0
-        bg16.layer.shadowColor = UIColor.black.cgColor
-        bg16.layer.shadowOpacity = 0.4
-        bg16.layer.shadowRadius = 3
-        bg16.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        bg17.layer.cornerRadius = 12.0
-        bg17.layer.shadowColor = UIColor.black.cgColor
-        bg17.layer.shadowOpacity = 0.4
-        bg17.layer.shadowRadius = 3
-        bg17.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
+        setBG(view: mainbg)
+        setBG(view: bg1)
+        setBG(view: bg2)
+        setBG(view: bg3)
+        setBG(view: bg4)
+        setBG(view: bg5)
+        setBG(view: bg6)
+        setBG(view: bg7)
+        setBG(view: bg8)
+        setBG(view: bg10)
+        setBG(view: bg11)
+        setBG(view: bg12)
+        setBG(view: bg13)
+        setBG(view: bg14)
+        setBG(view: bg15)
+        setBG(view: bg16)
+        setBG(view: bg17)
+    }
+    
+    func setBG(view: UIView) {
+        view.layer.cornerRadius = 12.0
+        view.layer.shadowColor = UIColor.darkGray.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 3
+        view.layer.shadowOffset = CGSize(width: 3, height: 3)
+        view.alpha = 0.75
     }
     
     @IBOutlet var newPuzzle: UIButton!

@@ -15,6 +15,7 @@ class User: NSObject {
     public var userName:String
     public var userSurname:String
     public var userPassword:String
+    public var userAvatar:String
     public var bestArray:[Int]
     public var easyArray:[Int]
     public var mediumArray:[Int]
@@ -25,6 +26,7 @@ class User: NSObject {
         userName=name
         userSurname=surname
         userPassword=password
+        userAvatar = "steph"
         bestArray = []
         easyArray = []
         mediumArray = []
@@ -59,6 +61,7 @@ class User: NSObject {
             "name": userName,
             "surname": userSurname,
             "password": userPassword,
+            "avatar": userAvatar,
             "best-array": bestArray,
             "easy-array": easyArray,
             "medium-array": mediumArray,
@@ -93,6 +96,7 @@ class User: NSObject {
             self.userName = value["name"] as! String
             self.userSurname = value["surname"] as! String
             self.userPassword = value["password"] as! String
+            self.userAvatar = value["avatar"] as! String
             
             //May not be init in Firebase yet
             if let bestArr = value.object(forKey: "best-array") {

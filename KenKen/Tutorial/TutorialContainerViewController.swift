@@ -24,7 +24,9 @@ class TutorialContainerViewController: UIViewController {
     
     
     @IBAction func playFirstSegue(_ sender: Any) {
+        print("TRY DISMISS")
         if let homeNav = self.presentingViewController as? HomeNavigationController {
+            print("DISMISS")
             self.dismiss(animated: true) {
                 homeNav.playFirstPuzzle()
                 playFirst = true

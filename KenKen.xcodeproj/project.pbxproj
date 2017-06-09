@@ -34,6 +34,10 @@
 		8359EBE31DE0DE64002834E5 /* ChallengeMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBE21DE0DE64002834E5 /* ChallengeMenuViewController.swift */; };
 		8359EBE51DE0E418002834E5 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBE41DE0E418002834E5 /* ChallengeViewController.swift */; };
 		8359EBE71DE0E6A4002834E5 /* FinishedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */; };
+		83615AE31EE8E4B30049ACBF /* AvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AE21EE8E4B30049ACBF /* AvatarViewController.swift */; };
+		83615AE51EE8E7C40049ACBF /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AE41EE8E7C40049ACBF /* AvatarCollectionViewCell.swift */; };
+		83615AE71EEA34560049ACBF /* AccountBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AE61EEA34560049ACBF /* AccountBodyCell.swift */; };
+		83615AE91EEA48720049ACBF /* AccountLogOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AE81EEA48720049ACBF /* AccountLogOutCell.swift */; };
 		837358C81EBB25B200E81DA5 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837358C71EBB25B200E81DA5 /* HomeNavigationController.swift */; };
 		837358CA1EBB510B00E81DA5 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837358C91EBB510B00E81DA5 /* PauseViewController.swift */; };
 		83869EC01EE041B200583B9A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83869EBF1EE041B200583B9A /* User.swift */; };
@@ -50,6 +54,8 @@
 		83A98D101DDBB48B00EF70B4 /* FourthTutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A98D0F1DDBB48B00EF70B4 /* FourthTutVC.swift */; };
 		83AB46461DE3BB6500643DD9 /* ChallengeCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AB46451DE3BB6500643DD9 /* ChallengeCompletedViewController.swift */; };
 		83AB46481DE3F07200643DD9 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AB46471DE3F07200643DD9 /* Scoreboard.swift */; };
+		83E1D23D1EE88881009F7494 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E1D23C1EE88881009F7494 /* AccountViewController.swift */; };
+		83E1D23F1EE894CB009F7494 /* AccountHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E1D23E1EE894CB009F7494 /* AccountHeaderCell.swift */; };
 		83FC41B71DD5696B008FAAFE /* MyCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC41B61DD5696B008FAAFE /* MyCustomCell.swift */; };
 		83FC41B91DD56A39008FAAFE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC41B81DD56A39008FAAFE /* HomeViewController.swift */; };
 		83FC41BB1DD7B081008FAAFE /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FC41BA1DD7B081008FAAFE /* TutorialPageViewController.swift */; };
@@ -87,6 +93,10 @@
 		8359EBE21DE0DE64002834E5 /* ChallengeMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeMenuViewController.swift; path = Challenge/ChallengeMenuViewController.swift; sourceTree = "<group>"; };
 		8359EBE41DE0E418002834E5 /* ChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeViewController.swift; path = Challenge/ChallengeViewController.swift; sourceTree = "<group>"; };
 		8359EBE61DE0E6A4002834E5 /* FinishedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinishedViewController.swift; path = Challenge/FinishedViewController.swift; sourceTree = "<group>"; };
+		83615AE21EE8E4B30049ACBF /* AvatarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarViewController.swift; path = Home/AvatarViewController.swift; sourceTree = "<group>"; };
+		83615AE41EE8E7C40049ACBF /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarCollectionViewCell.swift; path = Classes/AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
+		83615AE61EEA34560049ACBF /* AccountBodyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountBodyCell.swift; path = Classes/AccountBodyCell.swift; sourceTree = "<group>"; };
+		83615AE81EEA48720049ACBF /* AccountLogOutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountLogOutCell.swift; path = Classes/AccountLogOutCell.swift; sourceTree = "<group>"; };
 		837358C71EBB25B200E81DA5 /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeNavigationController.swift; path = Home/HomeNavigationController.swift; sourceTree = "<group>"; };
 		837358C91EBB510B00E81DA5 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PauseViewController.swift; path = Play/PauseViewController.swift; sourceTree = "<group>"; };
 		83869EBF1EE041B200583B9A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Classes/User.swift; sourceTree = "<group>"; };
@@ -104,6 +114,8 @@
 		83AB46451DE3BB6500643DD9 /* ChallengeCompletedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChallengeCompletedViewController.swift; path = Challenge/ChallengeCompletedViewController.swift; sourceTree = "<group>"; };
 		83AB46471DE3F07200643DD9 /* Scoreboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scoreboard.swift; path = Scoreboard/Scoreboard.swift; sourceTree = "<group>"; };
 		83D4D6FA1E121318004A5C96 /* Agilis.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Agilis.otf; path = Fonts/Agilis.otf; sourceTree = "<group>"; };
+		83E1D23C1EE88881009F7494 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = Home/AccountViewController.swift; sourceTree = "<group>"; };
+		83E1D23E1EE894CB009F7494 /* AccountHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountHeaderCell.swift; path = Classes/AccountHeaderCell.swift; sourceTree = "<group>"; };
 		83FC41B61DD5696B008FAAFE /* MyCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyCustomCell.swift; path = Classes/MyCustomCell.swift; sourceTree = "<group>"; };
 		83FC41B81DD56A39008FAAFE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Home/HomeViewController.swift; sourceTree = "<group>"; };
 		83FC41BA1DD7B081008FAAFE /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialPageViewController.swift; path = Tutorial/TutorialPageViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +232,8 @@
 				83A98D051DDBA54400EF70B4 /* Slide2ViewController.swift */,
 				832225EC1EBD42BB00CAF17E /* RateViewController.swift */,
 				8348ADAF1EDDBF32005331C0 /* LoginViewController.swift */,
+				83E1D23C1EE88881009F7494 /* AccountViewController.swift */,
+				83615AE21EE8E4B30049ACBF /* AvatarViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -236,6 +250,10 @@
 				8312326E1DEE099B008F9C89 /* Cage.swift */,
 				83869EBF1EE041B200583B9A /* User.swift */,
 				8357FC4D1EE844D3007A41F3 /* CustomNavigationBar.swift */,
+				83E1D23E1EE894CB009F7494 /* AccountHeaderCell.swift */,
+				83615AE41EE8E7C40049ACBF /* AvatarCollectionViewCell.swift */,
+				83615AE61EEA34560049ACBF /* AccountBodyCell.swift */,
+				83615AE81EEA48720049ACBF /* AccountLogOutCell.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -412,23 +430,28 @@
 				83FC41BF1DD8DD6F008FAAFE /* Slide1ViewController.swift in Sources */,
 				83A98D101DDBB48B00EF70B4 /* FourthTutVC.swift in Sources */,
 				83AB46481DE3F07200643DD9 /* Scoreboard.swift in Sources */,
+				83615AE51EE8E7C40049ACBF /* AvatarCollectionViewCell.swift in Sources */,
 				834DA1CA1DC69BAB00E9D919 /* ViewController.swift in Sources */,
 				831589E41DE20EDF00ABC3AE /* InfoViewController.swift in Sources */,
 				831589E81DE2895F00ABC3AE /* StartViewController.swift in Sources */,
 				839E7FB91DF3207300FAD13E /* TopAlignedLabel.swift in Sources */,
+				83E1D23D1EE88881009F7494 /* AccountViewController.swift in Sources */,
 				8359EBE51DE0E418002834E5 /* ChallengeViewController.swift in Sources */,
 				834DA1D01DC69BAB00E9D919 /* KenKen.xcdatamodeld in Sources */,
 				830D3D631DED33CB00D0DF44 /* StartTutorialViewController.swift in Sources */,
 				8359EBE31DE0DE64002834E5 /* ChallengeMenuViewController.swift in Sources */,
 				83A98D061DDBA54400EF70B4 /* Slide2ViewController.swift in Sources */,
 				83FC41BB1DD7B081008FAAFE /* TutorialPageViewController.swift in Sources */,
+				83615AE31EE8E4B30049ACBF /* AvatarViewController.swift in Sources */,
 				831589E01DE0F20200ABC3AE /* FailedViewController.swift in Sources */,
 				83FC41B71DD5696B008FAAFE /* MyCustomCell.swift in Sources */,
 				83A05DCF1DDA1B4900FE77BA /* PopUpViewController.swift in Sources */,
 				834DA1DD1DC8415700E9D919 /* KenKenCell.swift in Sources */,
 				83869EC01EE041B200583B9A /* User.swift in Sources */,
+				83E1D23F1EE894CB009F7494 /* AccountHeaderCell.swift in Sources */,
 				8312326F1DEE099B008F9C89 /* Cage.swift in Sources */,
 				83A05DD31DDA9C9700FE77BA /* HomePageViewController.swift in Sources */,
+				83615AE71EEA34560049ACBF /* AccountBodyCell.swift in Sources */,
 				8359EBDE1DE0DBCD002834E5 /* ScoreBoardViewController.swift in Sources */,
 				834DA1DF1DC90B9000E9D919 /* KenKenField.swift in Sources */,
 				830D3D611DECAF1000D0DF44 /* StarRank.swift in Sources */,
@@ -436,6 +459,7 @@
 				83FC41B91DD56A39008FAAFE /* HomeViewController.swift in Sources */,
 				83A98D0E1DDBB47E00EF70B4 /* ThirdTutVC.swift in Sources */,
 				831589EA1DE3567300ABC3AE /* Challenge.swift in Sources */,
+				83615AE91EEA48720049ACBF /* AccountLogOutCell.swift in Sources */,
 				8357FC4E1EE844D3007A41F3 /* CustomNavigationBar.swift in Sources */,
 				834DA1C81DC69BAB00E9D919 /* AppDelegate.swift in Sources */,
 				83A98D081DDBB24200EF70B4 /* FirstTutVC.swift in Sources */,
