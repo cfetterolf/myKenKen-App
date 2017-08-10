@@ -35,24 +35,45 @@ class User: NSObject {
     
     func updateBestTime(newTime:Int, diff:String) {
         let ref = Database.database().reference(withPath: "users/\((Auth.auth().currentUser?.uid)!)")
+        //UPDATE GLOBAL LEADERBOARDS
+        let leaderBoardRef = Database.database().reference(withPath: "leaderboard")
+        let bestRef = leaderBoardRef.child("best-leaderboard")
+        let easyRef = leaderBoardRef.child("easy-leaderboard")
+        let mediumRef = leaderBoardRef.child("medium-leaderboard")
+        let hardRef = leaderBoardRef.child("hard-leaderboard")
+        
         
         //Update diff arrays
+        
         bestArray.append(newTime)
         bestArray.sort()
+        //Update Best Array Global
+        let bestRefChild = bestRef.child((Auth.auth().currentUser?.uid)!)
+        bestRefChild.setValue(toLeaderboardObject(name: self.userName, avatar: self.userAvatar, time: bestArray[0]), andPriority: "time")
         
         switch diff {
         case "Easy":
             easyArray.append(newTime)
             easyArray.sort()
+            //Update Easy Array Global
+            let easyRefChild = easyRef.child((Auth.auth().currentUser?.uid)!)
+            easyRefChild.setValue(toLeaderboardObject(name: self.userName, avatar: self.userAvatar, time: easyArray[0]), andPriority: "time")
         case "Medium":
             mediumArray.append(newTime)
             mediumArray.sort()
+            //Update Medium Array Global
+            let mediumRefChild = mediumRef.child((Auth.auth().currentUser?.uid)!)
+            mediumRefChild.setValue(toLeaderboardObject(name: self.userName, avatar: self.userAvatar, time: mediumArray[0]), andPriority: "time")
         default:
             hardArray.append(newTime)
             hardArray.sort()
+            //Update Hard Array Global
+            let hardRefChild = hardRef.child((Auth.auth().currentUser?.uid)!)
+            hardRefChild.setValue(toLeaderboardObject(name: self.userName, avatar: self.userAvatar, time: hardArray[0]), andPriority: "time")
         }
         
         ref.setValue(self.toAnyObject())
+        
     }
     
     func toAnyObject() -> Any {
@@ -66,6 +87,14 @@ class User: NSObject {
             "easy-array": easyArray,
             "medium-array": mediumArray,
             "hard-array": hardArray
+        ]
+    }
+    
+    func toLeaderboardObject(name:String, avatar:String, time:Int) -> Any {
+        return [
+            "name": name,
+            "avatar": avatar,
+            "time": time
         ]
     }
     

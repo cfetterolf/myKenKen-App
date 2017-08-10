@@ -119,6 +119,46 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
+    
+    @IBAction func forgotPassword(_ sender: Any) {
+        if self.loginEmailForm.text == "" {
+            let alertController = UIAlertController(title: "Oops!", message: "Please enter an email.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            present(alertController, animated: true, completion: nil)
+        } else {
+            
+            Auth.auth().sendPasswordReset(withEmail: self.loginEmailForm.text!, completion: { (error) in
+                
+                var title = ""
+                var message = ""
+                
+                if error != nil {
+                    title = "Error!"
+                    message = (error?.localizedDescription)!
+                } else {
+                    title = "Success!"
+                    message = "Password reset email sent."
+                    self.loginEmailForm.text = ""
+                }
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+            })
+
+        }
+
+        
+    }
+    
+    
+    
     @IBAction func signUp(_ sender: Any) {
         // [START create_user]
         SwiftSpinner.show("Signing Up...")
@@ -152,12 +192,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // [END create_user]
     }
     
-    
-    func updateUserInfo(userID:String, userEmail:String) {
-        
-    }
-
-
     func showMessagePrompt(message:String) {
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         
@@ -166,6 +200,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    
+    func updateUserInfo(userID:String, userEmail:String) {
+        
+    }
+
     
     // Type should be either "email" or "password"
     func validate(type: String, content: String) -> Bool {

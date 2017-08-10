@@ -8,6 +8,8 @@
 
 import UIKit
 import AudioToolbox
+import Firebase
+import GoogleMobileAds
 
 //MARK: - Init Global Variables
 
@@ -38,7 +40,7 @@ protocol ParentProtocol : class
  Main ViewController class for the Play section.
  Handles generating new puzzles, checking entries, and keeping track of finish times.
 */
-class ViewController: UIViewController {
+class ViewController: UIViewController, GADInterstitialDelegate {
 
     // Init local variables
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -53,6 +55,7 @@ class ViewController: UIViewController {
     var closeHint = 0
     var stopWatchString: String = "00:00"
     var cageArray:[Cage] = []
+    var interstitial: GADInterstitial!
     @IBOutlet var popUpViewHint: UIView!
     @IBOutlet var popUpView: UIView!
     @IBOutlet var timerView: UIView!
@@ -62,7 +65,7 @@ class ViewController: UIViewController {
     //Set Nav Bar title back to "Play" when load view
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Play"
-        
+        interstitial = createAndLoadInterstitial()
     }
     override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
         tutorialOver = true
@@ -71,6 +74,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        // TEST AD FUNCTIONALITY
+//        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+//        let request = GADRequest()
+//        interstitial.load(request)
+        
+        // END AD TEST
         
         self.view.clipsToBounds = true
         
@@ -98,6 +110,21 @@ class ViewController: UIViewController {
         
     }
     
+    // MARK: - Interstitial
+    
+    func createAndLoadInterstitial() -> GADInterstitial {
+        let interstitial = GADInterstitial(adUnitID: "ca-app-pub-3560434471541225/8762103197")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadInterstitial()
+        generatePuzzle()
+    }
+    
+    
     
     // MARK : - First Puzzle Tutorial
     
@@ -115,7 +142,7 @@ class ViewController: UIViewController {
                       "Great!  Now that we know where the 4 is in the first column, we can logic our way into the order of the '4x' cage.  Can you figure out which numbers go where?  Remember, two of the same number can't occupy the same row or column",
                       "Nice work.  Now put some of the tricks we've learned together, and figure out what goes in the '3x' cage in the bottom row.",
                       "You're really getting the hang of this!  Now fill in the '2x' cage.",
-                      "Perfect!  From here, you should be able to figure out the rest of the tiles using everything you've learned so far.  See you on the other side, partner.",
+                      "Perfect!  From here, you should be able to figure out the rest of the tiles using everything you've learned so far.  See you on the other side.",
                       "Amazing work - you've really come a long way.  Keep all of these tips in mind when solving puzzles, and don't worry if you get stuck.  Remember, the color of the border tells you the puzzle's difficulty (if you forget, just click the '?' in the corner).  Until next time, partner."]
     var tutTagArr = [[],[2],[3],[7],[6],[8],[0,1],[12,13],[11,15],[4,5,9,10,14],[]]
     
@@ -260,6 +287,7 @@ class ViewController: UIViewController {
                     updateTimesArray(seconds: totalSeconds)
                     scoreBoard.addTime(difficulty: puzzleDifficulty, seconds: totalSeconds)
                     showPopUp(time: stopWatchString)
+                    adCount += 1
                 }
             }
             //Change views
@@ -2096,7 +2124,11 @@ class ViewController: UIViewController {
 
 extension ViewController : ParentProtocol {
     func method() {
-        self.generatePuzzle()
+        if interstitial.isReady && adCount % 3 == 0 {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            self.generatePuzzle()
+        }
     }
     func resume() {
         // If puzzle has been completed

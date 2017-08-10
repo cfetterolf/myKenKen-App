@@ -16,7 +16,7 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.darkGray
         self.navigationController?.navigationBar.topItem?.title = ""
         //self.navigationItem.title = "Scoreboard"
         
@@ -44,7 +44,7 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITableVi
     // number of rows in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return scoreBoard.challengeArray.count
+            return 4
         } else {
             return 4
         }
@@ -55,7 +55,8 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell2")
         
         if indexPath.section == 0 {
-            cell?.textLabel?.text = scoreBoard.challengeArray[indexPath.row]
+            let arr = ["Best Times","Easy Times","Medium Times","Hard Times"]
+            cell?.textLabel?.text = arr[indexPath.row]
             cell?.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightLight)
         } else if indexPath.section == 1 {
             let arr = ["All","Easy", "Medium", "Hard"]
@@ -69,9 +70,9 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Challenge Scoreboard"
+            return "Global Leaderboards"
         } else if section == 1 {
-            return "Best Times Scoreboard"
+            return "My Scoreboard"
         } else {
             return ""
         }
@@ -79,7 +80,7 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let title = UILabel()
-        title.textColor = UIColor.white
+        title.textColor = UIColor.darkGray
         
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor=title.textColor

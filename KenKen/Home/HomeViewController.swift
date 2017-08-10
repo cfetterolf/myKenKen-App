@@ -16,6 +16,7 @@ var difficultyDictTriple = [String: Int]()
 var difficultyDictL = [String: Int]()
 var scoreBoard:Scoreboard = Scoreboard()
 var starRank:StarRank = StarRank()
+var adCount = 0
 
 
 protocol HomeDelegate: class {
@@ -81,6 +82,30 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         // Do any additional setup after loading the view.
         
+        //Check if logged in
+        if Auth.auth().currentUser != nil { // LOGGED IN
+            loginButton.setTitle("Log Out", for: .normal)
+            self.userNameButton.isHidden = false
+            self.helloLabel.isHidden = false
+            self.myBestTimesLabel.isHidden = true
+            self.userNameButton.setTitle(self.appDelegate.user!.userName, for: .normal)
+            self.tableView.reloadData()
+            if (self.appDelegate.user!.bestArray.count >= 5) {
+                self.checkIfRated()
+            }
+            
+        } else { //NOT LOGGED IN
+            userNameButton.isHidden = true
+            helloLabel.isHidden = true
+            myBestTimesLabel.isHidden = false
+            appDelegate.user = nil
+            loginButton.setTitle("Log In", for: .normal)
+            if (timesArray.count >= 5) {
+                self.checkIfRated()
+            }
+        }
+
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -117,64 +142,35 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         tableView.reloadData()
         
-        
-//        // FORMAT NAV BAR
-//        let rateButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
-//        rateButton.setTitle("Rate Fours", for: .normal)
-//        //rateButton.titleLabel?.adjustsFontSizeToFitWidth = true
-//        rateButton.setTitleColor(UIColor.darkGray, for: .normal)
-//        rateButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 15)!
-//        rateButton.contentHorizontalAlignment = .left
-//        rateButton.addTarget(self, action: #selector(HomeViewController.rateOnAppStore(_:)), for: .touchUpInside)
-//        
-//        // here where the magic happens, you can shift it where you like
-//        rateButton.transform = CGAffineTransform(translationX: 0, y: 7)
-//        
-//        // add the button to a container, otherwise the transform will be ignored
-//        let rateButtonContainer = UIView(frame: rateButton.frame)
-//        rateButtonContainer.addSubview(rateButton)
-//        let rateButtonItem = UIBarButtonItem(customView: rateButtonContainer)
-//        
-//        self.navigationItem.leftBarButtonItem = rateButtonItem
-//        //self.navigationItem.leftBarButtonItem?.setBackgroundVerticalPositionAdjustment(10.0, for: .default)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
         self.navigationController?.navigationBar.alpha = 0.9
-        //Check if logged in
-        if Auth.auth().currentUser != nil { // LOGGED IN
-            loginButton.setTitle("Log Out", for: .normal)
-            if appDelegate.user == nil {
-                //Set up user object
-                appDelegate.user = User(email: "", name: "", surname: "", password: "")
-                appDelegate.user!.logIn(completionHandler: { (success) -> Void in
-                    self.userNameButton.isHidden = false
-                    self.helloLabel.isHidden = false
-                    self.myBestTimesLabel.isHidden = true
-                    self.userNameButton.setTitle(self.appDelegate.user!.userName, for: .normal)
-                    self.tableView.reloadData()
-                    if (self.appDelegate.user!.bestArray.count >= 5) {
-                        self.checkIfRated()
-                    }
-                })
-            }
-            if (self.appDelegate.user!.bestArray.count >= 5) {
-                self.checkIfRated()
-            }
-        } else { //NOT LOGGED IN
-            userNameButton.isHidden = true
-            helloLabel.isHidden = true
-            myBestTimesLabel.isHidden = false
-            appDelegate.user = nil
-            loginButton.setTitle("Log In", for: .normal)
-            if (timesArray.count >= 5) {
-                self.checkIfRated()
-            }
-        }
         
         
-
+        //TEST METHOD
+        //var leaderboardArr:[Int] = []
+//        let rootRef = Database.database().reference(withPath: "leaderboard")
+//        
+//        let ref = rootRef.child("best-leaderboard").queryOrdered(byChild: "time").observe(.childAdded, with: { (snapshot) -> Void in
+//            if !snapshot.exists() {return}
+//            let value = snapshot.value as! NSDictionary
+//            print(value)
+//        
+//          })
+        
+//        let TopTimesQuery = bestRef.queryOrdered(byChild: "time")
+//        TopTimesQuery.observe(.value, with: { (snapshot) in
+//            for each child in snapshot {
+//                
+//            }
+//        })
+//        TopTimesQuery.observeEvent(of: .value, with: { (snapshot) in
+//            if !snapshot.exists() { return }
+//            let value = snapshot.value as! NSDictionary
+//            print(value)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -214,21 +210,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if loginButton.titleLabel?.text == "Log In" {
             performSegue(withIdentifier: "loginSegue", sender: self)
         } else {
-            //Log Out User
-            SwiftSpinner.show("Logging Out...")
-            try! Auth.auth().signOut()
-            loginButton.setTitle("Log In", for: .normal)
-            userNameButton.isHidden = true
-            helloLabel.isHidden = true
-            myBestTimesLabel.isHidden = false
-            appDelegate.user = nil
-            tableView.reloadData()
-            let when = DispatchTime.now() + 0.8
-            DispatchQueue.main.asyncAfter(deadline: when){
-                SwiftSpinner.hide()
-            }
+            self.displayAlert("Log Out", message: "Are you sure you wish to log out of this account?")
         }
-        
     }
     
     @IBAction func unwindFromLogin(segue: UIStoryboardSegue) {
@@ -236,6 +219,27 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    func displayAlert(_ title:String, message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Log Out", style: UIAlertActionStyle.default, handler: { (action) in
+            //Log Out User
+            SwiftSpinner.show("Logging Out...")
+            try! Auth.auth().signOut()
+            self.loginButton.setTitle("Log In", for: .normal)
+            self.userNameButton.isHidden = true
+            self.helloLabel.isHidden = true
+            self.myBestTimesLabel.isHidden = false
+            self.appDelegate.user = nil
+            self.tableView.reloadData()
+            let when = DispatchTime.now() + 0.8
+            DispatchQueue.main.asyncAfter(deadline: when){
+                SwiftSpinner.hide()
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     
     
     // MARK: - Top buttons

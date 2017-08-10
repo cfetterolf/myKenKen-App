@@ -1,4 +1,7 @@
 PODS:
+  - Firebase/AdMob (4.0.0):
+    - Firebase/Core
+    - Google-Mobile-Ads-SDK (= 7.20.0)
   - Firebase/Auth (4.0.0):
     - Firebase/Core
     - FirebaseAuth (= 4.0.0)
@@ -22,6 +25,7 @@ PODS:
     - FirebaseAnalytics (~> 4.0)
   - FirebaseInstanceID (2.0.0):
     - FirebaseCore (~> 4.0)
+  - Google-Mobile-Ads-SDK (7.20.0)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
@@ -36,6 +40,7 @@ PODS:
   - SwiftSpinner (1.2.1)
 
 DEPENDENCIES:
+  - Firebase/AdMob
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -48,10 +53,11 @@ SPEC CHECKSUMS:
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
   FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
+  Google-Mobile-Ads-SDK: 168312cdc167fa22746d4ea8e839fc4825dd2966
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   SwiftSpinner: 62a28bbb4035f252a1e91b0e17fc40bdbbfa0aab
 
-PODFILE CHECKSUM: c934bd42b7aae22db1f05ba6e512e97231201939
+PODFILE CHECKSUM: 2b7b979fbf21b5db31ac1b09aa66409ba712d2f7
 
 COCOAPODS: 1.2.1

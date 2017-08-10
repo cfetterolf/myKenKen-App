@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class ScoreDetailTableViewController: UITableViewController {
     
+    let arr = ["Best Times","Easy Times","Medium Times","Hard Times"]
+    var bestTimesArr:[LeaderboardTime] = []
+    var easyTimesArr:[LeaderboardTime]  = []
+    var mediumTimesArr:[LeaderboardTime]  = []
+    var hardTimesArr:[LeaderboardTime]  = []
     var localStarRank:Int = 0
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,21 +28,68 @@ class ScoreDetailTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        
         self.tableView.rowHeight = 60.0
         
         if sectionSelected == 0 {
-            self.navigationItem.title = "\(scoreBoard.challengeArray[rowSelected])"
+            self.navigationItem.title = arr[rowSelected]
         } else {
             let arr = ["All Puzzles", "Easy Puzzles", "Medium Puzzles", "Hard Puzzles"]
             self.navigationItem.title = "\(arr[rowSelected])"
         }
         self.navigationController?.navigationBar.topItem?.title = ""
         
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        localStarRank = 0
-        computeTotalScore()
+//        localStarRank = 0
+//        computeTotalScore()
+        
+        
+        
+        // MARK: - Real time updates
+        let rootRef = Database.database().reference(withPath: "leaderboard")
+        
+        
+        //UPDATES BEST
+        rootRef.child("best-leaderboard").queryOrdered(byChild: "time").queryLimited(toFirst: 50).observe(.childAdded, with: { (snapshot) -> Void in
+            if !snapshot.exists() {return}
+            let value = snapshot.value as! NSDictionary
+            let time = LeaderboardTime(time: value["time"] as! Int, name: value["name"] as! String, avatar: value["avatar"] as! String)
+            if !self.bestTimesArr.contains(time) {self.bestTimesArr.append(time)}
+            self.tableView.reloadData()
+        })
+        
+        //UPDATE EASY
+        rootRef.child("easy-leaderboard").queryOrdered(byChild: "time").queryLimited(toFirst: 50).observe(.childAdded, with: { (snapshot) -> Void in
+            if !snapshot.exists() {return}
+            let value = snapshot.value as! NSDictionary
+            let time = LeaderboardTime(time: value["time"] as! Int, name: value["name"] as! String, avatar: value["avatar"] as! String)
+            if !self.easyTimesArr.contains(time) {self.easyTimesArr.append(time)}
+            self.tableView.reloadData()
+        })
+        
+        //UPDATE MEDIUM
+        rootRef.child("medium-leaderboard").queryOrdered(byChild: "time").queryLimited(toFirst: 50).observe(.childAdded, with: { (snapshot) -> Void in
+            if !snapshot.exists() {return}
+            let value = snapshot.value as! NSDictionary
+            let time = LeaderboardTime(time: value["time"] as! Int, name: value["name"] as! String, avatar: value["avatar"] as! String)
+            if !self.mediumTimesArr.contains(time) {self.mediumTimesArr.append(time)}
+            self.tableView.reloadData()
+        })
+        
+        //UPDATE HARD
+        rootRef.child("hard-leaderboard").queryOrdered(byChild: "time").queryLimited(toFirst: 50).observe(.childAdded, with: { (snapshot) -> Void in
+            if !snapshot.exists() {return}
+            let value = snapshot.value as! NSDictionary
+            let time = LeaderboardTime(time: value["time"] as! Int, name: value["name"] as! String, avatar: value["avatar"] as! String)
+            if !self.hardTimesArr.contains(time) {self.hardTimesArr.append(time)}
+            self.tableView.reloadData()
+        })
+
+
+
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,29 +102,15 @@ class ScoreDetailTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
-        // CHALLENGE Detail
-        if sectionSelected == 0 {
-            return 4
-        } else {
-            
-            return 2
-        }
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if sectionSelected == 0 {
-            if section < 3 {
-                return 5
-            } else {
-                return 1
-            }
+            return 50
         } else {
-            if section < 1 {
-                return 10
-            } else {
-                return 1
-            }
+            return 20
         }
     }
     
@@ -78,18 +118,9 @@ class ScoreDetailTableViewController: UITableViewController {
         
         // CHALLENGE Detail
         if sectionSelected == 0 {
-            if section < 3 {
-                return "\(scoreBoard.difficultyArray[rowSelected][section]) Puzzle"
-            } else {
-                return "Total Score for \(scoreBoard.challengeArray[rowSelected])"
-            }
+            return arr[section]
         } else {
-            if section == 0 {
-                return "Times"
-            } else {
-                let arr = ["All Puzzles", "Easy Puzzles", "Medium Puzzles", "Hard Puzzles"]
-                return "Total Score for \(arr[rowSelected])"
-            }
+            return "Times"
         }
         
     }
@@ -97,53 +128,91 @@ class ScoreDetailTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:ScoreboardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! ScoreboardTableViewCell
 
         // Configure the cell...
         
         
         if sectionSelected == 0 {
             
-            if indexPath.section < 3 {
-                cell.rankLabel.text = "\(indexPath.row+1)."
-                
-                if indexPath.row > scoreBoard.timesArray[rowSelected][indexPath.section].count-1 {
-                    cell.timeLabel.text = ""
-                    cell.starRank.image = nil
-                    cell.totalScoreLabel.text = ""
-                } else {
-                    cell.timeLabel.text = "\(self.formatTime(sec: scoreBoard.timesArray[rowSelected][indexPath.section][indexPath.row]))"
-                    cell.totalScoreLabel.text = ""
-                    setStarRank(time: scoreBoard.timesArray[rowSelected][indexPath.section][indexPath.row], cell: cell)
-                }
-            } else {
-                cell.totalScoreLabel.text = "\(localStarRank)"
-                cell.starRank.image = nil
-                cell.timeLabel.text = ""
-                cell.rankLabel.text = ""
+            let cell:LeaderboardCell = tableView.dequeueReusableCell(withIdentifier: "cell4", for: indexPath) as! LeaderboardCell
+            
+            var timesArr:[LeaderboardTime]!
+            
+            switch rowSelected {
+            case 0:
+                timesArr = bestTimesArr
+            case 1:
+                timesArr = easyTimesArr
+            case 2:
+                timesArr = mediumTimesArr
+            default:
+                timesArr = hardTimesArr
             }
+            
+            if indexPath.row > timesArr.count-1 {
+                cell.rankLabel.text = "\(indexPath.row+1)."
+                cell.avatarLabel.image = nil
+                cell.nameLabel.text = ""
+                cell.timeLabel.text = ""
+            } else {
+                cell.rankLabel.text = "\(indexPath.row+1)."
+                cell.timeLabel.text = self.formatTime(sec: timesArr[indexPath.row].time)
+                cell.nameLabel.text = timesArr[indexPath.row].name
+                cell.avatarLabel.image = UIImage(named: "avatar_\(timesArr[indexPath.row].avatar)")
+            }
+
+            return cell
+            
         } else {
             
+            let cell:ScoreboardTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! ScoreboardTableViewCell
+            
             var timesArr:[Int] = []
+            let loggedIn:Bool = (Auth.auth().currentUser != nil)
             
             // All Puzzles
             if rowSelected == 0 {
-                timesArr = timesArray
+                // CHECK IF USER LOGGED IN
+                if (loggedIn) {
+                    if (appDelegate.user != nil) {
+                        timesArr = appDelegate.user!.bestArray
+                    }
+                } else {
+                   timesArr = timesArray
+                }
             }
             
             // Easy Puzzles
             else if rowSelected == 1 {
-                timesArr = scoreBoard.easyArray
+                if (loggedIn) {
+                    if (appDelegate.user != nil) {
+                        timesArr = appDelegate.user!.easyArray
+                    }
+                } else {
+                    timesArr = scoreBoard.easyArray
+                }
             }
             
             // Medium Puzzles
             else if rowSelected == 2 {
-                timesArr = scoreBoard.mediumArray
+                if (loggedIn) {
+                    if (appDelegate.user != nil) {
+                        timesArr = appDelegate.user!.mediumArray
+                    }
+                } else {
+                    timesArr = scoreBoard.mediumArray
+                }
             }
             
             // Hard Puzzles
             else if rowSelected == 3 {
-                timesArr = scoreBoard.hardArray
+                if (loggedIn) {
+                    if (appDelegate.user != nil) {
+                        timesArr = appDelegate.user!.hardArray
+                    }
+                } else {
+                    timesArr = scoreBoard.hardArray
+                }
             }
             
             if indexPath.section < 1 {
@@ -164,11 +233,11 @@ class ScoreDetailTableViewController: UITableViewController {
                 cell.timeLabel.text = ""
                 cell.rankLabel.text = ""
             }
+            
+             return cell
 
         }
         
-        
-        return cell
     }
     
     func setStarRank(time:Int, cell:ScoreboardTableViewCell) {
@@ -232,14 +301,14 @@ class ScoreDetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let title = UILabel()
-        title.textColor = UIColor.white
+        title.textColor = UIColor.darkGray
         
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor=title.textColor
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25.0
+        return 0
     }
 
     

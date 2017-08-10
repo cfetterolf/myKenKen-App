@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        // Initialize the Google Mobile Ads SDK.
+        GADMobileAds.configure(withApplicationID: "cca-app-pub-3560434471541225~3951957193")
+        // APP ID: ca-app-pub-3560434471541225~3951957193
+        // APP-UNIT-ID: ca-app-pub-3560434471541225/8762103197
         return true
     }
 

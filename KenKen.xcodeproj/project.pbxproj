@@ -38,6 +38,10 @@
 		83615AE51EE8E7C40049ACBF /* AvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AE41EE8E7C40049ACBF /* AvatarCollectionViewCell.swift */; };
 		83615AE71EEA34560049ACBF /* AccountBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AE61EEA34560049ACBF /* AccountBodyCell.swift */; };
 		83615AE91EEA48720049ACBF /* AccountLogOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AE81EEA48720049ACBF /* AccountLogOutCell.swift */; };
+		83615AEB1EEB22060049ACBF /* ScoreboardGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AEA1EEB22060049ACBF /* ScoreboardGlobal.swift */; };
+		83615AED1EEC32430049ACBF /* LeaderboardTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AEC1EEC32430049ACBF /* LeaderboardTime.swift */; };
+		83615AEF1EED003D0049ACBF /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AEE1EED003D0049ACBF /* LeaderboardCell.swift */; };
+		83615AF31EF340E20049ACBF /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83615AF21EF340E20049ACBF /* InitViewController.swift */; };
 		837358C81EBB25B200E81DA5 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837358C71EBB25B200E81DA5 /* HomeNavigationController.swift */; };
 		837358CA1EBB510B00E81DA5 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837358C91EBB510B00E81DA5 /* PauseViewController.swift */; };
 		83869EC01EE041B200583B9A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83869EBF1EE041B200583B9A /* User.swift */; };
@@ -97,6 +101,10 @@
 		83615AE41EE8E7C40049ACBF /* AvatarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarCollectionViewCell.swift; path = Classes/AvatarCollectionViewCell.swift; sourceTree = "<group>"; };
 		83615AE61EEA34560049ACBF /* AccountBodyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountBodyCell.swift; path = Classes/AccountBodyCell.swift; sourceTree = "<group>"; };
 		83615AE81EEA48720049ACBF /* AccountLogOutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountLogOutCell.swift; path = Classes/AccountLogOutCell.swift; sourceTree = "<group>"; };
+		83615AEA1EEB22060049ACBF /* ScoreboardGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreboardGlobal.swift; path = Scoreboard/ScoreboardGlobal.swift; sourceTree = "<group>"; };
+		83615AEC1EEC32430049ACBF /* LeaderboardTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeaderboardTime.swift; path = Classes/LeaderboardTime.swift; sourceTree = "<group>"; };
+		83615AEE1EED003D0049ACBF /* LeaderboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeaderboardCell.swift; path = Scoreboard/LeaderboardCell.swift; sourceTree = "<group>"; };
+		83615AF21EF340E20049ACBF /* InitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitViewController.swift; path = Home/InitViewController.swift; sourceTree = "<group>"; };
 		837358C71EBB25B200E81DA5 /* HomeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeNavigationController.swift; path = Home/HomeNavigationController.swift; sourceTree = "<group>"; };
 		837358C91EBB510B00E81DA5 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PauseViewController.swift; path = Play/PauseViewController.swift; sourceTree = "<group>"; };
 		83869EBF1EE041B200583B9A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Classes/User.swift; sourceTree = "<group>"; };
@@ -202,6 +210,8 @@
 				83AB46471DE3F07200643DD9 /* Scoreboard.swift */,
 				830D3D5E1DECA3AF00D0DF44 /* ScoreboardTableViewCell.swift */,
 				839E7FBA1DF32AF700FAD13E /* HelpViewController.swift */,
+				83615AEA1EEB22060049ACBF /* ScoreboardGlobal.swift */,
+				83615AEE1EED003D0049ACBF /* LeaderboardCell.swift */,
 			);
 			name = Scoreboard;
 			sourceTree = "<group>";
@@ -234,6 +244,7 @@
 				8348ADAF1EDDBF32005331C0 /* LoginViewController.swift */,
 				83E1D23C1EE88881009F7494 /* AccountViewController.swift */,
 				83615AE21EE8E4B30049ACBF /* AvatarViewController.swift */,
+				83615AF21EF340E20049ACBF /* InitViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -254,6 +265,7 @@
 				83615AE41EE8E7C40049ACBF /* AvatarCollectionViewCell.swift */,
 				83615AE61EEA34560049ACBF /* AccountBodyCell.swift */,
 				83615AE81EEA48720049ACBF /* AccountLogOutCell.swift */,
+				83615AEC1EEC32430049ACBF /* LeaderboardTime.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -425,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83922B341DF7064E0084D0BF /* PlayHelpViewController.swift in Sources */,
+				83615AEF1EED003D0049ACBF /* LeaderboardCell.swift in Sources */,
 				83A05DD11DDA3D6700FE77BA /* TutorialContainerViewController.swift in Sources */,
 				8348ADB01EDDBF32005331C0 /* LoginViewController.swift in Sources */,
 				83FC41BF1DD8DD6F008FAAFE /* Slide1ViewController.swift in Sources */,
@@ -435,11 +448,13 @@
 				831589E41DE20EDF00ABC3AE /* InfoViewController.swift in Sources */,
 				831589E81DE2895F00ABC3AE /* StartViewController.swift in Sources */,
 				839E7FB91DF3207300FAD13E /* TopAlignedLabel.swift in Sources */,
+				83615AED1EEC32430049ACBF /* LeaderboardTime.swift in Sources */,
 				83E1D23D1EE88881009F7494 /* AccountViewController.swift in Sources */,
 				8359EBE51DE0E418002834E5 /* ChallengeViewController.swift in Sources */,
 				834DA1D01DC69BAB00E9D919 /* KenKen.xcdatamodeld in Sources */,
 				830D3D631DED33CB00D0DF44 /* StartTutorialViewController.swift in Sources */,
 				8359EBE31DE0DE64002834E5 /* ChallengeMenuViewController.swift in Sources */,
+				83615AF31EF340E20049ACBF /* InitViewController.swift in Sources */,
 				83A98D061DDBA54400EF70B4 /* Slide2ViewController.swift in Sources */,
 				83FC41BB1DD7B081008FAAFE /* TutorialPageViewController.swift in Sources */,
 				83615AE31EE8E4B30049ACBF /* AvatarViewController.swift in Sources */,
@@ -450,6 +465,7 @@
 				83869EC01EE041B200583B9A /* User.swift in Sources */,
 				83E1D23F1EE894CB009F7494 /* AccountHeaderCell.swift in Sources */,
 				8312326F1DEE099B008F9C89 /* Cage.swift in Sources */,
+				83615AEB1EEB22060049ACBF /* ScoreboardGlobal.swift in Sources */,
 				83A05DD31DDA9C9700FE77BA /* HomePageViewController.swift in Sources */,
 				83615AE71EEA34560049ACBF /* AccountBodyCell.swift in Sources */,
 				8359EBDE1DE0DBCD002834E5 /* ScoreBoardViewController.swift in Sources */,

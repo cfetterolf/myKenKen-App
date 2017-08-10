@@ -203,21 +203,33 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func logOut(_ sender: UIButton) {
-        SwiftSpinner.show("Logging Out...")
-        try! Auth.auth().signOut()
-        appDelegate.user = nil
-        parentVC.loginButton.setTitle("Log In", for: .normal)
-        parentVC.userNameButton.isHidden = true
-        parentVC.helloLabel.isHidden = true
-        parentVC.myBestTimesLabel.isHidden = false
-        tableView.reloadData()
-        let when = DispatchTime.now() + 0.8
-        DispatchQueue.main.asyncAfter(deadline: when){
-            SwiftSpinner.hide()
-            self.performSegue(withIdentifier: "unwindFromAccount", sender: self)
-        }
+        self.displayAlert("Log Out", message: "Are you sure you wish to log out of this account?")
     }
     
+    func displayAlert(_ title:String, message:String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Log Out", style: UIAlertActionStyle.default, handler: { (action) in
+            // Log out and dismiss
+            SwiftSpinner.show("Logging Out...")
+            try! Auth.auth().signOut()
+            self.appDelegate.user = nil
+            self.parentVC.loginButton.setTitle("Log In", for: .normal)
+            self.parentVC.userNameButton.isHidden = true
+            self.parentVC.helloLabel.isHidden = true
+            self.parentVC.myBestTimesLabel.isHidden = false
+            self.tableView.reloadData()
+            let when = DispatchTime.now() + 0.8
+            DispatchQueue.main.asyncAfter(deadline: when){
+                SwiftSpinner.hide()
+                self.performSegue(withIdentifier: "unwindFromAccount", sender: self)
+            }
+
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     
 
 }

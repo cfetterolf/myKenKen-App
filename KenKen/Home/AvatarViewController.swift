@@ -12,7 +12,7 @@ import Firebase
 class AvatarViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     let reuseIdentifier = "cell"
-    var avatarNames = ["steph", "warriors", "golden", "aussie", "block_dude", "rick"]
+    var avatarNames = ["steph", "golden", "aussie", "block_dude"]
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet var collectionView: UICollectionView!
     
@@ -63,6 +63,13 @@ class AvatarViewController: UIViewController, UICollectionViewDataSource, UIColl
         let ref = Database.database().reference(withPath: "users/\((Auth.auth().currentUser?.uid)!)")
         ref.setValue(appDelegate.user!.toAnyObject())
         
+        let queryRef = Database.database().reference(withPath: "leaderboard")
+        
+        //UPDATE Leaderboards
+        if (!appDelegate.user!.bestArray.isEmpty){queryRef.child("best-leaderboard").child((Auth.auth().currentUser?.uid)!).updateChildValues(["avatar": selectedAvatar])}
+        if (!appDelegate.user!.easyArray.isEmpty){queryRef.child("easy-leaderboard").child((Auth.auth().currentUser?.uid)!).updateChildValues(["avatar": selectedAvatar])}
+        if (!appDelegate.user!.mediumArray.isEmpty){queryRef.child("medium-leaderboard").child((Auth.auth().currentUser?.uid)!).updateChildValues(["avatar": selectedAvatar])}
+        if (!appDelegate.user!.hardArray.isEmpty){queryRef.child("hard-leaderboard").child((Auth.auth().currentUser?.uid)!).updateChildValues(["avatar": selectedAvatar])}
         
         //Exit back home
         self.dismiss(animated: true, completion: nil)

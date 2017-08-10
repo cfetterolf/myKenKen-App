@@ -9,6 +9,7 @@ target 'KenKen' do
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
+    pod 'Firebase/AdMob'
     pod "SwiftSpinner"
 
 end
